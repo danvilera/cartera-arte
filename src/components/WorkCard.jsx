@@ -23,7 +23,7 @@ function Bar({ lab, val }) {
   )
 }
 
-export default function WorkCard({ work: o, state: s, score, lead, onField }) {
+export default function WorkCard({ work: o, state: s, score, lead, onField, onOpen }) {
   const m = metrics(o, s)
   const [vtext, vcol] = verdict(score)
   const d = (Number(s.price) || 0) - BUDGET
@@ -39,6 +39,12 @@ export default function WorkCard({ work: o, state: s, score, lead, onField }) {
   return (
     <div className={'card' + (lead ? ' lead' : '')}>
       {lead && <span className="leadflag">Mejor puntuación</span>}
+
+      <button className="thumb" onClick={() => onOpen(o.id)} aria-label={'Ver ficha de ' + o.title}>
+        <img src={o.img} alt={o.artist + ' — ' + o.title} loading="lazy" />
+        <span className="thumb-hint">Ver ficha ↗</span>
+      </button>
+
       <div>
         <div className="artist">{o.artist}</div>
         <div className="title">{o.title}</div>
@@ -72,7 +78,6 @@ export default function WorkCard({ work: o, state: s, score, lead, onField }) {
       )}
 
       <p className="note">{o.note}</p>
-      <p className="note it">{o.comp}</p>
 
       <div className="inputs">
         <div className="irow">
@@ -96,6 +101,8 @@ export default function WorkCard({ work: o, state: s, score, lead, onField }) {
           </span>
         </div>
       </div>
+
+      <button className="btn ghost full" onClick={() => onOpen(o.id)}>Ver ficha completa</button>
     </div>
   )
 }
