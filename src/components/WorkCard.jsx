@@ -1,5 +1,5 @@
 import React from 'react'
-import { metrics, verdict, BUDGET } from '../lib/scoring'
+import { metrics, verdict, BUDGET, liquidityIndex, liquidityLabel } from '../lib/scoring'
 
 const fmt = (n) => (Number(n) || 0).toLocaleString('es-ES') + ' €'
 
@@ -62,6 +62,10 @@ export default function WorkCard({ work: o, state: s, score, lead, onField, onOp
       <div className="scorebox">
         <span className="scoreN" style={{ color: vcol }}>{score}</span>
         <span className="verdict" style={{ color: vcol }}>{vtext}<small>Índice de orientación /100</small></span>
+        {(() => {
+          const li = liquidityIndex(o, s); const [lt, lc] = liquidityLabel(li)
+          return <span className="liq" title="Índice de liquidez: qué tan fácil sería revenderla bien"><span className="liq-lab">Liquidez</span><b style={{ color: lc }}>{lt}</b><span className="liq-n">{li}</span></span>
+        })()}
       </div>
 
       <div className="bars">

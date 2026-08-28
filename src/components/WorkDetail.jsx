@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { BUDGET } from '../lib/scoring'
+import { BUDGET, liquidityIndex, liquidityLabel } from '../lib/scoring'
 
 const fmt = (n) => (Number(n) || 0).toLocaleString('es-ES') + ' €'
 
@@ -34,6 +34,17 @@ export default function WorkDetail({ work: o, state: s, onClose }) {
               ? <span className="delta over">+{fmt(d)} sobre tu objetivo</span>
               : <span className="delta under">{fmt(Math.abs(d))} bajo objetivo</span>}
           </div>
+
+          {(() => {
+            const li = liquidityIndex(o, s); const [lt, lc] = liquidityLabel(li)
+            return (
+              <div className="liq-bar">
+                <span>Índice de liquidez</span>
+                <div className="track" style={{ flex: 1 }}><div className="fill" style={{ width: li + '%', background: lc }} /></div>
+                <b style={{ color: lc }}>{lt} · {li}</b>
+              </div>
+            )
+          })()}
 
           <p className="note" style={{ fontSize: '0.92rem' }}>{o.desc}</p>
 

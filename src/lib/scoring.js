@@ -68,3 +68,27 @@ export function verdict(t) {
   if (t >= 48) return ['Dudosa — pide más datos', 'var(--warn)']
   return ['Floja como está', 'var(--bad)']
 }
+
+// Índice de liquidez (0-100): qué tan fácil/rápido sería revenderla a buen precio.
+// Combina la profundidad de mercado del artista, el riesgo de la gráfica (Dalí),
+// que esté firmada/catalogada (más fácil de colocar) y el precio (a menor precio,
+// más compradores potenciales).
+export function liquidityIndex(o, s) {
+  let sc = o.liquidity - o.printRisk * 0.45
+  if (s) {
+    if (s.signed === 'si') sc += 8
+    if (s.signed === 'no') sc -= 10
+    if (s.catalogue === 'si') sc += 6
+    const p = Number(s.price) || o.price
+    if (p <= 3000) sc += 8
+    else if (p <= 6000) sc += 3
+    else if (p >= 10000) sc -= 6
+  }
+  return clamp(Math.round(sc), 5, 98)
+}
+
+export function liquidityLabel(v) {
+  if (v >= 70) return ['Alta', 'var(--good)']
+  if (v >= 50) return ['Media', 'var(--warn)']
+  return ['Baja', 'var(--bad)']
+}

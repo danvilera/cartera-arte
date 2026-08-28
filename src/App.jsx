@@ -7,13 +7,24 @@ import { WORKS, WEIGHTS, defaultState, mergeDefaults } from './data/works'
 import { total } from './lib/scoring'
 import Info from './pages/Info'
 import ArteGenius from './pages/ArteGenius'
+import Glosario from './pages/Glosario'
+import Artistas from './pages/Artistas'
+import Inversion from './pages/Inversion'
+import DondeComprar from './pages/DondeComprar'
+import Pared from './pages/Pared'
 
 const NAV = [
   { key: 'obras', label: 'Obras', icon: '🖼️' },
-  { key: 'genius', label: 'ArteGenius', icon: '✨' },
+  { key: 'artistas', label: 'Artistas', icon: '🎨' },
+  { key: 'glosario', label: 'Glosario', icon: '📖' },
+  { key: 'pared', label: 'En la pared', icon: '📐' },
+  { key: 'inversion', label: 'Inversión', icon: '📈' },
   { key: 'mercado', label: 'Mercado', icon: '📊' },
+  { key: 'comprar', label: 'Dónde comprar', icon: '🏛️' },
+  { key: 'genius', label: 'ArteGenius', icon: '✨' },
   { key: 'ajustes', label: 'Ajustes', icon: '⚙️' },
 ]
+const TITLES = Object.fromEntries(NAV.map((n) => [n.key, n.label]))
 
 export default function App() {
   const [session, setSession] = useState(null)
@@ -23,6 +34,7 @@ export default function App() {
   const [tab, setTab] = useState('obras')
   const [openId, setOpenId] = useState(null)
   const [saved, setSaved] = useState(true)
+  const [drawer, setDrawer] = useState(false)
   const saveTimer = useRef(null)
 
   useEffect(() => {
@@ -55,7 +67,6 @@ export default function App() {
       setSaved(!error)
     }, 600)
   }
-
   function setField(id, field, value) {
     const next = { ...state, works: { ...state.works, [id]: { ...state.works[id], [field]: value } } }
     setState(next); persist(next)
@@ -64,9 +75,8 @@ export default function App() {
     const next = { ...state, weights: { ...state.weights, [key]: value } }
     setState(next); persist(next)
   }
-  function resetAll() {
-    const next = defaultState(); setState(next); persist(next)
-  }
+  function resetAll() { const next = defaultState(); setState(next); persist(next) }
+  function go(key) { setTab(key); setDrawer(false) }
 
   if (!authReady) return <div className="center">Cargando…</div>
   if (!session) return <Auth />
@@ -77,25 +87,28 @@ export default function App() {
   const openWork = openId ? WORKS.find((w) => w.id === openId) : null
 
   return (
-    <div className="layout">
-      <nav className="nav">
-        <div className="nav-brand">Cartera de <em>Arte</em></div>
+    <div className="app">
+      <header className="appbar">
+        <button className="burger" onClick={() => setDrawer(true)} aria-label="Menú">☰</button>
+        <div className="appbar-title">{TITLES[tab]}</div>
+        {tab === 'obras' && <span className={'saved ' + (saved ? 'on' : '')}>{saved ? 'guardado ✓' : 'guardando…'}</span>}
+      </header>
+
+      <div className={'drawer-back' + (drawer ? ' show' : '')} onClick={() => setDrawer(false)} />
+      <aside className={'drawer' + (drawer ? ' open' : '')}>
+        <div className="drawer-brand">Cartera de <em>Arte</em></div>
         {NAV.map((n) => (
-          <button key={n.key} className={'nav-item' + (tab === n.key ? ' on' : '')} onClick={() => setTab(n.key)}>
-            <span className="nav-ico">{n.icon}</span>
-            <span className="nav-lab">{n.label}</span>
+          <button key={n.key} className={'drawer-item' + (tab === n.key ? ' on' : '')} onClick={() => go(n.key)}>
+            <span className="nav-ico">{n.icon}</span><span>{n.label}</span>
           </button>
         ))}
-      </nav>
+        <div className="drawer-foot">{session.user.email}</div>
+      </aside>
 
       <main className="main">
         {tab === 'obras' && (
           <section>
-            <header className="page-head">
-              <h1>Obras</h1>
-              <span className={'saved ' + (saved ? 'on' : '')}>{saved ? 'guardado ✓' : 'guardando…'}</span>
-            </header>
-            <p className="lede">9 obras de 3 galerías. Toca una imagen para ver su ficha completa y el PDF. Ajusta precios y datos: la puntuación se recalcula y se guarda sola.</p>
+            <p className="lede">9 obras de 3 galerías. Toca una imagen para ver su ficha completa y el PDF. Ajusta precios y datos: la puntuación y la liquidez se recalculan y se guardan solas.</p>
             <div className="cards">
               {scored.map(({ o, t }) => (
                 <WorkCard key={o.id} work={o} state={state.works[o.id]} score={t}
@@ -104,19 +117,15 @@ export default function App() {
             </div>
           </section>
         )}
-
+        {tab === 'artistas' && <Artistas />}
+        {tab === 'glosario' && <Glosario />}
+        {tab === 'pared' && <Pared />}
+        {tab === 'inversion' && <Inversion />}
+        {tab === 'mercado' && <Info />}
+        {tab === 'comprar' && <DondeComprar />}
         {tab === 'genius' && <ArteGenius />}
-
-        {tab === 'mercado' && (
-          <section>
-            <header className="page-head"><h1>Mercado</h1></header>
-            <Info />
-          </section>
-        )}
-
         {tab === 'ajustes' && (
           <section>
-            <header className="page-head"><h1>Ajustes</h1></header>
             <p className="lede">¿Compras sobre todo como inversión o para disfrutar el cuadro en casa? Mueve los pesos y el ranking cambia.</p>
             <div className="panel">
               <div className="wgrid">
@@ -129,9 +138,7 @@ export default function App() {
                   </div>
                 ))}
               </div>
-              <div style={{ marginTop: 16 }}>
-                <button className="btn ghost" onClick={resetAll}>↺ Restablecer todo</button>
-              </div>
+              <div style={{ marginTop: 16 }}><button className="btn ghost" onClick={resetAll}>↺ Restablecer todo</button></div>
             </div>
             <div className="panel" style={{ marginTop: 16 }}>
               <h3 style={{ fontSize: '1.05rem', marginBottom: 8 }}>Cuenta</h3>
