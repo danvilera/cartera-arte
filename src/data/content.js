@@ -138,7 +138,7 @@ export const CHANNELS = [
     name: 'Galería física', best: 'Confianza y asesoramiento',
     pros: ['Ves la obra y su estado en persona', 'Certificado, factura y procedencia claros', 'Puedes negociar y crear relación'],
     cons: ['Precio de retail (con margen de galería)', 'Oferta limitada a su stock'],
-    tip: 'Lo mejor para tu primera compra: pagas algo más pero compras tranquilidad. Es tu caso actual (Bagot, Mayoral, Rubén Torres).',
+    tip: 'Lo mejor para tu primera compra: pagas algo más pero compras tranquilidad. Es tu caso actual (Bagot, Mayoral, Rubén Torres y Joan Gaspar).',
   },
   {
     name: 'Galería / plataforma online', best: 'Comparar y encontrar',

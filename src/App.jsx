@@ -108,7 +108,7 @@ export default function App() {
       <main className="main">
         {tab === 'obras' && (
           <section>
-            <p className="lede">9 obras de 3 galerías. Toca una imagen para ver su ficha completa y el PDF. Ajusta precios y datos: la puntuación y la liquidez se recalculan y se guardan solas.</p>
+            <p className="lede">19 obras de 4 galerías (Bagot, Mayoral, Rubén Torres y Joan Gaspar). Toca una imagen para ver su ficha completa y el PDF. Ajusta precios y datos: la puntuación y la liquidez se recalculan y se guardan solas.</p>
             <div className="cards">
               {scored.map(({ o, t }) => (
                 <WorkCard key={o.id} work={o} state={state.works[o.id]} score={t}
