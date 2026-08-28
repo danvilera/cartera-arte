@@ -12,9 +12,9 @@ const FRAMES = {
 const MATS = { hueso: '#efe9db', blanco: '#ffffff', gris: '#d7d5cf', negro: '#1c1c1c' }
 
 const DEF_CFG = {
-  sceneWidthCm: 300, artId: 'miro', artWcm: 53, artHcm: 42,
+  sceneWidthCm: 300, artId: 'miro', artWcm: 70,
   matCm: 6, matColor: 'hueso', frameCm: 3, frameColor: 'madera clara',
-  posX: 40, posY: 30,
+  posX: 38, posY: 26,
 }
 
 const load = (k, f) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : f } catch { return f } }
@@ -24,6 +24,7 @@ export default function Pared() {
   const [photo, setPhoto] = useState(() => load('arte_wall_photo', null))
   const [cfg, setCfg] = useState(() => ({ ...DEF_CFG, ...load('arte_wall_cfg', {}) }))
   const [customArt, setCustomArt] = useState(() => load('arte_wall_art', null))
+  const [imgAR, setImgAR] = useState(1.3) // ancho/alto REAL de la imagen (se lee de la propia imagen)
   const stageRef = useRef(null)
   const [stageW, setStageW] = useState(0)
   const drag = useRef(null)
@@ -41,6 +42,16 @@ export default function Pared() {
     return () => ro.disconnect()
   }, [photo])
 
+  const artSrc = cfg.artId === 'custom' ? customArt : (WORKS.find((w) => w.id === cfg.artId)?.img)
+
+  // La proporción SIEMPRE sale de la imagen real → nunca gira ni deforma.
+  useEffect(() => {
+    if (!artSrc) return
+    const im = new Image()
+    im.onload = () => { if (im.naturalWidth && im.naturalHeight) setImgAR(im.naturalWidth / im.naturalHeight) }
+    im.src = artSrc
+  }, [artSrc])
+
   const set = (k, v) => setCfg((c) => ({ ...c, [k]: v }))
 
   async function onPhoto(e) {
@@ -54,12 +65,23 @@ export default function Pared() {
     setCustomArt(url); save('arte_wall_art', url); set('artId', 'custom'); e.target.value = ''
   }
 
+  // Al elegir obra: fija el ancho real según su orientación (usa el lado que toca).
+  function pickWork(w) {
+    const dims = sizeOf(w) // [a,b] en cm o null
+    let widthCm = cfg.artWcm
+    if (dims) {
+      const isLandscape = imgLandscapeGuess(w) // orientación probable
+      widthCm = isLandscape ? Math.max(dims[0], dims[1]) : Math.min(dims[0], dims[1])
+    }
+    setCfg((c) => ({ ...c, artId: w.id, artWcm: widthCm }))
+  }
+
   const pxPerCm = stageW && cfg.sceneWidthCm ? stageW / cfg.sceneWidthCm : 0
-  const artSrc = cfg.artId === 'custom' ? customArt : (WORKS.find((w) => w.id === cfg.artId)?.img)
-  const artW = cfg.artWcm * pxPerCm
-  const artH = cfg.artHcm * pxPerCm
+  const artWpx = cfg.artWcm * pxPerCm
+  const artHpx = artWpx / imgAR // alto derivado de la proporción de la imagen
   const matPx = cfg.matCm * pxPerCm
   const framePx = Math.max(2, cfg.frameCm * pxPerCm)
+  const altoCm = Math.round(cfg.artWcm / imgAR)
 
   function onDown(e) {
     e.preventDefault()
@@ -82,7 +104,7 @@ export default function Pared() {
 
   return (
     <div className="prose">
-      <p className="lede">Sube una foto de tu pared, dime el ancho real de lo que se ve y prueba cómo quedaría el cuadro enmarcado. Arrástralo para colocarlo.</p>
+      <p className="lede">Sube una foto de tu pared, dime el ancho real de lo que se ve y prueba cómo quedaría el cuadro enmarcado. Arrástralo para colocarlo. La proporción se toma de la propia obra, así que no se gira.</p>
 
       {!photo ? (
         <label className="dropzone">
@@ -101,14 +123,14 @@ export default function Pared() {
                 onPointerDown={onDown}
                 style={{
                   left: cfg.posX + '%', top: cfg.posY + '%',
-                  width: artW + matPx * 2 + framePx * 2 + 'px',
+                  width: artWpx + matPx * 2 + framePx * 2 + 'px',
                   background: FRAMES[cfg.frameColor].bg,
                   padding: framePx + 'px',
                   boxShadow: '0 6px 20px rgba(0,0,0,.35)',
                 }}
               >
                 <div className="mat" style={{ padding: matPx + 'px', background: MATS[cfg.matColor] }}>
-                  <img src={artSrc} alt="obra" draggable={false} style={{ width: artW + 'px', height: artH + 'px', display: 'block' }} />
+                  <img src={artSrc} alt="obra" draggable={false} style={{ width: artWpx + 'px', height: artHpx + 'px', display: 'block' }} />
                 </div>
               </div>
             )}
@@ -121,18 +143,17 @@ export default function Pared() {
       )}
 
       <div className="panel" style={{ marginTop: 16 }}>
-        <h3 className="sheet-h3" style={{ marginTop: 0 }}>Escala</h3>
+        <h3 className="sheet-h3" style={{ marginTop: 0 }}>1 · Escala de la pared</h3>
         <div className="ctl">
           <label>Ancho real de lo que se ve en la foto: <b>{cfg.sceneWidthCm} cm</b></label>
           <input type="range" min="80" max="600" step="5" value={cfg.sceneWidthCm} onChange={(e) => set('sceneWidthCm', +e.target.value)} />
-          <small>Mide (aprox.) cuántos cm de pared abarca la foto de lado a lado.</small>
+          <small>Mide (aprox.) cuántos cm de pared abarca la foto de lado a lado. Es lo que hace que el tamaño sea realista.</small>
         </div>
 
-        <h3 className="sheet-h3">Obra</h3>
+        <h3 className="sheet-h3">2 · Obra</h3>
         <div className="chips2">
           {WORKS.map((w) => (
-            <button key={w.id} className={'chip2' + (cfg.artId === w.id ? ' on' : '')}
-              onClick={() => { set('artId', w.id); const d = sizeOf(w); if (d) setCfg((c) => ({ ...c, artId: w.id, artWcm: d[0], artHcm: d[1] })) }}>
+            <button key={w.id} className={'chip2' + (cfg.artId === w.id ? ' on' : '')} onClick={() => pickWork(w)}>
               {w.artist.split(' ').slice(-1)[0]} · {w.title.replace(/[“”"]/g, '').slice(0, 16)}
             </button>
           ))}
@@ -140,14 +161,13 @@ export default function Pared() {
             + Subir obra<input type="file" accept="image/*" hidden onChange={onArt} />
           </label>
         </div>
-        <div className="two">
-          <div className="ctl"><label>Ancho obra: <b>{cfg.artWcm} cm</b></label>
-            <input type="range" min="15" max="150" step="1" value={cfg.artWcm} onChange={(e) => set('artWcm', +e.target.value)} /></div>
-          <div className="ctl"><label>Alto obra: <b>{cfg.artHcm} cm</b></label>
-            <input type="range" min="15" max="150" step="1" value={cfg.artHcm} onChange={(e) => set('artHcm', +e.target.value)} /></div>
+        <div className="ctl">
+          <label>Ancho real de la obra: <b>{cfg.artWcm} cm</b> <span className="note" style={{ fontWeight: 400 }}>· alto ≈ {altoCm} cm</span></label>
+          <input type="range" min="15" max="150" step="1" value={cfg.artWcm} onChange={(e) => set('artWcm', +e.target.value)} />
+          <small>El alto se calcula solo a partir de la proporción de la imagen.</small>
         </div>
 
-        <h3 className="sheet-h3">Paspartú</h3>
+        <h3 className="sheet-h3">3 · Paspartú</h3>
         <div className="two">
           <div className="ctl"><label>Grosor: <b>{cfg.matCm} cm</b></label>
             <input type="range" min="0" max="15" step="0.5" value={cfg.matCm} onChange={(e) => set('matCm', +e.target.value)} /></div>
@@ -157,7 +177,7 @@ export default function Pared() {
             ))}</div></div>
         </div>
 
-        <h3 className="sheet-h3">Marco</h3>
+        <h3 className="sheet-h3">4 · Marco</h3>
         <div className="two">
           <div className="ctl"><label>Grosor: <b>{cfg.frameCm} cm</b></label>
             <input type="range" min="0.5" max="10" step="0.5" value={cfg.frameCm} onChange={(e) => set('frameCm', +e.target.value)} /></div>
@@ -167,19 +187,21 @@ export default function Pared() {
             ))}</div></div>
         </div>
       </div>
-      <p className="note it" style={{ marginTop: 12 }}>La simulación es orientativa (depende de que la foto sea recta y la medida correcta). Tus ajustes y la foto se guardan solo en este dispositivo.</p>
+      <p className="note it" style={{ marginTop: 12 }}>Orientativo (depende de que la foto sea recta y la medida correcta). Tus ajustes y la foto se guardan solo en este dispositivo.</p>
     </div>
   )
 }
 
-// Intenta sacar ancho×alto (cm) del texto de la ficha; si no, null.
 function sizeOf(w) {
-  const row = (w.detail || []).find(([k]) => k.toLowerCase().startsWith('dimension') || k.toLowerCase().startsWith('dimensiones'))
+  const row = (w.detail || []).find(([k]) => k.toLowerCase().startsWith('dimension'))
   const s = row ? row[1] : ''
   const m = s.match(/(\d+[.,]?\d*)\s*[×x]\s*(\d+[.,]?\d*)/)
   if (!m) return null
-  const a = parseFloat(m[1].replace(',', '.')), b = parseFloat(m[2].replace(',', '.'))
-  return [Math.round(a), Math.round(b)]
+  return [parseFloat(m[1].replace(',', '.')), parseFloat(m[2].replace(',', '.'))]
+}
+// La mayoría de estas obras gráficas son apaisadas o casi cuadradas salvo los Dalí/carteles verticales.
+function imgLandscapeGuess(w) {
+  return !['dali1', 'dali2', 'rt_hommage', 'rt_fundacio', 'rt_head', 'rt_fauteuil'].includes(w.id)
 }
 
 function toDataURL(file) {

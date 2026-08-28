@@ -15,12 +15,12 @@ import Pared from './pages/Pared'
 
 const NAV = [
   { key: 'obras', label: 'Obras', icon: '🖼️' },
+  { key: 'pared', label: 'En la pared', icon: '📐' },
+  { key: 'comprar', label: 'Dónde comprar', icon: '🏛️' },
   { key: 'artistas', label: 'Artistas', icon: '🎨' },
   { key: 'glosario', label: 'Glosario', icon: '📖' },
-  { key: 'pared', label: 'En la pared', icon: '📐' },
   { key: 'inversion', label: 'Inversión', icon: '📈' },
   { key: 'mercado', label: 'Mercado', icon: '📊' },
-  { key: 'comprar', label: 'Dónde comprar', icon: '🏛️' },
   { key: 'genius', label: 'ArteGenius', icon: '✨' },
   { key: 'ajustes', label: 'Ajustes', icon: '⚙️' },
 ]
