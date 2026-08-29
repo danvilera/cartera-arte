@@ -164,3 +164,28 @@ export const AUCTION_HOUSES = [
   { name: 'Balclis', where: 'Barcelona', focus: 'Arte y gráfica; casa histórica catalana.', cadence: 'Subastas mensuales aprox.', url: 'https://www.balclis.com' },
   { name: 'Durán / Ansorena / Segre', where: 'Madrid', focus: 'Casas españolas con secciones de obra gráfica.', cadence: 'Ventas periódicas; revisa sus calendarios.', url: 'https://www.duran-subastas.com/es/calendar' },
 ]
+
+export const GALLERY_PLAN = [
+  { zone: '⭐ Prioridad — litografías firmadas de Miró', items: [
+    { name: 'Polígrafa Obra Gràfica', addr: 'Travessera de Gràcia 66, 3º · L–V 8–14 / 16–18 · con cita (+34 93 488 23 81)', note: 'Editora histórica de la gráfica de Miró, Tàpies y Chillida. El sitio con más sentido para ti.' },
+  ]},
+  { zone: 'Eixample (Quadrat d’Or)', items: [
+    { name: 'Marc Domènech', addr: 'Ptge. Mercader 12 (confirmar)', note: 'Maestros modernos y vanguardias.' },
+    { name: 'Galeria Toni Tàpies', addr: 'Eixample (confirmar dirección)', note: 'Tàpies y contemporáneo.' },
+    { name: 'Artur Ramon Art', addr: 'c/ Bailèn 19 (confirmar)', note: 'De arte antiguo a moderno; a veces gráfica de maestros.' },
+    { name: 'Ya visitadas ✓', addr: 'Consell de Cent: Joan Gaspar 284 · Mayoral 286 · Rubén Torres 315 · J. Bagot 321', note: 'Cierra aquí Femme Torero / Sèrie Barcelona.' },
+  ]},
+  { zone: 'Gòtic (calle Petritxol)', items: [
+    { name: 'Sala Parés', addr: 'c/ Petritxol 5', note: 'Galería histórica (1877), con obra sobre papel.' },
+    { name: 'Galeria Trama', addr: 'Petritxol 8 (confirmar)', note: 'Obra gráfica contemporánea. Está puerta con puerta con Sala Parés.' },
+  ]},
+]
+
+export const GALLERY_ASK = 'Busco litografías o aguafuertes firmados a lápiz y numerados de Miró (y también Tàpies o Chillida), por debajo de ~5.000 €, con certificado y referencia de catálogo. En persona comprueba siempre: firma a lápiz (no en plancha), numeración, estado (márgenes, foxing) y pide ver el reverso.'
+
+export const AUCTION_TIPS = [
+  'Setdart (Barcelona, online, casi semanal) es tu mejor vía: mucha gráfica local y sin aduanas. También Balclis (BCN). Internacionales: Christie’s / Sotheby’s / Phillips online, Bonhams, Artcurial.',
+  'Fija un techo “todo incluido”: la prima del comprador ronda el 22–27 %, así que tu puja máxima ≈ techo ÷ 1,25. Ej.: techo 5.000 € → no pujes por encima de ~4.000 € de martillo.',
+  'Pide SIEMPRE informe de estado (foxing, márgenes, recortes, refuerzos). Verifica firma A LÁPIZ + referencia de catálogo (Dupin/Maeght, Bloch/Baer, Galfetti). Evita “firmado con sello”, ediciones póstumas y “d’après / after”.',
+  'Deja una puja máxima (absentee) y no la superes. Empieza observando 2–3 subastas sin pujar para calibrar precios.',
+]
