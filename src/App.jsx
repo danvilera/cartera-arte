@@ -12,8 +12,10 @@ import Artistas from './pages/Artistas'
 import Inversion from './pages/Inversion'
 import DondeComprar from './pages/DondeComprar'
 import Pared from './pages/Pared'
+import Dashboard from './pages/Dashboard'
 
 const NAV = [
+  { key: 'inicio', label: 'Inicio', icon: '🏠' },
   { key: 'obras', label: 'Obras', icon: '🖼️' },
   { key: 'pared', label: 'En la pared', icon: '📐' },
   { key: 'comprar', label: 'Dónde comprar', icon: '🏛️' },
@@ -31,7 +33,7 @@ export default function App() {
   const [authReady, setAuthReady] = useState(false)
   const [state, setState] = useState(defaultState())
   const [loaded, setLoaded] = useState(false)
-  const [tab, setTab] = useState('obras')
+  const [tab, setTab] = useState('inicio')
   const [openId, setOpenId] = useState(null)
   const [saved, setSaved] = useState(true)
   const [drawer, setDrawer] = useState(false)
@@ -106,6 +108,7 @@ export default function App() {
       </aside>
 
       <main className="main">
+        {tab === 'inicio' && <Dashboard state={state} onOpen={setOpenId} onNav={setTab} />}
         {tab === 'obras' && (
           <section>
             <p className="lede">19 obras de 4 galerías (Bagot, Mayoral, Rubén Torres y Joan Gaspar). Toca una imagen para ver su ficha completa y el PDF. Ajusta precios y datos: la puntuación y la liquidez se recalculan y se guardan solas.</p>
