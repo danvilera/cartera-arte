@@ -111,7 +111,7 @@ export default function App() {
         {tab === 'inicio' && <Dashboard state={state} onOpen={setOpenId} onNav={setTab} />}
         {tab === 'obras' && (
           <section>
-            <p className="lede">24 obras de 5 galerías (Bagot, Mayoral, Rubén Torres, Joan Gaspar y Disponible Online). Toca una imagen para ver su ficha. Ajusta precios y datos: la puntuación y la liquidez se recalculan y se guardan solas.</p>
+            <p className="lede">26 obras de 5 galerías (Bagot, Mayoral, Rubén Torres, Joan Gaspar y Disponible Online). Toca una imagen para ver su ficha. Ajusta precios y datos: la puntuación y la liquidez se recalculan y se guardan solas.</p>
             {(() => {
               const order = ['J. Bagot', 'Mayoral', 'Rubén Torres', 'Joan Gaspar', 'Disponible Online']
               const gals = [...new Set(scored.map(({ o }) => o.gallery))]
