@@ -20,7 +20,7 @@ export default function WorkDetail({ work: o, state: s, onClose }) {
         <button className="sheet-close" onClick={onClose} aria-label="Cerrar">✕</button>
 
         <div className="sheet-hero">
-          <img src={o.img} alt={o.artist + ' — ' + o.title} />
+          {o.img ? <img src={o.img} alt={o.artist + ' — ' + o.title} /> : <div style={{ display: 'grid', placeItems: 'center', height: '100%', minHeight: 160, opacity: 0.6 }}>Sin imagen · ver en la galería</div>}
         </div>
 
         <div className="sheet-body">
@@ -64,7 +64,7 @@ export default function WorkDetail({ work: o, state: s, onClose }) {
           <h3 className="sheet-h3">Mi lectura</h3>
           <p className="note">{o.note}</p>
 
-          <a className="btn full" href={o.pdf} target="_blank" rel="noopener noreferrer">📄 Ver PDF original de la galería</a>
+          <a className="btn full" href={o.pdf || o.url} target="_blank" rel="noopener noreferrer">{o.pdf ? '📄 Ver PDF original de la galería' : '🔗 Ver en la web de la galería'}</a>
         </div>
       </div>
     </div>

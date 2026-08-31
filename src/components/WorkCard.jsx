@@ -41,7 +41,7 @@ export default function WorkCard({ work: o, state: s, score, lead, onField, onOp
       {lead && <span className="leadflag">Mejor puntuación</span>}
 
       <button className="thumb" onClick={() => onOpen(o.id)} aria-label={'Ver ficha de ' + o.title}>
-        <img src={o.img} alt={o.artist + ' — ' + o.title} loading="lazy" />
+        {o.img ? <img src={o.img} alt={o.artist + ' — ' + o.title} loading="lazy" /> : <span className="thumb-ph" style={{ display: 'grid', placeItems: 'center', height: '100%', minHeight: 130, opacity: 0.6, textAlign: 'center', padding: 12, fontSize: '.85rem' }}>🖼️<br />Ver en la galería</span>}
         <span className="thumb-hint">Ver ficha ↗</span>
       </button>
 
@@ -50,6 +50,7 @@ export default function WorkCard({ work: o, state: s, score, lead, onField, onOp
         <div className="title">{o.title}</div>
         <div className="meta">{o.tech} · {o.ref}</div>
         <div className="gal">Galería: {o.gallery}</div>
+        {o.url && <a className="gal-link" href={o.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: '.82rem', fontWeight: 600 }}>Ver en la web ↗</a>}
       </div>
 
       <div className="priceRow">

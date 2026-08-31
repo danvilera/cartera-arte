@@ -111,13 +111,28 @@ export default function App() {
         {tab === 'inicio' && <Dashboard state={state} onOpen={setOpenId} onNav={setTab} />}
         {tab === 'obras' && (
           <section>
-            <p className="lede">19 obras de 4 galerías (Bagot, Mayoral, Rubén Torres y Joan Gaspar). Toca una imagen para ver su ficha completa y el PDF. Ajusta precios y datos: la puntuación y la liquidez se recalculan y se guardan solas.</p>
-            <div className="cards">
-              {scored.map(({ o, t }) => (
-                <WorkCard key={o.id} work={o} state={state.works[o.id]} score={t}
-                  lead={o.id === leadId} onField={(f, v) => setField(o.id, f, v)} onOpen={setOpenId} />
-              ))}
-            </div>
+            <p className="lede">24 obras de 5 galerías (Bagot, Mayoral, Rubén Torres, Joan Gaspar y Disponible Online). Toca una imagen para ver su ficha. Ajusta precios y datos: la puntuación y la liquidez se recalculan y se guardan solas.</p>
+            {(() => {
+              const order = ['J. Bagot', 'Mayoral', 'Rubén Torres', 'Joan Gaspar', 'Disponible Online']
+              const gals = [...new Set(scored.map(({ o }) => o.gallery))]
+                .sort((a, b) => ((order.indexOf(a) + 1) || 99) - ((order.indexOf(b) + 1) || 99))
+              return gals.map((g) => {
+                const items = scored.filter(({ o }) => o.gallery === g)
+                return (
+                  <div key={g} className="galgroup">
+                    <h2 style={{ fontSize: '1.15rem', margin: '28px 0 12px', paddingBottom: 6, borderBottom: '1px solid var(--line, #e2ddd0)', display: 'flex', alignItems: 'baseline', gap: 10 }}>
+                      {g}<span style={{ fontSize: '.8rem', opacity: 0.55, fontWeight: 400 }}>{items.length} obras</span>
+                    </h2>
+                    <div className="cards">
+                      {items.map(({ o, t }) => (
+                        <WorkCard key={o.id} work={o} state={state.works[o.id]} score={t}
+                          lead={o.id === leadId} onField={(f, v) => setField(o.id, f, v)} onOpen={setOpenId} />
+                      ))}
+                    </div>
+                  </div>
+                )
+              })
+            })()}
           </section>
         )}
         {tab === 'artistas' && <Artistas />}
