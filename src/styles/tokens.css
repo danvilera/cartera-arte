@@ -422,3 +422,33 @@ label.btn { display: inline-flex; align-items: center; }
 .gplan-name { font-weight: 700; font-size: 0.9rem; }
 .gplan-addr { font-family: var(--mono); font-size: 0.74rem; color: var(--ink-soft); margin-top: 2px; }
 .gplan-note { font-size: 0.84rem; color: var(--ink-soft); margin-top: 2px; }
+
+/* --- Mejoras: coste, due-diligence, historial, notas, fotos, comparador --- */
+.ctl input[type='number'], .ctl input[type='text'], .ctl input:not([type]) { width:100%; box-sizing:border-box; border:1px solid var(--line-strong); background:var(--paper); color:var(--ink); border-radius:9px; padding:8px 10px; font:inherit; font-size:.9rem; }
+.notes { width:100%; box-sizing:border-box; border:1px solid var(--line-strong); background:var(--paper); color:var(--ink); border-radius:12px; padding:10px 12px; font:inherit; font-size:.9rem; resize:vertical; }
+.cost-row { display:flex; justify-content:space-between; align-items:baseline; padding:5px 0; font-size:.9rem; color:var(--ink-soft); }
+.cost-row b { color:var(--ink); font-variant-numeric:tabular-nums; }
+.cost-row.total { border-top:1px solid var(--line); margin-top:4px; padding-top:8px; font-size:1rem; }
+.cost-row.total b { font-family:var(--mono); font-weight:600; }
+.dd { display:flex; flex-direction:column; gap:8px; }
+.dd .irow { font-size:.85rem; }
+.hist { display:flex; flex-direction:column; gap:6px; margin-bottom:10px; }
+.hist-row { display:flex; align-items:center; gap:10px; background:var(--card); border:1px solid var(--line); border-radius:9px; padding:7px 10px; }
+.hist-row .hist-t { flex:1; color:var(--ink-soft); font-size:.82rem; }
+.hist-row b { font-variant-numeric:tabular-nums; }
+.hist-row .x, .ph .x { border:0; background:none; color:var(--ink-soft); cursor:pointer; font-size:.85rem; padding:0 2px; }
+.hist-row .x:hover, .ph .x:hover { color:var(--bad); }
+.photos { display:flex; flex-wrap:wrap; gap:8px; }
+.photos .ph { position:relative; width:78px; height:78px; border-radius:10px; overflow:hidden; border:1px solid var(--line); }
+.photos .ph img { width:100%; height:100%; object-fit:cover; display:block; }
+.photos .ph .x { position:absolute; top:2px; right:2px; background:rgba(0,0,0,.55); color:#fff; border-radius:50%; width:20px; height:20px; line-height:1; }
+.photos .ph.add { display:grid; place-items:center; font-size:1.5rem; color:var(--ink-soft); cursor:pointer; background:var(--paper); }
+.cmp-wrap { overflow-x:auto; margin:8px 0 14px; }
+table.cmp { border-collapse:collapse; width:100%; min-width:440px; font-size:.86rem; }
+table.cmp th, table.cmp td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+table.cmp thead th { font-family:var(--mono); font-size:.72rem; text-transform:uppercase; letter-spacing:.04em; color:var(--accent); }
+table.cmp td:first-child, table.cmp th:first-child { color:var(--ink-soft); font-size:.74rem; text-transform:uppercase; letter-spacing:.03em; white-space:nowrap; }
+.cmp-actions { display:flex; flex-wrap:wrap; gap:8px; }
+.wall-guide { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin-top:12px; font-size:.88rem; }
+.wall-guide h4 { margin:0 0 6px; font-size:.95rem; }
+.slots { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }

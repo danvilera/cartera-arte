@@ -11,12 +11,14 @@ import Glosario from './pages/Glosario'
 import Artistas from './pages/Artistas'
 import Inversion from './pages/Inversion'
 import DondeComprar from './pages/DondeComprar'
+import Comparar from './pages/Comparar'
 import Pared from './pages/Pared'
 import Dashboard from './pages/Dashboard'
 
 const NAV = [
   { key: 'inicio', label: 'Inicio', icon: '🏠' },
   { key: 'obras', label: 'Obras', icon: '🖼️' },
+  { key: 'comparar', label: 'Comparar', icon: '⚖️' },
   { key: 'pared', label: 'En la pared', icon: '📐' },
   { key: 'comprar', label: 'Dónde comprar', icon: '🏛️' },
   { key: 'artistas', label: 'Artistas', icon: '🎨' },
@@ -135,6 +137,7 @@ export default function App() {
             })()}
           </section>
         )}
+        {tab === 'comparar' && <Comparar state={state} onOpen={setOpenId} />}
         {tab === 'artistas' && <Artistas />}
         {tab === 'glosario' && <Glosario />}
         {tab === 'pared' && <Pared />}
@@ -167,7 +170,7 @@ export default function App() {
         )}
       </main>
 
-      {openWork && <WorkDetail work={openWork} state={state.works[openWork.id]} onClose={() => setOpenId(null)} />}
+      {openWork && <WorkDetail work={openWork} state={state.works[openWork.id]} onClose={() => setOpenId(null)} onField={(f, v) => setField(openWork.id, f, v)} />}
     </div>
   )
 }

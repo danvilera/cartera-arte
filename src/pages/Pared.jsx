@@ -13,8 +13,9 @@ const MATS = { hueso: '#efe9db', blanco: '#ffffff', gris: '#d7d5cf', negro: '#1c
 
 const DEF_CFG = {
   sceneWidthCm: 300, artId: 'miro', artWcm: 70,
+  art2Id: 'none', art2Wcm: 60, gapCm: 8,
   matCm: 6, matColor: 'hueso', frameCm: 3, frameColor: 'madera clara',
-  posX: 38, posY: 26,
+  posX: 30, posY: 26,
 }
 
 const load = (k, f) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : f } catch { return f } }
@@ -24,13 +25,17 @@ export default function Pared() {
   const [photo, setPhoto] = useState(() => load('arte_wall_photo', null))
   const [cfg, setCfg] = useState(() => ({ ...DEF_CFG, ...load('arte_wall_cfg', {}) }))
   const [customArt, setCustomArt] = useState(() => load('arte_wall_art', null))
-  const [imgAR, setImgAR] = useState(1.3) // ancho/alto REAL de la imagen (se lee de la propia imagen)
+  const [imgAR, setImgAR] = useState(1.3)
+  const [imgAR2, setImgAR2] = useState(1.3)
+  const [slots, setSlots] = useState(() => load('arte_wall_slots', []))
+  const [slotName, setSlotName] = useState('')
   const stageRef = useRef(null)
   const [stageW, setStageW] = useState(0)
   const drag = useRef(null)
 
   useEffect(() => save('arte_wall_cfg', cfg), [cfg])
   useEffect(() => { if (photo) save('arte_wall_photo', photo) }, [photo])
+  useEffect(() => save('arte_wall_slots', slots), [slots])
 
   useLayoutEffect(() => {
     const el = stageRef.current
@@ -42,15 +47,13 @@ export default function Pared() {
     return () => ro.disconnect()
   }, [photo])
 
-  const artSrc = cfg.artId === 'custom' ? customArt : (WORKS.find((w) => w.id === cfg.artId)?.img)
+  const srcOf = (id) => id === 'custom' ? customArt : (WORKS.find((w) => w.id === id)?.img)
+  const artSrc = srcOf(cfg.artId)
+  const hasTwo = cfg.art2Id && cfg.art2Id !== 'none'
+  const art2Src = hasTwo ? srcOf(cfg.art2Id) : null
 
-  // La proporción SIEMPRE sale de la imagen real → nunca gira ni deforma.
-  useEffect(() => {
-    if (!artSrc) return
-    const im = new Image()
-    im.onload = () => { if (im.naturalWidth && im.naturalHeight) setImgAR(im.naturalWidth / im.naturalHeight) }
-    im.src = artSrc
-  }, [artSrc])
+  useEffect(() => { readAR(artSrc, setImgAR) }, [artSrc])
+  useEffect(() => { if (art2Src) readAR(art2Src, setImgAR2) }, [art2Src])
 
   const set = (k, v) => setCfg((c) => ({ ...c, [k]: v }))
 
@@ -65,23 +68,36 @@ export default function Pared() {
     setCustomArt(url); save('arte_wall_art', url); set('artId', 'custom'); e.target.value = ''
   }
 
-  // Al elegir obra: fija el ancho real según su orientación (usa el lado que toca).
-  function pickWork(w) {
-    const dims = sizeOf(w) // [a,b] en cm o null
-    let widthCm = cfg.artWcm
+  function pickWork(w, slot) {
+    const dims = sizeOf(w)
+    let widthCm = slot === 2 ? cfg.art2Wcm : cfg.artWcm
     if (dims) {
-      const isLandscape = imgLandscapeGuess(w) // orientación probable
+      const isLandscape = imgLandscapeGuess(w)
       widthCm = isLandscape ? Math.max(dims[0], dims[1]) : Math.min(dims[0], dims[1])
     }
-    setCfg((c) => ({ ...c, artId: w.id, artWcm: widthCm }))
+    if (slot === 2) setCfg((c) => ({ ...c, art2Id: w.id, art2Wcm: widthCm }))
+    else setCfg((c) => ({ ...c, artId: w.id, artWcm: widthCm }))
   }
 
   const pxPerCm = stageW && cfg.sceneWidthCm ? stageW / cfg.sceneWidthCm : 0
-  const artWpx = cfg.artWcm * pxPerCm
-  const artHpx = artWpx / imgAR // alto derivado de la proporción de la imagen
   const matPx = cfg.matCm * pxPerCm
   const framePx = Math.max(2, cfg.frameCm * pxPerCm)
-  const altoCm = Math.round(cfg.artWcm / imgAR)
+
+  const framedOuterCm = (wcm) => wcm + 2 * cfg.matCm + 2 * cfg.frameCm
+  const groupWcm = framedOuterCm(cfg.artWcm) + (hasTwo ? cfg.gapCm + framedOuterCm(cfg.art2Wcm) : 0)
+  const alto1 = Math.round(cfg.artWcm / imgAR)
+
+  function Framed({ src, wcm, ar }) {
+    const artWpx = wcm * pxPerCm
+    const artHpx = artWpx / ar
+    return (
+      <div className="framed" style={{ position: 'relative', width: artWpx + matPx * 2 + framePx * 2 + 'px', background: FRAMES[cfg.frameColor].bg, padding: framePx + 'px', boxShadow: '0 6px 20px rgba(0,0,0,.35)' }}>
+        <div className="mat" style={{ padding: matPx + 'px', background: MATS[cfg.matColor] }}>
+          <img src={src} alt="obra" draggable={false} style={{ width: artWpx + 'px', height: artHpx + 'px', display: 'block' }} />
+        </div>
+      </div>
+    )
+  }
 
   function onDown(e) {
     e.preventDefault()
@@ -102,9 +118,17 @@ export default function Pared() {
     window.removeEventListener('pointerup', onUp)
   }
 
+  function saveSlot() {
+    const name = (slotName || 'Montaje ' + (slots.length + 1)).trim()
+    setSlots((s) => [...s.filter((x) => x.name !== name), { name, cfg }])
+    setSlotName('')
+  }
+  const loadSlot = (s) => setCfg((c) => ({ ...c, ...s.cfg }))
+  const delSlot = (name) => setSlots((s) => s.filter((x) => x.name !== name))
+
   return (
     <div className="prose">
-      <p className="lede">Sube una foto de tu pared, dime el ancho real de lo que se ve y prueba cómo quedaría el cuadro enmarcado. Arrástralo para colocarlo. La proporción se toma de la propia obra, así que no se gira.</p>
+      <p className="lede">Sube una foto de tu pared, dime el ancho real de lo que se ve y prueba cómo quedaría enmarcado. Arrástralo para colocarlo. Puedes montar <b>dos obras juntas</b> para tu pared de 3 m.</p>
 
       {!photo ? (
         <label className="dropzone">
@@ -118,20 +142,9 @@ export default function Pared() {
           <div className="wall-stage" ref={stageRef}>
             <img className="wall-photo" src={photo} alt="pared" draggable={false} />
             {artSrc && pxPerCm > 0 && (
-              <div
-                className="framed"
-                onPointerDown={onDown}
-                style={{
-                  left: cfg.posX + '%', top: cfg.posY + '%',
-                  width: artWpx + matPx * 2 + framePx * 2 + 'px',
-                  background: FRAMES[cfg.frameColor].bg,
-                  padding: framePx + 'px',
-                  boxShadow: '0 6px 20px rgba(0,0,0,.35)',
-                }}
-              >
-                <div className="mat" style={{ padding: matPx + 'px', background: MATS[cfg.matColor] }}>
-                  <img src={artSrc} alt="obra" draggable={false} style={{ width: artWpx + 'px', height: artHpx + 'px', display: 'block' }} />
-                </div>
+              <div onPointerDown={onDown} style={{ position: 'absolute', left: cfg.posX + '%', top: cfg.posY + '%', display: 'flex', alignItems: 'center', gap: (cfg.gapCm * pxPerCm) + 'px', cursor: 'grab', touchAction: 'none' }}>
+                <Framed src={artSrc} wcm={cfg.artWcm} ar={imgAR} />
+                {hasTwo && art2Src && <Framed src={art2Src} wcm={cfg.art2Wcm} ar={imgAR2} />}
               </div>
             )}
           </div>
@@ -147,27 +160,42 @@ export default function Pared() {
         <div className="ctl">
           <label>Ancho real de lo que se ve en la foto: <b>{cfg.sceneWidthCm} cm</b></label>
           <input type="range" min="80" max="600" step="5" value={cfg.sceneWidthCm} onChange={(e) => set('sceneWidthCm', +e.target.value)} />
-          <small>Mide (aprox.) cuántos cm de pared abarca la foto de lado a lado. Es lo que hace que el tamaño sea realista.</small>
+          <small>Mide (aprox.) cuántos cm de pared abarca la foto de lado a lado.</small>
         </div>
 
-        <h3 className="sheet-h3">2 · Obra</h3>
+        <h3 className="sheet-h3">2 · Obra principal</h3>
         <div className="chips2">
           {WORKS.map((w) => (
-            <button key={w.id} className={'chip2' + (cfg.artId === w.id ? ' on' : '')} onClick={() => pickWork(w)}>
+            <button key={w.id} className={'chip2' + (cfg.artId === w.id ? ' on' : '')} onClick={() => pickWork(w, 1)}>
               {w.artist.split(' ').slice(-1)[0]} · {w.title.replace(/[“”"]/g, '').slice(0, 16)}
             </button>
           ))}
-          <label className={'chip2' + (cfg.artId === 'custom' ? ' on' : '')}>
-            + Subir obra<input type="file" accept="image/*" hidden onChange={onArt} />
-          </label>
+          <label className={'chip2' + (cfg.artId === 'custom' ? ' on' : '')}>+ Subir obra<input type="file" accept="image/*" hidden onChange={onArt} /></label>
         </div>
         <div className="ctl">
-          <label>Ancho real de la obra: <b>{cfg.artWcm} cm</b> <span className="note" style={{ fontWeight: 400 }}>· alto ≈ {altoCm} cm</span></label>
+          <label>Ancho real de la obra: <b>{cfg.artWcm} cm</b> <span className="note" style={{ fontWeight: 400 }}>· alto ≈ {alto1} cm</span></label>
           <input type="range" min="15" max="150" step="1" value={cfg.artWcm} onChange={(e) => set('artWcm', +e.target.value)} />
-          <small>El alto se calcula solo a partir de la proporción de la imagen.</small>
         </div>
 
-        <h3 className="sheet-h3">3 · Paspartú</h3>
+        <h3 className="sheet-h3">3 · Segunda obra (opcional)</h3>
+        <div className="chips2">
+          <button className={'chip2' + (cfg.art2Id === 'none' ? ' on' : '')} onClick={() => set('art2Id', 'none')}>Ninguna</button>
+          {WORKS.map((w) => (
+            <button key={w.id} className={'chip2' + (cfg.art2Id === w.id ? ' on' : '')} onClick={() => pickWork(w, 2)}>
+              {w.artist.split(' ').slice(-1)[0]} · {w.title.replace(/[“”"]/g, '').slice(0, 16)}
+            </button>
+          ))}
+        </div>
+        {hasTwo && (
+          <div className="two">
+            <div className="ctl"><label>Ancho 2ª obra: <b>{cfg.art2Wcm} cm</b></label>
+              <input type="range" min="15" max="150" step="1" value={cfg.art2Wcm} onChange={(e) => set('art2Wcm', +e.target.value)} /></div>
+            <div className="ctl"><label>Separación: <b>{cfg.gapCm} cm</b></label>
+              <input type="range" min="2" max="30" step="1" value={cfg.gapCm} onChange={(e) => set('gapCm', +e.target.value)} /></div>
+          </div>
+        )}
+
+        <h3 className="sheet-h3">4 · Paspartú</h3>
         <div className="two">
           <div className="ctl"><label>Grosor: <b>{cfg.matCm} cm</b></label>
             <input type="range" min="0" max="15" step="0.5" value={cfg.matCm} onChange={(e) => set('matCm', +e.target.value)} /></div>
@@ -177,7 +205,7 @@ export default function Pared() {
             ))}</div></div>
         </div>
 
-        <h3 className="sheet-h3">4 · Marco</h3>
+        <h3 className="sheet-h3">5 · Marco</h3>
         <div className="two">
           <div className="ctl"><label>Grosor: <b>{cfg.frameCm} cm</b></label>
             <input type="range" min="0.5" max="10" step="0.5" value={cfg.frameCm} onChange={(e) => set('frameCm', +e.target.value)} /></div>
@@ -187,11 +215,42 @@ export default function Pared() {
             ))}</div></div>
         </div>
       </div>
-      <p className="note it" style={{ marginTop: 12 }}>Orientativo (depende de que la foto sea recta y la medida correcta). Tus ajustes y la foto se guardan solo en este dispositivo.</p>
+
+      <div className="wall-guide">
+        <h4>📐 Guía de colgado</h4>
+        <p style={{ margin: '0 0 6px' }}>Conjunto ≈ <b>{Math.round(groupWcm)} cm</b> de ancho{hasTwo ? ` (dos piezas, ${cfg.gapCm} cm de separación)` : ''}. En una pared de 3 m deja al menos <b>{Math.max(0, Math.round((300 - groupWcm) / 2))} cm</b> libres a cada lado para que respire.</p>
+        <p className="note" style={{ margin: 0 }}>Cuelga con el <b>eje horizontal a 145–150 cm</b> del suelo (altura de museo). {hasTwo ? 'Alinea las dos piezas por su centro; mantén la misma separación arriba y abajo.' : ''}</p>
+      </div>
+
+      <div className="panel" style={{ marginTop: 12 }}>
+        <h3 className="sheet-h3" style={{ marginTop: 0 }}>Montajes guardados</h3>
+        <div className="two">
+          <div className="ctl"><input type="text" placeholder="Nombre del montaje" value={slotName} onChange={(e) => setSlotName(e.target.value)} /></div>
+          <div className="ctl"><button className="btn ghost mini" onClick={saveSlot}>💾 Guardar montaje actual</button></div>
+        </div>
+        {slots.length > 0 && (
+          <div className="slots">
+            {slots.map((s) => (
+              <span key={s.name} className="chip2" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                <button style={{ border: 0, background: 'none', color: 'inherit', cursor: 'pointer', font: 'inherit' }} onClick={() => loadSlot(s)}>{s.name}</button>
+                <button style={{ border: 0, background: 'none', color: 'inherit', cursor: 'pointer' }} onClick={() => delSlot(s.name)}>✕</button>
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <p className="note it" style={{ marginTop: 12 }}>Orientativo (depende de que la foto sea recta y la medida correcta). Tus ajustes, montajes y la foto se guardan solo en este dispositivo.</p>
     </div>
   )
 }
 
+function readAR(src, setter) {
+  if (!src) return
+  const im = new Image()
+  im.onload = () => { if (im.naturalWidth && im.naturalHeight) setter(im.naturalWidth / im.naturalHeight) }
+  im.src = src
+}
 function sizeOf(w) {
   const row = (w.detail || []).find(([k]) => k.toLowerCase().startsWith('dimension'))
   const s = row ? row[1] : ''
@@ -199,11 +258,9 @@ function sizeOf(w) {
   if (!m) return null
   return [parseFloat(m[1].replace(',', '.')), parseFloat(m[2].replace(',', '.'))]
 }
-// La mayoría de estas obras gráficas son apaisadas o casi cuadradas salvo los Dalí/carteles verticales.
 function imgLandscapeGuess(w) {
   return !['dali1', 'dali2', 'rt_hommage', 'rt_fundacio', 'rt_head', 'rt_fauteuil'].includes(w.id)
 }
-
 function toDataURL(file) {
   return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = rej; r.readAsDataURL(file) })
 }
