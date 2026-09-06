@@ -1,0 +1,14 @@
+{
+  "name": "Cartera de Arte",
+  "short_name": "Arte",
+  "description": "Tu cartera de obra gráfica: fichas, precios, liquidez y decisión de compra.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f4f0",
+  "theme_color": "#1e44b8",
+  "icons": [
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" },
+    { "src": "/icon-maskable-512.png", "type": "image/png", "sizes": "512x512", "purpose": "maskable" }
+  ]
+}
