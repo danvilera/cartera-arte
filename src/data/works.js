@@ -20,7 +20,7 @@ export const WORKS = [
     ref: 'Dupin 588 · ej. 60/182 · papel Guarro · 53×70 cm',
     comp: 'Comparable: un ejemplar firmado de la serie ~6.300 € en retail (negociable); en subasta, bastante menos.',
     def: { signed: 'si', numbered: 'si', catalogue: 'si', cert: '?' },
-    note: 'Firmada y catalogada (Dupin 588). Ojo: es aguafuerte/aguatinta, NO litografía, y falta certificado formal (pídelo). Retail completo: margen para negociar a 5.000–5.500 €.',
+    note: 'Firmada y catalogada (Dupin 588). Ojo: es aguafuerte/aguatinta, NO litografía, y falta certificado formal (pídelo). Retail completo: margen para negociar a 5.000–5.500 €. Marc aportó la publicación/catalogación (Dupin 588); certificado formal, a confirmar en factura.',
     desc: 'Estampa de la carpeta homenaje a la amistad Picasso–Reventós, editada por Gustavo Gili. Aguafuerte con aguatinta de color sobre Guarro, firmada y numerada.',
     detail: [
       ['Año', '1973'],
@@ -212,15 +212,15 @@ export const WORKS = [
     bandSigned: [5000, 20000], bandUnsigned: [1500, 6000],
     liquidity: 78, prestige: 96, printRisk: 10, specialist: 6,
     ref: 'Bloch 281 · Baer 429 · ej. 5/50 · firmada a lápiz · 23,8×29,9 cm · 8.000 € + IVA (≈ 9.680 €)',
-    comp: 'Aguafuerte firmado de 1934. Firmado en buen estado ~8.000–20.000 €. Con el estado que se ve (tonalización/foxing), cabe negociar hacia ~6.500 € + IVA.',
+    comp: 'Aguafuerte firmado de 1934 (Baer 429). En buen estado ~8.000–20.000 €. Precio firme (no rebajan); la palanca real es el IVA (~21%).',
     def: { signed: 'si', numbered: 'si', catalogue: 'si', cert: '?' },
-    note: 'Firmado a lápiz y numerado 5/50 (confirmado en tus fotos) → pieza seria. PERO en las fotos se ve papel tonalizado y posible foxing leve + ondulación. Pide informe de estado y contraoferta por conservación (~6.500 € + IVA).',
+    note: 'Firmado a lápiz 5/50, catalogado Baer 429 (el “347/195” era un error de catalogación de la galería, ya aclarado). NO rebajan precio, pero: (1) lo RESTAURAN antes de entregar con una paga y señal —cubre la tonalización/foxing que viste—, y (2) IVA: sin IVA con pasaporte extranjero o recuperable vía empresa (~21% de ahorro real). Exige en factura “estampa original de época” + Baer 429.',
     desc: 'Aguafuerte de línea de 1934, escena de tauromaquia (mujer torero, caballo y toro moribundo). Firmado a lápiz, ejemplar 5/50.',
     detail: [
       ['Fecha', '22 de junio de 1934'], ['Técnica', 'Aguafuerte'], ['Dimensiones', '23,8 × 29,9 cm'],
       ['Edición', '5/50, firmada a lápiz'], ['Catálogo', 'Bloch 281 · Baer 429'],
-      ['Estado', 'Papel tonalizado y posible foxing leve — pedir informe de conservación'],
-      ['Precio', '8.000 € + IVA (≈ 9.680 €)'], ['Galería', 'Joan Gaspar'],
+      ['Estado', 'Tonalización/foxing leve — la galería lo restaura antes de entregar (con señal)'],
+      ['Precio', '8.000 € + IVA (≈ 9.680 €) — firme, no rebajan'], ['IVA', 'Sin IVA con pasaporte extranjero, o recuperable vía empresa (~21%)'], ['Galería', 'Joan Gaspar'],
     ],
   },
   {
@@ -232,11 +232,11 @@ export const WORKS = [
     ref: 'Dupin 594 · firmada a lápiz · ej. 6/50 · 70×105 cm · 8.500 € + IVA (≈ 10.285 €)',
     comp: 'Gran carborundo firmado a lápiz (105×70). Comparables de la serie ~7.000–18.000 €. Precio de mercado.',
     def: { signed: 'si', numbered: 'si', catalogue: 'si', cert: '?' },
-    note: 'Miró grande, firmado a lápiz y catalogado (Dupin 594). Pieza potente y muy “Miró”. Con IVA supera tu objetivo, pero es obra seria y líquida.',
+    note: 'Miró grande (70×105), firmado a lápiz, catalogado MG-594 / Dupin 594. NO rebajan precio, pero aplica la misma vía de IVA (sin IVA con pasaporte extranjero o recuperable vía empresa, ~21%). OJO: va SIN marco — suma enmarcado de conservación a ese tamaño (~400–700 €). Formato ideal para tu pared de 3 m.',
     desc: 'Gran estampa de la “Sèrie Barcelona” (1972-73): aguafuerte y aguatinta al carborundo sobre Guarro, firmada a lápiz. Formato grande y matérico.',
     detail: [
       ['Año', '1972-1973'], ['Técnica', 'Aguafuerte y aguatinta al carborundo sobre Guarro'], ['Dimensiones', '70 × 105 cm'],
-      ['Edición', '6/50, firmada a lápiz'], ['Catálogo', 'Dupin 594 (MG-594)'], ['Precio', '8.500 € + IVA (≈ 10.285 €)'], ['Galería', 'Joan Gaspar'],
+      ['Edición', '6/50, firmada a lápiz'], ['Catálogo', 'Dupin 594 (MG-594)'], ['Precio', '8.500 € + IVA (≈ 10.285 €) — firme, no rebajan'], ['Marco', 'No incluido — enmarcado conservación ~400–700 €'], ['IVA', 'Sin IVA con pasaporte extranjero o recuperable vía empresa'], ['Galería', 'Joan Gaspar'],
     ],
   },
   {

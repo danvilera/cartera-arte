@@ -354,9 +354,9 @@ a.btn { text-decoration: none; }
 .dz-ico { font-size: 2rem; }
 .wall-stage { position: relative; width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: var(--paper); touch-action: none; user-select: none; }
 .wall-photo { width: 100%; display: block; }
-.framed { position: absolute; cursor: grab; box-sizing: content-box; touch-action: none; border-radius: 1px; }
+.framed { position: absolute; cursor: grab; box-sizing: border-box; touch-action: none; border-radius: 1px; }
 .framed:active { cursor: grabbing; }
-.mat { box-sizing: content-box; }
+.mat { box-sizing: border-box; }
 .wall-actions { display: flex; gap: 8px; margin-top: 8px; }
 .btn.mini { padding: 6px 12px; font-size: 0.8rem; }
 label.btn { display: inline-flex; align-items: center; }
