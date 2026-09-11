@@ -840,6 +840,25 @@ export const WORKS = [
       ['Precio', '6.500 € lista · socio ≈ 5.200 €'], ['Vendedor', 'Taller del Prado, Madrid'],
     ],
   },
+  {
+    id: 'online_dali_singe', artist: 'Salvador Dalí', tech: 'Punta seca iluminada a mano, firmada a mano', gallery: 'Disponible Online', price: 2800, online: true,
+    url: 'https://www.tallerdelprado.com/obra-de-arte/copia-108/',
+    title: '“Le Singe et le Léopard” (1974)',
+    img: 'https://www.tallerdelprado.com/wp-content/uploads/2026/05/260508_Salvador-Dali-_Taller_del_Prado_40046.jpg', pdf: '',
+    bandSigned: [2000, 4500], bandUnsigned: [400, 1200],
+    liquidity: 45, prestige: 70, printRisk: 55, specialist: -3,
+    ref: 'Punta seca iluminada a mano · 76 × 56 cm (huella 58×40) · 1974 · ej. 4/250 · firmada a mano · Field 74-1 H · Le Bestiaire de La Fontaine · Taller del Prado',
+    comp: 'Dalí firmado a mano y catalogado en Field (74-1 H). PERO 1974: época de las hojas firmadas en blanco → la firma vale mucho menos que en un Miró/Picasso. Por eso un Dalí firmado, coloreado a mano y de 76×56 cuesta solo 3.500 € (socio 2.800). Buen objeto decorativo; inversión floja.',
+    def: { signed: 'si', numbered: 'si', catalogue: 'si', cert: 'si' },
+    note: 'RIESGO ALTO de firma: es de 1974, la época en que Dalí firmó a mano miles de hojas EN BLANCO que luego se imprimieron. La firma es auténtica como caligrafía, pero no garantiza que se firmara para ESTA imagen ni bajo su control. Mitigante: la edición SÍ está catalogada en Field (74-1 H) y es la suite real "Le Bestiaire de La Fontaine", con certificado de la galería. Aun así: revalorización y liquidez bajas (mercado saturado de Dalí de los 70). Es GRANDE (76×56), no combina como pequeña con los Miró: dominaría. Válido si te gusta la imagen a precio de mercado justo; por debajo de Miró/Hartung/Picasso como inversión.',
+    desc: 'Punta seca iluminada a mano con acuarela sobre papel Arches, de la suite “Le Bestiaire de La Fontaine” (1974), ej. 4/250, numerada y firmada a mano por Dalí, catalogada en Field (74-1 H). Hoja 76×56. Legítima y documentada, pero de la época de firmas en hojas en blanco: cautela como inversión. Vendedor Taller del Prado (Madrid).',
+    detail: [
+      ['Año', '1974'], ['Serie', 'Le Bestiaire de La Fontaine'], ['Técnica', 'Punta seca iluminada a mano (acuarela)'],
+      ['Soporte', 'Papel Arches'], ['Dimensiones', '76 × 56 cm (huella 58×40)'], ['Ejemplar', '4/250'],
+      ['Catálogo', 'Field 74-1 H'], ['Firma', 'A mano (ojo: era de hojas prefirmadas)'],
+      ['Precio', '3.500 € lista · socio ≈ 2.800 €'], ['Vendedor', 'Taller del Prado, Madrid'],
+    ],
+  },
 ]
 
 export function defaultState() {
