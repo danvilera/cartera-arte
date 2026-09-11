@@ -521,7 +521,7 @@ export const WORKS = [
     ref: 'Maeght 201 · firmada a lápiz · ed. HC + 100 · 65,5×46,5 cm',
     comp: 'Litografía a color firmada, editada por Maeght. Comparables ~5.000–12.000 €. A 6.000 € es buen precio y con presencia.',
     def: { signed: 'si', numbered: 'no', catalogue: 'si', cert: '?' },
-    note: 'Miró a color firmado a lápiz (Maeght 201). La MÁS grande y decorativa de las tres (65×46) y la más barata: mejor relación impacto/precio para tu pared de 3 m. Tu ejemplar es HC (hors commerce): prueba fuera de la tirada de 100, igualmente firmada y de misma calidad — perfectamente válida y apenas afecta al valor. Confirma que la hoja lleva marcado «HC».',
+    note: 'Miró a color firmado a lápiz (Maeght 201). La MÁS grande y decorativa de las tres (65×46) y la más barata: mejor relación impacto/precio para tu pared de 3 m. Tu ejemplar es HC (hors commerce): prueba fuera de la tirada de 100, igualmente firmada y de misma calidad — perfectamente válida y apenas afecta al valor. Confirmado: es HC (no numerada), marcado a lápiz.',
     desc: 'Litografía original a color (azul, rojo y negro), 1960, editada por Maeght. Firmada a lápiz. Formato vertical de buen tamaño.',
     detail: [
       ['Año', '1960'], ['Técnica', 'Litografía original a color'], ['Dimensiones', '65,5 × 46,5 cm'],
