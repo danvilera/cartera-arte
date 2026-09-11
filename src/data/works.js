@@ -971,6 +971,40 @@ export const WORKS = [
       ['Firma', 'A mano (era de hojas prefirmadas)'], ['Precio', '3.900 € lista · socio ≈ 3.120 €'], ['Vendedor', 'Taller del Prado, Madrid'],
     ],
   },
+  {
+    id: 'online_tapies_ovalgris', artist: 'Antoni Tàpies', tech: 'Litografía firmada a mano', gallery: 'Disponible Online', price: 2352, online: true,
+    url: 'https://www.tallerdelprado.com/obra-de-arte/oval-gris/',
+    title: '“Oval gris” (1987)',
+    img: 'https://www.tallerdelprado.com/wp-content/uploads/2025/10/251029_Antoni-Tapies_Taller_del_Prado_36298.jpg', pdf: '',
+    bandSigned: [2500, 6000], bandUnsigned: [700, 2000],
+    liquidity: 64, prestige: 86, printRisk: 10, specialist: 0,
+    ref: 'Litografía · 74 × 104,5 cm (apaisado) · 1987 · numerada y firmada a mano · Taller del Prado',
+    comp: 'Tàpies gran formato apaisado (74×104), firmado a mano y numerado, 2.352 € socio. Maestro catalán de museo; abstracción matérica sobria. Buen ancla para un trío de catalanes.',
+    def: { signed: 'si', numbered: 'si', catalogue: '?', cert: 'si' },
+    note: 'Tàpies, litografía apaisada 74×104, firmada a mano y numerada, 1987. Maestro catalán de primer nivel, liquidez decente. Gran formato = presencia en pared. Confirmar nº de catálogo (Galfetti) en la visita.',
+    desc: 'Litografía original de Antoni Tàpies, “Oval gris” (1987), numerada y firmada a mano. Gran formato apaisado 74×104, abstracción matérica. Vendedor Taller del Prado (Madrid).',
+    detail: [
+      ['Año', '1987'], ['Técnica', 'Litografía'], ['Dimensiones', '74 × 104,5 cm'],
+      ['Firma', 'A mano, numerada'], ['Precio', '2.940 € lista · socio ≈ 2.352 €'], ['Vendedor', 'Taller del Prado, Madrid'],
+    ],
+  },
+  {
+    id: 'online_tapies_profil', artist: 'Antoni Tàpies', tech: 'Litografía firmada a mano', gallery: 'Disponible Online', price: 2352, online: true,
+    url: 'https://www.tallerdelprado.com/obra-de-arte/profil/',
+    title: '“Profil” (vertical)',
+    img: 'https://www.tallerdelprado.com/wp-content/uploads/2025/10/251029_Antoni-Tapies_Taller_del_Prado_36300.jpg', pdf: '',
+    bandSigned: [2500, 6000], bandUnsigned: [700, 2000],
+    liquidity: 64, prestige: 86, printRisk: 10, specialist: 0,
+    ref: 'Litografía · 103 × 73,5 cm (vertical) · numerada y firmada a mano · Taller del Prado',
+    comp: 'Tàpies gran formato VERTICAL (103×73), firmado a mano, 2.352 € socio. Alternativa vertical al Oval gris para el trío catalán.',
+    def: { signed: 'si', numbered: 'si', catalogue: '?', cert: 'si' },
+    note: 'Tàpies, litografía vertical 103×73, firmada a mano y numerada. Gran formato, maestro catalán. Confirmar nº de catálogo (Galfetti).',
+    desc: 'Litografía original de Antoni Tàpies, “Profil”, numerada y firmada a mano. Gran formato vertical 103×73. Vendedor Taller del Prado (Madrid).',
+    detail: [
+      ['Técnica', 'Litografía'], ['Dimensiones', '103 × 73,5 cm'],
+      ['Firma', 'A mano, numerada'], ['Precio', '2.940 € lista · socio ≈ 2.352 €'], ['Vendedor', 'Taller del Prado, Madrid'],
+    ],
+  },
 ]
 
 export function defaultState() {
