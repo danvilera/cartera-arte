@@ -897,6 +897,25 @@ export const WORKS = [
       ['Precio', '8.000 € lista · socio ≈ 6.400 €'], ['Vendedor', 'Taller del Prado, Madrid'],
     ],
   },
+  {
+    id: 'online_dali_capdecreus', artist: 'Salvador Dalí', tech: 'Litografía firmada a mano', gallery: 'Disponible Online', price: 1600, online: true,
+    url: 'https://www.tallerdelprado.com/obra-de-arte/la-vision-del-angel-de-cap-de-creus-de-la-serie-retrspectiva-ii/',
+    title: '“La Visión del Ángel de Cap de Creus” (1979)',
+    img: 'https://www.dali.com/wp-content/uploads/2015/07/1647_TheVisionOfTheAngelOfCapDeCreus_LaVisionDeCapDeCreus.jpg', pdf: '',
+    bandSigned: [1500, 3500], bandUnsigned: [400, 1200],
+    liquidity: 48, prestige: 72, printRisk: 50, specialist: -2,
+    ref: 'Litografía · 74,8 × 54,6 cm (huella 58×43) · 1979 · ed. 125 · firmada a mano · Field 80-8 · Taller del Prado',
+    comp: 'Dalí firmado a mano y catalogado (Field 80-8), litografía de verdad (no fotomecánica), ed. 125, tema Cap de Creus (la Costa Brava de Dalí). 1.600 € socio (lista 2.000). Mejor Dalí que “Off the battle” y más barato. Mismo caveat de firma de 1979.',
+    def: { signed: 'si', numbered: 'si', catalogue: 'si', cert: 'si' },
+    note: 'Litografía sobre Arches, 1979, ed. 125, firmada a mano, catalogada en Field (80-8). Tema Cap de Creus (Cadaqués), muy resonante estando en Cataluña. MISMO caveat que los Dalí de los 70: firma de la época de hojas prefirmadas → menos garantía que un Miró/Goya, y revalorización floja. Pero es litografía real (no el heliograbado del díptico) y edición contenida (125). Imagen del archivo oficial dali.com (la ficha de la galería tenía la foto mal). Buen Dalí "de entrada" si te gusta el tema.',
+    desc: 'Litografía original de Salvador Dalí, “La Visión del Ángel de Cap de Creus” (1979), edición 125 sobre papel Arches, numerada y firmada a mano, catalogada en Field (80-8). Paisaje surrealista de la Costa Brava de Dalí. Vendedor Taller del Prado (Madrid).',
+    detail: [
+      ['Año', '1979'], ['Técnica', 'Litografía'], ['Soporte', 'Papel Arches'],
+      ['Dimensiones', '74,8 × 54,6 cm (huella 58×43)'], ['Edición', '125'],
+      ['Catálogo', 'Field 80-8'], ['Firma', 'A mano (ojo: era de hojas prefirmadas)'],
+      ['Precio', '2.000 € lista · socio ≈ 1.600 €'], ['Vendedor', 'Taller del Prado, Madrid'],
+    ],
+  },
 ]
 
 export function defaultState() {

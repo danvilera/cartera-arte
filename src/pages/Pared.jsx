@@ -13,7 +13,7 @@ const MATS = { hueso: '#efe9db', blanco: '#ffffff', gris: '#d7d5cf', negro: '#1c
 
 const DEF_CFG = {
   sceneWidthCm: 300, artId: 'miro', artWcm: 70,
-  art2Id: 'none', art2Wcm: 60, gapCm: 8,
+  art2Id: 'none', art2Wcm: 60, art3Id: 'none', art3Wcm: 60, gapCm: 8,
   matCm: 6, matColor: 'hueso', frameCm: 3, frameColor: 'madera clara',
   posX: 30, posY: 26,
 }
@@ -27,6 +27,7 @@ export default function Pared() {
   const [customArt, setCustomArt] = useState(() => load('arte_wall_art', null))
   const [imgAR, setImgAR] = useState(1.3)
   const [imgAR2, setImgAR2] = useState(1.3)
+  const [imgAR3, setImgAR3] = useState(1.3)
   const [slots, setSlots] = useState(() => load('arte_wall_slots', []))
   const [slotName, setSlotName] = useState('')
   const stageRef = useRef(null)
@@ -51,9 +52,12 @@ export default function Pared() {
   const artSrc = srcOf(cfg.artId)
   const hasTwo = cfg.art2Id && cfg.art2Id !== 'none'
   const art2Src = hasTwo ? srcOf(cfg.art2Id) : null
+  const hasThree = cfg.art3Id && cfg.art3Id !== 'none'
+  const art3Src = hasThree ? srcOf(cfg.art3Id) : null
 
   useEffect(() => { readAR(artSrc, setImgAR) }, [artSrc])
   useEffect(() => { if (art2Src) readAR(art2Src, setImgAR2) }, [art2Src])
+  useEffect(() => { if (art3Src) readAR(art3Src, setImgAR3) }, [art3Src])
 
   const set = (k, v) => setCfg((c) => ({ ...c, [k]: v }))
 
@@ -70,12 +74,13 @@ export default function Pared() {
 
   function pickWork(w, slot) {
     const dims = sizeOf(w)
-    let widthCm = slot === 2 ? cfg.art2Wcm : cfg.artWcm
+    let widthCm = slot === 3 ? cfg.art3Wcm : slot === 2 ? cfg.art2Wcm : cfg.artWcm
     if (dims) {
       const isLandscape = imgLandscapeGuess(w)
       widthCm = isLandscape ? Math.max(dims[0], dims[1]) : Math.min(dims[0], dims[1])
     }
-    if (slot === 2) setCfg((c) => ({ ...c, art2Id: w.id, art2Wcm: widthCm }))
+    if (slot === 3) setCfg((c) => ({ ...c, art3Id: w.id, art3Wcm: widthCm }))
+    else if (slot === 2) setCfg((c) => ({ ...c, art2Id: w.id, art2Wcm: widthCm }))
     else setCfg((c) => ({ ...c, artId: w.id, artWcm: widthCm }))
   }
 
@@ -84,7 +89,8 @@ export default function Pared() {
   const framePx = Math.max(2, cfg.frameCm * pxPerCm)
 
   const framedOuterCm = (wcm) => wcm + 2 * cfg.matCm + 2 * cfg.frameCm
-  const groupWcm = framedOuterCm(cfg.artWcm) + (hasTwo ? cfg.gapCm + framedOuterCm(cfg.art2Wcm) : 0)
+  const nPieces = 1 + (hasTwo ? 1 : 0) + (hasThree ? 1 : 0)
+  const groupWcm = framedOuterCm(cfg.artWcm) + (hasTwo ? cfg.gapCm + framedOuterCm(cfg.art2Wcm) : 0) + (hasThree ? cfg.gapCm + framedOuterCm(cfg.art3Wcm) : 0)
   const alto1 = Math.round(cfg.artWcm / imgAR)
 
   function Framed({ src, wcm, ar }) {
@@ -128,7 +134,7 @@ export default function Pared() {
 
   return (
     <div className="prose">
-      <p className="lede">Sube una foto de tu pared, dime el ancho real de lo que se ve y prueba cómo quedaría enmarcado. Arrástralo para colocarlo. Puedes montar <b>dos obras juntas</b> para tu pared de 3 m.</p>
+      <p className="lede">Sube una foto de tu pared, dime el ancho real de lo que se ve y prueba cómo quedaría enmarcado. Arrástralo para colocarlo. Puedes montar <b>hasta tres obras juntas</b> para tu pared de 3 m.</p>
 
       {!photo ? (
         <label className="dropzone">
@@ -145,6 +151,7 @@ export default function Pared() {
               <div onPointerDown={onDown} style={{ position: 'absolute', left: cfg.posX + '%', top: cfg.posY + '%', display: 'flex', alignItems: 'center', gap: (cfg.gapCm * pxPerCm) + 'px', cursor: 'grab', touchAction: 'none' }}>
                 <Framed src={artSrc} wcm={cfg.artWcm} ar={imgAR} />
                 {hasTwo && art2Src && <Framed src={art2Src} wcm={cfg.art2Wcm} ar={imgAR2} />}
+                {hasThree && art3Src && <Framed src={art3Src} wcm={cfg.art3Wcm} ar={imgAR3} />}
               </div>
             )}
           </div>
@@ -195,6 +202,20 @@ export default function Pared() {
           </div>
         )}
 
+        <h3 className="sheet-h3">3b · Tercera obra (opcional)</h3>
+        <div className="chips2">
+          <button className={'chip2' + (cfg.art3Id === 'none' ? ' on' : '')} onClick={() => set('art3Id', 'none')}>Ninguna</button>
+          {WORKS.map((w) => (
+            <button key={w.id} className={'chip2' + (cfg.art3Id === w.id ? ' on' : '')} onClick={() => pickWork(w, 3)}>
+              {w.artist.split(' ').slice(-1)[0]} · {w.title.replace(/[“”"]/g, '').slice(0, 16)}
+            </button>
+          ))}
+        </div>
+        {hasThree && (
+          <div className="ctl"><label>Ancho 3ª obra: <b>{cfg.art3Wcm} cm</b></label>
+            <input type="range" min="15" max="150" step="1" value={cfg.art3Wcm} onChange={(e) => set('art3Wcm', +e.target.value)} /></div>
+        )}
+
         <h3 className="sheet-h3">4 · Paspartú</h3>
         <div className="two">
           <div className="ctl"><label>Grosor: <b>{cfg.matCm} cm</b></label>
@@ -218,8 +239,8 @@ export default function Pared() {
 
       <div className="wall-guide">
         <h4>📐 Guía de colgado</h4>
-        <p style={{ margin: '0 0 6px' }}>Conjunto ≈ <b>{Math.round(groupWcm)} cm</b> de ancho{hasTwo ? ` (dos piezas, ${cfg.gapCm} cm de separación)` : ''}. En una pared de 3 m deja al menos <b>{Math.max(0, Math.round((300 - groupWcm) / 2))} cm</b> libres a cada lado para que respire.</p>
-        <p className="note" style={{ margin: 0 }}>Cuelga con el <b>eje horizontal a 145–150 cm</b> del suelo (altura de museo). {hasTwo ? 'Alinea las dos piezas por su centro; mantén la misma separación arriba y abajo.' : ''}</p>
+        <p style={{ margin: '0 0 6px' }}>Conjunto ≈ <b>{Math.round(groupWcm)} cm</b> de ancho{nPieces > 1 ? ` (${nPieces} piezas, ${cfg.gapCm} cm de separación)` : ''}. En una pared de 3 m deja al menos <b>{Math.max(0, Math.round((300 - groupWcm) / 2))} cm</b> libres a cada lado para que respire.</p>
+        <p className="note" style={{ margin: 0 }}>Cuelga con el <b>eje horizontal a 145–150 cm</b> del suelo (altura de museo). {nPieces > 1 ? 'Alinea las piezas por su centro; mantén la misma separación entre ellas.' : ''}</p>
       </div>
 
       <div className="panel" style={{ marginTop: 12 }}>
