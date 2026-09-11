@@ -935,6 +935,42 @@ export const WORKS = [
       ['Precio', '2.500 € lista · socio ≈ 2.000 €'], ['Vendedor', 'Taller del Prado, Madrid'],
     ],
   },
+  {
+    id: 'online_dali_animaux', artist: 'Salvador Dalí', tech: 'Punta seca iluminada a mano, firmada a mano', gallery: 'Disponible Online', price: 2800, online: true,
+    url: 'https://www.tallerdelprado.com/obra-de-arte/copia-106/',
+    title: '“Les Animaux Malades de la Peste” (1974)',
+    img: 'https://www.tallerdelprado.com/wp-content/uploads/2026/05/260508_Salvador-Dali-_Taller_del_Prado_40050.jpg', pdf: '',
+    bandSigned: [1800, 4000], bandUnsigned: [500, 1500],
+    liquidity: 52, prestige: 74, printRisk: 45, specialist: -2,
+    ref: 'Punta seca iluminada a mano · 56,5 × 76,5 cm (huella 40×57) · 1974 · ej. 4/250 · firmada a mano · Field 74-1 D · Le Bestiaire de La Fontaine',
+    comp: 'Hermana de “Le Singe”: punta seca coloreada a mano, apaisada 56×76, Field 74-1 D, firmada a mano. 2.800 € socio. Buena factura (intaglio + acuarela), no fotomecánica.',
+    def: { signed: 'si', numbered: 'si', catalogue: 'si', cert: 'si' },
+    note: 'Le Bestiaire de La Fontaine (1974), punta seca iluminada a mano con acuarela, ej. 4/250, Field 74-1 D, firmada a mano. Apaisada 56×76 (buena presencia). MISMO caveat de firma de los 70 (hojas prefirmadas) y liquidez de subasta por debajo del retail; pero es de la mejor factura de la gráfica daliniana (intaglio hecho a mano + color), no el heliograbado del díptico.',
+    desc: 'Punta seca iluminada a mano con acuarela sobre Arches, “Les Animaux Malades de la Peste”, suite Le Bestiaire de La Fontaine (1974), ej. 4/250, firmada a mano, Field 74-1 D. Vendedor Taller del Prado (Madrid).',
+    detail: [
+      ['Año', '1974'], ['Serie', 'Le Bestiaire de La Fontaine'], ['Técnica', 'Punta seca iluminada a mano'],
+      ['Dimensiones', '56,5 × 76,5 cm (huella 40×57)'], ['Ejemplar', '4/250'], ['Catálogo', 'Field 74-1 D'],
+      ['Firma', 'A mano (era de hojas prefirmadas)'], ['Precio', '3.500 € lista · socio ≈ 2.800 €'], ['Vendedor', 'Taller del Prado, Madrid'],
+    ],
+  },
+  {
+    id: 'online_dali_chene', artist: 'Salvador Dalí', tech: 'Punta seca iluminada a mano, firmada a mano', gallery: 'Disponible Online', price: 3120, online: true,
+    url: 'https://www.tallerdelprado.com/obra-de-arte/la-chene-et-le-roseau-le-bestiaire-de-la-fontaine-2/',
+    title: '“Le Chêne et le Roseau” (1974)',
+    img: 'https://www.tallerdelprado.com/wp-content/uploads/2023/10/231016_Salvador_Dali_Taller_del_Prado_28312.jpg', pdf: '',
+    bandSigned: [2000, 4500], bandUnsigned: [500, 1600],
+    liquidity: 52, prestige: 74, printRisk: 45, specialist: -2,
+    ref: 'Punta seca iluminada a mano · 78,4 × 57,5 cm (huella 58×40) · 1974 · ej. 142/250 · firmada a mano · Field 74-1 K · Le Bestiaire de La Fontaine',
+    comp: 'La más GRANDE de los Dalí que miras (78×57), punta seca coloreada a mano, Field 74-1 K, firmada a mano. 3.120 € socio. Vertical, buena para pared.',
+    def: { signed: 'si', numbered: 'si', catalogue: 'si', cert: 'si' },
+    note: 'Le Bestiaire de La Fontaine (1974), punta seca iluminada a mano con acuarela, ej. 142/250, Field 74-1 K, firmada a mano. Formato grande vertical 78×57, la de más presencia de los Dalí candidatos. Mismo caveat de firma de los 70; buena factura (no fotomecánica).',
+    desc: 'Punta seca iluminada a mano con acuarela, “Le Chêne et le Roseau”, suite Le Bestiaire de La Fontaine (1974), ej. 142/250, firmada a mano, Field 74-1 K. Formato grande 78×57. Vendedor Taller del Prado (Madrid).',
+    detail: [
+      ['Año', '1974'], ['Serie', 'Le Bestiaire de La Fontaine'], ['Técnica', 'Punta seca iluminada a mano'],
+      ['Dimensiones', '78,4 × 57,5 cm (huella 58×40)'], ['Ejemplar', '142/250'], ['Catálogo', 'Field 74-1 K'],
+      ['Firma', 'A mano (era de hojas prefirmadas)'], ['Precio', '3.900 € lista · socio ≈ 3.120 €'], ['Vendedor', 'Taller del Prado, Madrid'],
+    ],
+  },
 ]
 
 export function defaultState() {
