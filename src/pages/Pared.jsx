@@ -15,6 +15,7 @@ const DEF_CFG = {
   sceneWidthCm: 300, artId: 'miro', artWcm: 70,
   art2Id: 'none', art2Wcm: 60, art3Id: 'none', art3Wcm: 60, gapCm: 8,
   matCm: 6, matColor: 'hueso', frameCm: 3, frameColor: 'madera clara',
+  uniform: false, outWcm: 64, outHcm: 88,
   posX: 30, posY: 26,
 }
 
@@ -90,10 +91,26 @@ export default function Pared() {
 
   const framedOuterCm = (wcm) => wcm + 2 * cfg.matCm + 2 * cfg.frameCm
   const nPieces = 1 + (hasTwo ? 1 : 0) + (hasThree ? 1 : 0)
-  const groupWcm = framedOuterCm(cfg.artWcm) + (hasTwo ? cfg.gapCm + framedOuterCm(cfg.art2Wcm) : 0) + (hasThree ? cfg.gapCm + framedOuterCm(cfg.art3Wcm) : 0)
+  const outerCm = (wcm) => cfg.uniform ? cfg.outWcm : framedOuterCm(wcm)
+  const groupWcm = outerCm(cfg.artWcm) + (hasTwo ? cfg.gapCm + outerCm(cfg.art2Wcm) : 0) + (hasThree ? cfg.gapCm + outerCm(cfg.art3Wcm) : 0)
   const alto1 = Math.round(cfg.artWcm / imgAR)
 
   function Framed({ src, wcm, ar }) {
+    if (cfg.uniform) {
+      const outWpx = cfg.outWcm * pxPerCm
+      const outHpx = cfg.outHcm * pxPerCm
+      const innerW = Math.max(1, outWpx - 2 * framePx - 2 * matPx)
+      const innerH = Math.max(1, outHpx - 2 * framePx - 2 * matPx)
+      let iw = innerW, ih = iw / ar
+      if (ih > innerH) { ih = innerH; iw = ih * ar }
+      return (
+        <div className="framed" style={{ position: 'relative', width: outWpx + 'px', height: outHpx + 'px', boxSizing: 'border-box', background: FRAMES[cfg.frameColor].bg, padding: framePx + 'px', boxShadow: '0 6px 20px rgba(0,0,0,.35)' }}>
+          <div className="mat" style={{ width: '100%', height: '100%', boxSizing: 'border-box', background: MATS[cfg.matColor], display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <img src={src} alt="obra" draggable={false} style={{ width: iw + 'px', height: ih + 'px', display: 'block' }} />
+          </div>
+        </div>
+      )
+    }
     const artWpx = wcm * pxPerCm
     const artHpx = artWpx / ar
     return (
@@ -131,6 +148,7 @@ export default function Pared() {
   }
   const loadSlot = (s) => setCfg((c) => ({ ...c, ...s.cfg }))
   const delSlot = (name) => setSlots((s) => s.filter((x) => x.name !== name))
+  const loadTrioCatalan = () => setCfg((c) => ({ ...c, artId: 'online_dali_zootrope', art2Id: 'online_miro_recent5', art3Id: 'online_tapies_minoriv', uniform: true, outWcm: 64, outHcm: 88, matCm: 8, frameCm: 3, gapCm: 16, matColor: 'hueso', frameColor: 'madera clara', posX: 18, posY: 20 }))
 
   return (
     <div className="prose">
@@ -237,10 +255,33 @@ export default function Pared() {
         </div>
       </div>
 
+      <div className="panel" style={{ marginTop: 12 }}>
+        <h3 className="sheet-h3" style={{ marginTop: 0 }}>6 · Marcos iguales (paspartú grande)</h3>
+        <label className="ctl" style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          <input type="checkbox" checked={cfg.uniform} onChange={(e) => set('uniform', e.target.checked)} />
+          <span>Igualar los tres marcos al mismo tamaño (el paspartú del más pequeño se agranda solo para compensar).</span>
+        </label>
+        {cfg.uniform && (
+          <div className="two">
+            <div className="ctl"><label>Ancho de marco: <b>{cfg.outWcm} cm</b></label>
+              <input type="range" min="30" max="120" step="1" value={cfg.outWcm} onChange={(e) => set('outWcm', +e.target.value)} /></div>
+            <div className="ctl"><label>Alto de marco: <b>{cfg.outHcm} cm</b></label>
+              <input type="range" min="30" max="140" step="1" value={cfg.outHcm} onChange={(e) => set('outHcm', +e.target.value)} /></div>
+          </div>
+        )}
+        <p className="note" style={{ margin: '6px 0 0' }}>En modo "marcos iguales" el paspartú (sección 4) actúa como margen mínimo; el resto se rellena de paspartú para que los tres marcos midan lo mismo.</p>
+      </div>
+
       <div className="wall-guide">
         <h4>📐 Guía de colgado</h4>
         <p style={{ margin: '0 0 6px' }}>Conjunto ≈ <b>{Math.round(groupWcm)} cm</b> de ancho{nPieces > 1 ? ` (${nPieces} piezas, ${cfg.gapCm} cm de separación)` : ''}. En una pared de 3 m deja al menos <b>{Math.max(0, Math.round((300 - groupWcm) / 2))} cm</b> libres a cada lado para que respire.</p>
         <p className="note" style={{ margin: 0 }}>Cuelga con el <b>eje horizontal a 145–150 cm</b> del suelo (altura de museo). {nPieces > 1 ? 'Alinea las piezas por su centro; mantén la misma separación entre ellas.' : ''}</p>
+      </div>
+
+      <div className="panel" style={{ marginTop: 12 }}>
+        <h3 className="sheet-h3" style={{ marginTop: 0 }}>Montajes sugeridos</h3>
+        <button className="btn ghost mini" onClick={loadTrioCatalan}>🎨 Trío catalán (Miró al centro · marcos iguales)</button>
+        <p className="note" style={{ margin: '6px 0 0' }}>Dalí «Zöotrope» y Tàpies «Minor IV» a los lados, Miró pequeño al centro con paspartú mayor; los tres marcos del mismo tamaño. Súbele tu foto y ajusta escala/posición.</p>
       </div>
 
       <div className="panel" style={{ marginTop: 12 }}>
