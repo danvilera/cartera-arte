@@ -916,6 +916,25 @@ export const WORKS = [
       ['Precio', '2.000 € lista · socio ≈ 1.600 €'], ['Vendedor', 'Taller del Prado, Madrid'],
     ],
   },
+  {
+    id: 'online_goyadali_diptico', artist: 'Goya / Dalí', tech: 'Díptico: Goya (reimpr.) + Dalí (heliograbado firmado a mano)', gallery: 'Disponible Online', price: 2000, online: true,
+    url: 'https://www.tallerdelprado.com/obra-de-arte/buen-viage-y-esto-es-esto-no-es-capricho-no-64-diptico/',
+    title: 'Goya + Dalí · «Buen viage / Esto es, ésto no es» (Capricho 64)',
+    img: 'https://www.tallerdelprado.com/wp-content/uploads/2025/01/250117_Francisco_de_Goya_Salvador_Dali_Taller_del_Prado_32777-1.jpg', pdf: '',
+    bandSigned: [1500, 3500], bandUnsigned: [600, 1500],
+    liquidity: 40, prestige: 72, printRisk: 55, specialist: -3,
+    ref: 'Díptico · Goya Capricho 64 (reimpresión s. XX) + reinterpretación de Dalí (1975, heliograbado), ej. 34/200 firmado a mano · 2 hojas (medidas a confirmar) · Taller del Prado',
+    comp: 'Dos maestros en un marco: el Capricho 64 de Goya y la versión surrealista de Dalí, lado a lado, por 2.000 € socio. Con un Miró al lado tendrías Miró + Goya + Dalí. Pieza conceptual y barata; como inversión, la más floja (ver nota).',
+    def: { signed: 'si', numbered: 'si', catalogue: 'no', cert: 'si' },
+    note: 'CONCEPTO bonito (diálogo Goya↔Dalí), pero la de menor calidad como inversión: la parte de Dalí es HELIOGRABADO (fotomecánico) de 1975 —gama baja de su gráfica— y la de Goya es una REIMPRESIÓN del s. XX (no 1ª edición). La parte Dalí sí va firmada a mano (34/200); la ficha no cita catálogo Field. Alternativa a valorar: por dinero similar tendrías DOS piezas mejores separadas — un Goya Desastres de 1ª edición (~1.920) + un Dalí litografía real Cap de Creus (~1.600) — aunque pierdes el efecto díptico en un solo marco.',
+    desc: 'Díptico enmarcado: el Capricho nº 64 de Goya (“Buen viage”), en reimpresión del siglo XX, junto a la reinterpretación surrealista que hizo Dalí en 1975 (heliograbado), ejemplar 34/200 firmado a mano por Dalí. Dos maestros en diálogo en un mismo marco. Vendedor Taller del Prado (Madrid).',
+    detail: [
+      ['Obra', 'Díptico Goya + Dalí'], ['Goya', 'Capricho 64 · reimpresión s. XX'],
+      ['Dalí', 'Reinterpretación 1975 · heliograbado'], ['Firma', 'Parte Dalí: a mano, 34/200'],
+      ['Edición', '200 (parte Dalí)'], ['Medidas', 'Dos hojas — a confirmar'],
+      ['Precio', '2.500 € lista · socio ≈ 2.000 €'], ['Vendedor', 'Taller del Prado, Madrid'],
+    ],
+  },
 ]
 
 export function defaultState() {
