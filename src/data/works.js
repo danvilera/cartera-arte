@@ -1195,6 +1195,32 @@ export const WORKS = [
     desc: 'Punta seca iluminada a mano con acuarela, “La Cour du Lion”, suite Le Bestiaire de La Fontaine (1974), firmada a mano, Field 74-1 J. Vertical 76×57. Vendedor Taller del Prado (Madrid).',
     detail: [['Año','1974'],['Serie','Le Bestiaire de La Fontaine'],['Técnica','Punta seca iluminada a mano'],['Dimensiones','76 × 57 cm (vertical)'],['Catálogo','Field 74-1 J'],['Firma','A mano (era de hojas prefirmadas)'],['Precio','3.500 € lista · socio ≈ 2.800 €'],['Vendedor','Taller del Prado, Madrid']],
   },
+  {
+    id: 'online_dali_zootrope', artist: 'Salvador Dalí', tech: 'Punta seca firmada a mano', gallery: 'Disponible Online', price: 1760, online: true,
+    url: 'https://www.tallerdelprado.com/obra-de-arte/zootrope-et-tour-boullee/',
+    title: '“Zöotrope et tour Boullée” (1973)',
+    img: 'https://www.tallerdelprado.com/wp-content/uploads/2024/09/240917_Salvador_Dali_Taller_del_Prado_31773.jpg', pdf: '',
+    bandSigned: [1400, 3200], bandUnsigned: [400, 1200], liquidity: 50, prestige: 74, printRisk: 48, specialist: -2,
+    ref: 'Punta seca · 57,8 × 39,4 cm (VERTICAL) · 1973 · ed. 210 · firmada a mano · Field · suite Dix Recettes d’Immortalité',
+    comp: 'Dalí VERTICAL 58×39 (Dix Recettes d’Immortalité), punta seca firmada a mano, Field, 1.760 € socio. Tamaño casi idéntico al Tàpies Minor IV (56×40) → pareja perfecta; el Miró pequeño hace de acento de color.',
+    def: { signed: 'si', numbered: 'si', catalogue: 'si', cert: 'si' },
+    note: 'Dalí, "Zöotrope et tour Boullée", suite Dix Recettes d’Immortalité (1973), punta seca vertical 58×39, ed.210, firmada a mano, en Field. Mismo caveat de firma de los 70 (hojas prefirmadas) y ed. algo alta (210); pieza genuina y catalogada. Tamaño casa con Tàpies Minor IV (56×40).',
+    desc: 'Punta seca original de Salvador Dalí, “Zöotrope et tour Boullée”, de la suite Dix Recettes d’Immortalité (1973), vertical 58×39, ed.210, firmada a mano y catalogada en Field. Vendedor Taller del Prado (Madrid).',
+    detail: [['Año','1973'],['Serie','Dix Recettes d’Immortalité'],['Técnica','Punta seca'],['Dimensiones','57,8 × 39,4 cm (vertical)'],['Edición','210'],['Firma','A mano (era de hojas prefirmadas)'],['Precio','2.200 € lista · socio ≈ 1.760 €'],['Vendedor','Taller del Prado, Madrid']],
+  },
+  {
+    id: 'online_miro_recent5', artist: 'Joan Miró', tech: 'Litografía firmada a mano (monograma)', gallery: 'Disponible Online', price: 2240, online: true,
+    url: 'https://www.tallerdelprado.com/obra-de-arte/sin-titulo-miro-obra-inedita-recent-9/',
+    title: '“Miró. Obra inédita recent (5)” (1964)',
+    img: 'https://www.tallerdelprado.com/wp-content/uploads/2026/06/260612_Joan-Miro_Taller_del_Prado_40576.jpg', pdf: '',
+    bandSigned: [2200, 4500], bandUnsigned: [500, 1400], liquidity: 76, prestige: 90, printRisk: 8, specialist: -1,
+    ref: 'Litografía · 30,5 × 22 cm (VERTICAL, pequeña) · 1964 · ed. 100 · firmada a mano (monograma) · Miró Litógrafo VI · Sala Gaspar',
+    comp: 'Miró VERTICAL pequeño (30×22) firmado a mano (monograma), ed.100, 2.240 € socio. El acento de color del trío catalán; pequeño → enmarcar con paspartú ancho para igualar a los otros.',
+    def: { signed: 'si', numbered: 'si', catalogue: 'si', cert: 'si' },
+    note: 'Serie "Obra inédita recent" (Sala Gaspar, 1964), litografía vertical 30×22, ed.100, numerada y firmada a mano con monograma, Miró Litógrafo VI. Pequeña: en un trío con Dalí/Tàpies de ~57×40 conviene paspartú generoso para equilibrar el tamaño enmarcado.',
+    desc: 'Litografía original de Miró, serie “Obra inédita recent” (Sala Gaspar, 1964), vertical 30×22, ed.100, numerada y firmada a mano con monograma. Aporta el color del conjunto. Vendedor Taller del Prado (Madrid).',
+    detail: [['Año','1964'],['Técnica','Litografía'],['Dimensiones','30,5 × 22 cm (vertical, pequeña)'],['Edición','100'],['Catálogo','Miró Litógrafo VI, ref. 356'],['Firma','A mano, monograma'],['Precio','2.800 € lista · socio ≈ 2.240 €'],['Vendedor','Taller del Prado, Madrid']],
+  },
 ]
 
 export function defaultState() {
