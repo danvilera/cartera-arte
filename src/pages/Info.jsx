@@ -52,8 +52,8 @@ export default function Info() {
             <tr><td><strong>Dalí</strong> · Cap de Creus (1979) · litografía</td><td className="n">1.600 €</td><td>subasta all-in ~2.200 € (Swann 2018)</td><td>🟢 Barato (condicional)</td><td>sí*</td></tr>
             <tr><td><strong>Tàpies</strong> · La main jaune · ed. 200</td><td className="n">1.520 €</td><td>subasta est. 400–600 €; retail ~900–1.600 €</td><td>⚪ En banda (alto)</td><td>no</td></tr>
             <tr><td><strong>Tàpies</strong> · Messiaen 1986</td><td className="n">1.520 €</td><td>solo consta el <em>cartel</em> (Galfetti 1068, firma en plancha) ~80 €</td><td>❓ A verificar</td><td>no</td></tr>
-            <tr><td><strong>Tàpies</strong> · L'esperit català I (1974) · aguafuerte</td><td className="n">2.160 €</td><td>retail ~3.125 € +IVA (composition)</td><td>🟢 Barato</td><td>sí</td></tr>
-            <tr><td><strong>Tàpies</strong> · L'esperit català II (1974) · aguafuerte</td><td className="n">2.160 €</td><td>retail ~3.125 € +IVA</td><td>🟢 Barato</td><td>sí</td></tr>
+            <tr><td><strong>Tàpies</strong> · L'esperit català I (1971) · aguatinta+gofrado</td><td className="n">2.160 €</td><td>retail ~3.125 € +IVA (composition)</td><td>🟢 Barato</td><td>sí</td></tr>
+            <tr><td><strong>Tàpies</strong> · L'esperit català II (1974) · aguafuerte+gofrado</td><td className="n">2.160 €</td><td>retail ~3.125 € +IVA</td><td>🟢 Barato</td><td>sí</td></tr>
             <tr><td><strong>Tàpies</strong> · Nocturn Matinal</td><td className="n">2.240 €</td><td>hoja suelta ~1.350 €; carpeta ed. 100 más</td><td>❓ A verificar</td><td>depende</td></tr>
             <tr><td><strong>Tàpies</strong> · Grand chaise (Variations)</td><td className="n">2.352 €</td><td>Variations retail 2.990–3.600 €</td><td>🟢 Bien/barato</td><td>sí</td></tr>
             <tr><td><strong>Tàpies</strong> · Improvisations en blanc et en noir 4 (1987)</td><td className="n">2.352 €</td><td>inferencia 2.500–3.500 €</td><td>⚪ Bien</td><td>posible</td></tr>
@@ -61,7 +61,7 @@ export default function Info() {
             <tr><td><strong>Tàpies</strong> · Personnage assis (Variations XI)</td><td className="n">2.352 €</td><td>retail 3.600 € (IVA incl.)</td><td>🟢 Barato</td><td>sí</td></tr>
             <tr><td><strong>Tàpies</strong> · Profil (Variations I)</td><td className="n">2.352 €</td><td>Variations 2.990–3.600 €</td><td>🟢 Bien/barato</td><td>sí</td></tr>
             <tr><td><strong>Tàpies</strong> · Venus · aguafuerte (Galfetti 573)</td><td className="n">1.200 €</td><td>inferencia ~1.500–2.800 €</td><td>⚪ Bien (inf.)</td><td>leve</td></tr>
-            <tr><td><strong>Tàpies</strong> · Minor IV · aguafuerte</td><td className="n">1.440 €</td><td>la web de TdP lo muestra a ~1.190 € socio</td><td>❓ Verificar precio</td><td>—</td></tr>
+            <tr><td><strong>Tàpies</strong> · Minor IV · aguafuerte (ed. 60)</td><td className="n">1.440 €</td><td>sin comp externo; inferencia ~1.500–2.500 €</td><td>⚪ En banda (inf.)</td><td>—</td></tr>
             <tr><td><strong>Tàpies</strong> · Paupière (sèrie negra) (1987) · aguafuerte</td><td className="n">1.840 €</td><td>sin dato; inferencia 1.800–3.500 €</td><td>⚪ En banda (inf.)</td><td>—</td></tr>
             <tr><td><strong>Braque</strong> · Lettera amorosa (1963) · ed. 75</td><td className="n">3.040 €</td><td>subasta ~1.700 € all-in; retail ~5.100 €</td><td>⚪ Bien/en banda</td><td>no</td></tr>
             <tr><td><strong>Braque</strong> · Personnage sur fond rose</td><td className="n">2.800 €</td><td>Mourlot Ed. ~1.650 €; Artsy 3.800 €</td><td>⚪ En banda (medio)</td><td>no</td></tr>
@@ -85,7 +85,7 @@ export default function Info() {
 
       <div className="callout">
         <span>⚠️</span>
-        <p><strong>A verificar antes de comprar</strong> (cambian el veredicto): <strong>«Messiaen 1986»</strong> — en mercado solo consta el <em>cartel</em> (Galfetti 1068, ed. 1.400, firma impresa en plancha, ~80 €); pide a TdP el nº de catálogo y foto de la firma a lápiz que confirme que es una edición distinta y firmada a mano. <strong>«Minor IV»</strong> — la propia web de TdP lo muestra a ~1.190 € socio, no 1.440 €; confirmar cuál es. <strong>«L'esperit català I/II»</strong> — son <strong>aguafuertes</strong> de 1974 (ed. 75), no litografías. <strong>«Nocturn Matinal»</strong> — existe como carpeta completa (ed. 100) y como hoja suelta (~1.350 €); aclarar cuál venden. <strong>Chillida «Ce maudit moi»</strong> — es un libro deluxe (ed. 50) firmado por Chillida y Cioran; confirmar que es una xilografía suelta. <strong>Goya</strong> — el valor depende de que sea 1ª edición (Desastres 1863 / Tauromaquia 1816); verificar papel y estado.</p>
+        <p><strong>A verificar antes de comprar</strong> (cambian el veredicto): <strong>«Messiaen 1986»</strong> — en mercado solo consta el <em>cartel</em> (Galfetti 1068, ed. 1.400, firma impresa en plancha, ~80 €); pide a TdP el nº de catálogo y foto de la firma a lápiz que confirme que es una edición distinta y firmada a mano. <strong>«L'esperit català I/II»</strong> — son <strong>grabados</strong> (aguatinta 1971 / aguafuerte 1974, con gofrado), no litografías. <strong>«Nocturn Matinal»</strong> — existe como carpeta completa (ed. 100) y como hoja suelta (~1.350 €); aclarar cuál venden. <strong>Chillida «Ce maudit moi»</strong> — es un libro deluxe (ed. 50) firmado por Chillida y Cioran; confirmar que es una xilografía suelta. <strong>Goya</strong> — el valor depende de que sea 1ª edición (Desastres 1863 / Tauromaquia 1816); verificar papel y estado.</p>
       </div>
 
       <div className="callout">
