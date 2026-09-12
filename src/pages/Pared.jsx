@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { WORKS } from '../data/works'
+import { TRIOS } from '../data/trios'
 
 const FRAMES = {
   negro: { bg: '#141414', label: 'Negro' },
@@ -38,6 +39,12 @@ export default function Pared() {
   useEffect(() => save('arte_wall_cfg', cfg), [cfg])
   useEffect(() => { if (photo) save('arte_wall_photo', photo) }, [photo])
   useEffect(() => save('arte_wall_slots', slots), [slots])
+  useEffect(() => {
+    try {
+      const k = localStorage.getItem('arte_open_trio')
+      if (k) { const t = TRIOS.find((x) => x.key === k); if (t) setCfg((c) => ({ ...c, ...t.cfg })); localStorage.removeItem('arte_open_trio') }
+    } catch {}
+  }, [])
 
   useLayoutEffect(() => {
     const el = stageRef.current
@@ -149,9 +156,7 @@ export default function Pared() {
   }
   const loadSlot = (s) => setCfg((c) => ({ ...c, ...s.cfg }))
   const delSlot = (name) => setSlots((s) => s.filter((x) => x.name !== name))
-  const trioBase = { uniform: true, outWcm: 66, outHcm: 90, matCm: 4, frameCm: 3, gapCm: 16, matColor: 'hueso', frameColor: 'madera clara', posX: 15, posY: 16, artId: 'online_dali_zootrope', artWcm: 39.4, art2Id: 'online_miro_recent5', art2Wcm: 22 }
-  const loadTrioCatalan = () => setCfg((c) => ({ ...c, ...trioBase, art3Id: 'online_tapies_messiaen', art3Wcm: 51.5 }))
-  const loadTrioCatalan2 = () => setCfg((c) => ({ ...c, ...trioBase, art3Id: 'online_tapies_minoriv', art3Wcm: 40 }))
+  const loadTrio = (t) => setCfg((c) => ({ ...c, ...t.cfg }))
 
   return (
     <div className="prose">
@@ -283,11 +288,12 @@ export default function Pared() {
 
       <div className="panel" style={{ marginTop: 12 }}>
         <h3 className="sheet-h3" style={{ marginTop: 0 }}>Montajes sugeridos</h3>
-        <div className="two">
-          <div className="ctl"><button className="btn ghost mini" onClick={loadTrioCatalan}>🎨 Trío catalán v1 (Tàpies Messiaen)</button></div>
-          <div className="ctl"><button className="btn ghost mini" onClick={loadTrioCatalan2}>🎨 Trío catalán v2 (Tàpies Minor IV)</button></div>
+        <div className="chips2">
+          {TRIOS.map((t) => (
+            <button key={t.key} className="chip2" onClick={() => loadTrio(t)}>🎨 {t.name}</button>
+          ))}
         </div>
-        <p className="note" style={{ margin: '6px 0 0' }}>Dalí «Zöotrope» (izq.) y el Tàpies (der.) flanqueando; Miró pequeño al centro. Marcos del mismo tamaño, pero cada obra a su TAMAÑO REAL: el Miró sale más pequeño con más paspartú, como debe ser. Súbele tu foto y ajusta.</p>
+        <p className="note" style={{ margin: '6px 0 0' }}>Cada trío carga las obras con <b>marcos iguales</b> y cada obra a su <b>tamaño real</b> (el más pequeño lleva más paspartú). El análisis de precio/inversión/mercado está en la pestaña «Tríos».</p>
       </div>
 
       <div className="panel" style={{ marginTop: 12 }}>

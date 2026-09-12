@@ -14,12 +14,14 @@ import DondeComprar from './pages/DondeComprar'
 import Comparar from './pages/Comparar'
 import Pared from './pages/Pared'
 import Dashboard from './pages/Dashboard'
+import Trios from './pages/Trios'
 
 const NAV = [
   { key: 'inicio', label: 'Inicio', icon: '🏠' },
   { key: 'obras', label: 'Obras', icon: '🖼️' },
   { key: 'comparar', label: 'Comparar', icon: '⚖️' },
   { key: 'pared', label: 'En la pared', icon: '📐' },
+  { key: 'trios', label: 'Tríos', icon: '🧩' },
   { key: 'comprar', label: 'Dónde comprar', icon: '🏛️' },
   { key: 'artistas', label: 'Artistas', icon: '🎨' },
   { key: 'glosario', label: 'Glosario', icon: '📖' },
@@ -29,6 +31,15 @@ const NAV = [
   { key: 'ajustes', label: 'Ajustes', icon: '⚙️' },
 ]
 const TITLES = Object.fromEntries(NAV.map((n) => [n.key, n.label]))
+
+function TrioBanner({ onNav }) {
+  return (
+    <button className="panel" onClick={() => onNav('trios')} style={{ width: '100%', textAlign: 'left', cursor: 'pointer', border: '1px dashed var(--accent, #b98b50)', display: 'flex', gap: 10, alignItems: 'center', margin: '0 0 14px' }}>
+      <span style={{ fontSize: '1.2rem' }}>🖼️🖼️🖼️</span>
+      <span>¿Y si en vez de <b>una sola obra</b> montas un <b>TRÍO</b>? Precio total, inversión (3 pequeñas vs 1 grande) y mercado → <b>ver Tríos</b></span>
+    </button>
+  )
+}
 
 export default function App() {
   const [session, setSession] = useState(null)
@@ -114,6 +125,7 @@ export default function App() {
         {tab === 'obras' && (
           <section>
             <p className="lede">71 obras de 6 galerías (Bagot, Mayoral, Rubén Torres, Joan Gaspar y Disponible Online). Toca una imagen para ver su ficha. Ajusta precios y datos: la puntuación y la liquidez se recalculan y se guardan solas.</p>
+            <TrioBanner onNav={go} />
             {(() => {
               const order = ['J. Bagot', 'Mayoral', 'Rubén Torres', 'Joan Gaspar', 'Disponible Online']
               const gals = [...new Set(scored.map(({ o }) => o.gallery))]
@@ -141,8 +153,9 @@ export default function App() {
         {tab === 'artistas' && <Artistas />}
         {tab === 'glosario' && <Glosario />}
         {tab === 'pared' && <Pared />}
-        {tab === 'inversion' && <Inversion />}
-        {tab === 'mercado' && <Info />}
+        {tab === 'trios' && <Trios state={state} onOpen={setOpenId} onNav={setTab} />}
+        {tab === 'inversion' && (<><TrioBanner onNav={go} /><Inversion /></>)}
+        {tab === 'mercado' && (<><TrioBanner onNav={go} /><Info /></>)}
         {tab === 'comprar' && <DondeComprar />}
         {tab === 'genius' && <ArteGenius />}
         {tab === 'ajustes' && (
