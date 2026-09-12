@@ -23,8 +23,8 @@ const DEF_CFG = {
 const load = (k, f) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : f } catch { return f } }
 const save = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)) } catch {} }
 
-export default function Pared() {
-  const [photo, setPhoto] = useState(() => load('arte_wall_photo', null))
+export default function Pared({ wall, onWall }) {
+  const [photo, setPhoto] = useState(() => (wall && wall.photo) || load('arte_wall_photo', null))
   const [cfg, setCfg] = useState(() => ({ ...DEF_CFG, ...load('arte_wall_cfg', {}) }))
   const [customArt, setCustomArt] = useState(() => load('arte_wall_art', null))
   const [imgAR, setImgAR] = useState(1.3)
@@ -72,7 +72,7 @@ export default function Pared() {
   async function onPhoto(e) {
     const f = e.target.files?.[0]; if (!f) return
     const url = await shrink(await toDataURL(f), 1600)
-    setPhoto(url); e.target.value = ''
+    setPhoto(url); onWall && onWall({ photo: url }); e.target.value = ''
   }
   async function onArt(e) {
     const f = e.target.files?.[0]; if (!f) return
@@ -183,7 +183,7 @@ export default function Pared() {
           </div>
           <div className="wall-actions">
             <label className="btn ghost mini">Cambiar foto<input type="file" accept="image/*" hidden onChange={onPhoto} /></label>
-            <button className="btn ghost mini" onClick={() => { setPhoto(null); try { localStorage.removeItem('arte_wall_photo') } catch {} }}>Quitar foto</button>
+            <button className="btn ghost mini" onClick={() => { setPhoto(null); onWall && onWall({ photo: null }); try { localStorage.removeItem('arte_wall_photo') } catch {} }}>Quitar foto</button>
           </div>
         </>
       )}

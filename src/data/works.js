@@ -1265,14 +1265,14 @@ export const WORKS = [
 export function defaultState() {
   const works = {}
   WORKS.forEach((o) => {
-    works[o.id] = { price: o.price, ...o.def, gusto: 3 }
+    works[o.id] = { price: o.price, ...o.def, gusto: 3, estado: 'ninguno' }
   })
-  return { weights: { ...DEFAULT_WEIGHTS }, works }
+  return { weights: { ...DEFAULT_WEIGHTS }, works, wall: { photo: null } }
 }
 
 export function mergeDefaults(saved) {
   const base = defaultState()
-  const out = { weights: { ...base.weights, ...(saved.weights || {}) }, works: { ...base.works } }
+  const out = { weights: { ...base.weights, ...(saved.weights || {}) }, works: { ...base.works }, wall: { ...(base.wall || {}), ...(saved.wall || {}) } }
   if (saved.works) {
     WORKS.forEach((o) => {
       if (saved.works[o.id]) out.works[o.id] = { ...base.works[o.id], ...saved.works[o.id] }

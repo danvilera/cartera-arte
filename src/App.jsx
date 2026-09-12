@@ -91,6 +91,7 @@ export default function App() {
     setState(next); persist(next)
   }
   function resetAll() { const next = defaultState(); setState(next); persist(next) }
+  function saveWall(patch) { const next = { ...state, wall: { ...(state.wall || {}), ...patch } }; setState(next); persist(next) }
   function go(key) { setTab(key); setDrawer(false) }
 
   if (!authReady) return <div className="center">Cargando…</div>
@@ -152,7 +153,7 @@ export default function App() {
         {tab === 'comparar' && <Comparar state={state} onOpen={setOpenId} />}
         {tab === 'artistas' && <Artistas />}
         {tab === 'glosario' && <Glosario />}
-        {tab === 'pared' && <Pared />}
+        {tab === 'pared' && <Pared wall={state.wall} onWall={saveWall} />}
         {tab === 'trios' && <Trios state={state} onOpen={setOpenId} onNav={setTab} />}
         {tab === 'inversion' && (<><TrioBanner onNav={go} /><Inversion /></>)}
         {tab === 'mercado' && (<><TrioBanner onNav={go} /><Info /></>)}

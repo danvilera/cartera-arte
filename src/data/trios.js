@@ -57,6 +57,30 @@ export const TRIOS = [
     cfg: { uniform: true, outWcm: 64, outHcm: 86, matCm: 4, frameCm: 3, gapCm: 16, matColor: 'hueso', frameColor: 'madera clara', posX: 15, posY: 17,
       artId: 'online_dali_zootrope', artWcm: 39.4, art2Id: 'online_miro_recent5', art2Wcm: 22, art3Id: 'online_braque_personnage', art3Wcm: 52 },
   },
+  {
+    key: 'duo_miro_braque', name: 'Dúo · Miró + Braque', theme: 'Dúo blue-chip', kind: 'duo',
+    subtitle: 'Miró «Quelques fleurs» + Braque «Personnage»',
+    ids: ['online_miro_quelquesfleurs', 'online_braque_personnage'],
+    note: 'Dos blue-chips que retienen valor. Concentras presupuesto en 2 piezas mejores en vez de repartir en 3.',
+    cfg: { uniform: true, outWcm: 64, outHcm: 86, matCm: 5, frameCm: 3, gapCm: 18, matColor: 'hueso', frameColor: 'madera clara', posX: 20, posY: 18,
+      artId: 'online_miro_quelquesfleurs', artWcm: 41, art2Id: 'online_braque_personnage', art2Wcm: 52, art3Id: 'none' },
+  },
+  {
+    key: 'duo_goya_miro', name: 'Dúo · Goya + Miró', theme: 'Dúo inversión', kind: 'duo',
+    subtitle: 'Goya Tauromaquia 1ª ed + Miró pequeño',
+    ids: ['online_goya_tauromaquia', 'online_miro_recent5'],
+    note: 'Un Goya de 1ª edición (retiene/sube) + un Miró firmado: máxima solidez de valor. El Goya es apaisado.',
+    cfg: { uniform: true, outWcm: 60, outHcm: 78, matCm: 5, frameCm: 3, gapCm: 18, matColor: 'hueso', frameColor: 'madera clara', posX: 20, posY: 22,
+      artId: 'online_goya_tauromaquia', artWcm: 41.7, art2Id: 'online_miro_recent5', art2Wcm: 22, art3Id: 'none' },
+  },
+  {
+    key: 'duo_miro_tapies', name: 'Dúo · Miró + Tàpies', theme: 'Dúo catalán', kind: 'duo',
+    subtitle: 'Miró «Quelques» + Tàpies «Messiaen»',
+    ids: ['online_miro_quelquesfleurs', 'online_tapies_messiaen'],
+    note: 'Dúo catalán, ambos firmados y con liquidez decente.',
+    cfg: { uniform: true, outWcm: 62, outHcm: 84, matCm: 5, frameCm: 3, gapCm: 18, matColor: 'hueso', frameColor: 'madera clara', posX: 20, posY: 18,
+      artId: 'online_miro_quelquesfleurs', artWcm: 41, art2Id: 'online_tapies_messiaen', art2Wcm: 51.5, art3Id: 'none' },
+  },
 ]
 
 // ¿Retiene valor razonablemente? (heurística por artista, para la vista de inversión)

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { BUDGET, liquidityIndex, liquidityLabel } from '../lib/scoring'
 import { computeCost, readiness } from '../lib/cost'
+import { frameCost, parseDims, GLASS } from '../lib/framing'
 
 const fmt = (n) => (Number(n) || 0).toLocaleString('es-ES') + ' €'
 const lget = (k, f) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : f } catch { return f } }
@@ -50,6 +51,7 @@ export default function WorkDetail({ work: o, state: s, onClose, onField }) {
   const setCost = (k, v) => onField('cost', { ...cost, [k]: v })
 
   const [rate, setRate] = useState(() => lget('arte_fx', 0.92))
+  const [frameGlass, setFrameGlass] = useState('uv70')
   const [usd, setUsd] = useState('')
   const eur = usd ? Math.round(Number(usd) * rate) : 0
 
@@ -105,6 +107,16 @@ export default function WorkDetail({ work: o, state: s, onClose, onField }) {
 
           <p className="note" style={{ fontSize: '0.92rem' }}>{o.desc}</p>
 
+          <h3 className="sheet-h3">Estado</h3>
+          <select className="notes" style={{ width: '100%' }} value={s.estado || 'ninguno'} onChange={(e) => onField('estado', e.target.value)}>
+            <option value="ninguno">— Sin marcar —</option>
+            <option value="interesa">Me interesa</option>
+            <option value="vista">Vista en persona</option>
+            <option value="negociando">En negociación</option>
+            <option value="comprada">Comprada ✓</option>
+            <option value="descartada">Descartada</option>
+          </select>
+
           <h3 className="sheet-h3">Coste real "puerta"</h3>
           <div className="ctl"><label>¿El precio ({fmt(price)}) incluye IVA?</label>
             <Seg value={cost.ivaIncl ? 'si' : 'no'} options={[['no', '+ IVA aparte'], ['si', 'IVA incluido']]} onChange={(v) => setCost('ivaIncl', v === 'si')} /></div>
@@ -124,6 +136,21 @@ export default function WorkDetail({ work: o, state: s, onClose, onField }) {
             <div className="cost-row total"><span>Coste puerta</span><b>{fmt(cc.total)}</b></div>
             {cost.ivaMode && cost.ivaMode !== 'normal' && <p className="note it" style={{ margin: '6px 0 0' }}>Ahorro de IVA aplicado: {fmt(cc.withIva - cc.net)}.</p>}
           </div>
+
+          <h3 className="sheet-h3">Enmarcado estimado</h3>
+          <div className="ctl"><label>Vidrio</label>
+            <Seg value={frameGlass} options={[['ar', 'Antirreflejo'], ['uv70', 'Museo UV70'], ['uv99', 'Museo UV99']]} onChange={setFrameGlass} /></div>
+          {(() => {
+            const d = parseDims(o); const fc = frameCost(d, { glass: frameGlass })
+            return (
+              <div className="panel" style={{ marginTop: 8 }}>
+                <div className="cost-row"><span>Marco + paspartú + vidrio {fc.glass.label} ({fc.glass.uv} UV)</span><b>{fmt(fc.total)}</b></div>
+                <div className="cost-row"><span>Desglose</span><span className="note">vidrio {fmt(fc.breakdown.glass)} · moldura {fmt(fc.breakdown.mould)} · paspartú {fmt(fc.breakdown.mat)} · mano {fmt(fc.breakdown.labor)}</span></div>
+                <button className="btn ghost mini" style={{ marginTop: 8 }} onClick={() => setCost('marco', fc.total)}>Usar en coste puerta</button>
+                <p className="note it" style={{ margin: '6px 0 0' }}>Estimación por tamaño ({d ? d[0] + '×' + d[1] + ' cm' : '—'}); pide presupuesto en firme.</p>
+              </div>
+            )
+          })()}
 
           <h3 className="sheet-h3">USD → EUR</h3>
           <div className="two">

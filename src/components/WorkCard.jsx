@@ -2,6 +2,7 @@ import React from 'react'
 import { metrics, verdict, BUDGET, liquidityIndex, liquidityLabel } from '../lib/scoring'
 
 const fmt = (n) => (Number(n) || 0).toLocaleString('es-ES') + ' €'
+const ESTADO = { interesa: ['Me interesa', '#8a5a2b'], vista: ['Vista', '#3a8f5f'], negociando: ['Negociando', '#c9911f'], comprada: ['Comprada ✓', '#1f9d6b'], descartada: ['Descartada', '#9a938a'] }
 
 function Seg({ value, options, onChange }) {
   return (
@@ -26,6 +27,7 @@ function Bar({ lab, val }) {
 export default function WorkCard({ work: o, state: s, score, lead, onField, onOpen }) {
   const m = metrics(o, s)
   const [vtext, vcol] = verdict(score)
+  const est = s.estado && s.estado !== 'ninguno' && ESTADO[s.estado]
   const d = (Number(s.price) || 0) - BUDGET
   const pct = Math.round((d / BUDGET) * 100)
   const flags = []
@@ -47,7 +49,7 @@ export default function WorkCard({ work: o, state: s, score, lead, onField, onOp
 
       <div>
         <div className="artist">{o.artist}</div>
-        <div className="title">{o.title}</div>
+        <div className="title">{o.title}{est && <span style={{ fontSize: '.66rem', padding: '2px 7px', borderRadius: 20, background: est[1], color: '#fff', marginLeft: 6, verticalAlign: 'middle', fontWeight: 700 }}>{est[0]}</span>}</div>
         <div className="meta">{o.tech} · {o.ref}</div>
         <div className="gal">Galería: {o.gallery}</div>
         {o.url && <a className="gal-link" href={o.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: '.82rem', fontWeight: 600 }}>Ver en la web ↗</a>}
