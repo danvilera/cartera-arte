@@ -1,6 +1,7 @@
 import React from 'react'
 import { WORKS } from '../data/works'
 import { total, liquidityIndex, liquidityLabel, BUDGET } from '../lib/scoring'
+import RecoPanel from '../components/RecoPanel'
 
 const fmt = (n) => (Number(n) || 0).toLocaleString('es-ES') + ' €'
 const last = (name) => name.split(' ').slice(-1)[0]
@@ -31,7 +32,7 @@ export default function Dashboard({ state, onOpen, onNav }) {
   const inBudget = scored.filter(({ s }) => (Number(s.price) || 0) <= BUDGET).length
   const near = scored.filter(({ s }) => (Number(s.price) || 0) <= 6500).length
 
-  const artistOrder = ['Joan Miró', 'Pablo Picasso', 'Antoni Tàpies', 'Salvador Dalí', 'Eduardo Chillida']
+  const artistOrder = ['Joan Miró', 'Salvador Dalí', 'Antoni Tàpies', 'Georges Braque', 'Francisco de Goya', 'Pablo Picasso', 'Eduardo Chillida', 'Antoni Clavé', 'Victor Vasarely', 'Hans Hartung']
   const byArtist = artistOrder
     .map((a) => ({ k: last(a), v: WORKS.filter((o) => o.artist === a).length }))
     .filter((d) => d.v > 0)
@@ -44,8 +45,9 @@ export default function Dashboard({ state, onOpen, onNav }) {
 
   const SECTIONS = [
     ['pared', '📐', 'En la pared', 'Prueba las obras en tu pared'],
+    ['trios', '🧩', 'Tríos', 'Arma un trío y compáralo'],
     ['comprar', '🏛️', 'Dónde comprar', 'Galerías vs. subastas'],
-    ['artistas', '🎨', 'Artistas', 'Timelines de tus 6 pintores'],
+    ['artistas', '🎨', 'Artistas', 'Timelines de tus pintores'],
     ['glosario', '📖', 'Glosario', 'Litografía, aguafuerte…'],
     ['inversion', '📈', 'Inversión', 'Arte vs. otras inversiones'],
     ['genius', '✨', 'ArteGenius', 'Tu asesor con IA'],
@@ -54,6 +56,8 @@ export default function Dashboard({ state, onOpen, onNav }) {
   return (
     <div className="dash">
       <p className="lede">Tu cartera de un vistazo. Toca cualquier obra para ver su ficha. Objetivo: Miró/Picasso por ~5.000 € (flexible).</p>
+
+      <RecoPanel state={state} weights={state.weights} onOpen={onOpen} onNav={onNav} />
 
       <div className="kpis">
         <div className="kpi"><div className="kpi-n">{WORKS.length}</div><div className="kpi-l">obras</div></div>

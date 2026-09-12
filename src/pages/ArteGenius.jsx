@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { supabase } from '../lib/supabase'
+import RecoPanel from '../components/RecoPanel'
 
 const SUGGESTIONS = [
   'Estoy en una galería y me ofrecen una litografía de Miró firmada por 4.500 €. ¿Qué te parece?',
@@ -16,7 +17,7 @@ function fileToDataURL(file) {
   })
 }
 
-export default function ArteGenius() {
+export default function ArteGenius({ state, weights, onOpen, onNav }) {
   const [messages, setMessages] = useState([
     { role: 'assistant', text: 'Hola, soy ArteGenius. Cuéntame qué obra te ofrecen (o hazle una foto a la obra o a la etiqueta de precio) y te doy mi lectura: si el precio es razonable, qué comprobar y las banderas rojas. No soy tasador; es orientación.' },
   ])
@@ -80,6 +81,8 @@ export default function ArteGenius() {
         </div>
         <span className="badge-ai">GPT · visión</span>
       </div>
+
+      {state && <div style={{ marginBottom: 14 }}><RecoPanel state={state} weights={weights} onOpen={onOpen} onNav={onNav} /></div>}
 
       <div className="chat">
         {messages.map((m, i) => (

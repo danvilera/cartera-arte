@@ -41,6 +41,22 @@ export const TRIOS = [
     cfg: { uniform: true, outWcm: 64, outHcm: 86, matCm: 4, frameCm: 3, gapCm: 16, matColor: 'hueso', frameColor: 'madera clara', posX: 15, posY: 17,
       artId: 'online_braque_lettera', artWcm: 28, art2Id: 'online_miro_recent5', art2Wcm: 22, art3Id: 'online_braque_personnage', art3Wcm: 52 },
   },
+  {
+    key: 'braque1', name: 'Dalí · Miró · Braque «Lettera»', theme: 'Catalanes + École de Paris',
+    subtitle: 'Dalí Zootrope · Miró (centro) · Braque «Lettera amorosa»',
+    ids: ['online_dali_zootrope', 'online_miro_recent5', 'online_braque_lettera'],
+    note: 'Zootrope + Obra inédita + Braque «Lettera amorosa». Miró (color) al centro; Braque aporta el cubismo. Piezas pequeñas.',
+    cfg: { uniform: true, outWcm: 60, outHcm: 82, matCm: 4, frameCm: 3, gapCm: 16, matColor: 'hueso', frameColor: 'madera clara', posX: 16, posY: 18,
+      artId: 'online_dali_zootrope', artWcm: 39.4, art2Id: 'online_miro_recent5', art2Wcm: 22, art3Id: 'online_braque_lettera', art3Wcm: 28 },
+  },
+  {
+    key: 'braque2', name: 'Dalí · Miró · Braque «Personnage»', theme: 'Catalanes + École de Paris',
+    subtitle: 'Dalí Zootrope · Miró (centro) · Braque «Personnage sur fond rose»',
+    ids: ['online_dali_zootrope', 'online_miro_recent5', 'online_braque_personnage'],
+    note: 'Zootrope + Obra inédita + Braque «Personnage» (mayor, 67×52). Miró al centro; el Braque da presencia.',
+    cfg: { uniform: true, outWcm: 64, outHcm: 86, matCm: 4, frameCm: 3, gapCm: 16, matColor: 'hueso', frameColor: 'madera clara', posX: 15, posY: 17,
+      artId: 'online_dali_zootrope', artWcm: 39.4, art2Id: 'online_miro_recent5', art2Wcm: 22, art3Id: 'online_braque_personnage', art3Wcm: 52 },
+  },
 ]
 
 // ¿Retiene valor razonablemente? (heurística por artista, para la vista de inversión)

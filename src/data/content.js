@@ -99,6 +99,88 @@ export const ARTISTS = [
       ['1948–1985', 'Sur de Francia', 'Litografía a color (Mourlot), vidrieras, techo de la Ópera de París (1964).'],
     ],
   },
+
+  {
+    id: 'braque', name: 'Georges Braque', years: '1882–1963', origin: 'Argenteuil, Francia',
+    blurb: 'Cofundador del cubismo junto a Picasso. Bodegones, pájaros y colores sobrios; en gráfica, litografías de los años 50-60 (Maeght/Mourlot). Blue-chip de la Escuela de París; ojo con las reproducciones en el mercado.',
+    periods: [
+      ['1906–1909', 'Fauvismo y Cézanne', 'Del color fauve a la lección de Cézanne; primeros paisajes de L’Estaque.'],
+      ['1908–1914', 'Cubismo', 'Con Picasso inventa el cubismo analítico y sintético; papiers collés.'],
+      ['1945–1963', 'Pájaros y gráfica', 'Serie de los pájaros, vidrieras y litografías (Lettera amorosa, DLM). Madurez lírica.'],
+    ],
+  },
+  {
+    id: 'clave', name: 'Antoni Clavé', years: '1913–2005', origin: 'Barcelona, España',
+    blurb: 'Maestro catalán de posguerra: del cartelismo y la ilustración a una abstracción matérica personal (reyes, guerreros, collages). Obra apreciada; una PIEZA ÚNICA suya es rara y difícil de replicar.',
+    periods: [
+      ['1939–1945', 'Exilio y París', 'Se exilia a Francia; ilustración, escenografía y contacto con Picasso.'],
+      ['1950s–1960s', 'Reyes y guerreros', 'Figuras-icono (Rey, guerrero) con materia y collage; reconocimiento internacional.'],
+      ['1970s–2005', 'Abstracción matérica', 'Texturas, arpilleras, papeles rasgados; obra gráfica y única muy matérica.'],
+    ],
+  },
+  {
+    id: 'goya', name: 'Francisco de Goya', years: '1746–1828', origin: 'Fuendetodos, España',
+    blurb: 'Genio del grabado moderno. Sus series (Caprichos, Desastres de la Guerra, Tauromaquia, Disparates) son cumbre del aguafuerte. No firmó a lápiz (s. XVIII-XIX): lo que decide el valor es la EDICIÓN (1ª edición = lo cotizado).',
+    periods: [
+      ['1799', 'Los Caprichos', 'Sátira social en 80 aguafuertes/aguatintas; 1ª edición muy buscada.'],
+      ['1810–1820', 'Los Desastres de la Guerra', 'Testimonio brutal de la guerra; publicados póstumamente (1ª ed. 1863).'],
+      ['1816', 'La Tauromaquia', 'Serie taurina, dinámica y luminosa; 1ª edición blue-chip.'],
+    ],
+  },
+  {
+    id: 'barcelo', name: 'Miquel Barceló', years: '1957', origin: 'Felanitx, Mallorca, España',
+    blurb: 'El contemporáneo español más internacional. Materia, África, mares y bestiarios; pintura potente y gráfica muy cotizada. Mercado fuerte y en alza a largo plazo.',
+    periods: [
+      ['1980s', 'Irrupción', 'Documenta 1982; materia densa, bodegones y bibliotecas.'],
+      ['1988–2000s', 'África y el Mediterráneo', 'Estancias en Mali; barros, blancos, animales. Cúpula ONU Ginebra (2008).'],
+      ['2000s–hoy', 'Cerámica y gráfica', 'Cerámica, ilustración (La Divina Comedia) y grabado muy demandado.'],
+    ],
+  },
+  {
+    id: 'saura', name: 'Antonio Saura', years: '1930–1998', origin: 'Huesca, España',
+    blurb: 'Informalista clave (grupo El Paso). Damas, crucifixiones y retratos imaginarios en negro gestual, muy reconocibles. Gráfica expresiva y asequible.',
+    periods: [
+      ['1957', 'El Paso', 'Cofunda el grupo El Paso; abstracción gestual en blanco y negro.'],
+      ['1960s–1970s', 'Damas y multitudes', 'Figuras deformadas, retratos imaginarios; ferocidad y humor.'],
+      ['1980s–1998', 'Obra gráfica', 'Suites litográficas (Kafka, Quijote) y libros ilustrados.'],
+    ],
+  },
+  {
+    id: 'vasarely', name: 'Victor Vasarely', years: '1906–1997', origin: 'Pécs, Hungría / Francia',
+    blurb: 'Padre del Op Art. Geometría, ilusión óptica y color; serigrafías y litografías muy decorativas y reconocibles. Mercado amplio y estable.',
+    periods: [
+      ['1930s–1940s', 'París y gráfica', 'Diseño gráfico; germina su interés por la percepción.'],
+      ['1950s–1960s', 'Op Art', 'Cinetismo y op-art; el manifiesto "Amarillo" y las estructuras geométricas.'],
+      ['1970s–1980s', 'Serigrafía', 'Ediciones seriales (Vega, Zebra) que popularizan su lenguaje.'],
+    ],
+  },
+  {
+    id: 'hartung', name: 'Hans Hartung', years: '1904–1989', origin: 'Leipzig, Alemania / Francia',
+    blurb: 'Maestro de la abstracción gestual (art informel). El gesto, el rasguño y la mancha; litografías grandes muy pictóricas. École de Paris; buen valor por tamaño.',
+    periods: [
+      ['1930s', 'Abstracción temprana', 'Pionero del gesto abstracto; se instala en París.'],
+      ['1950s–1960s', 'Consagración', 'Gran Premio de la Bienal de Venecia (1960); el signo "T" y la caligrafía.'],
+      ['1970s–1989', 'Grandes formatos', 'Pulverizadores, ramas; litografía y grabado de gran escala.'],
+    ],
+  },
+  {
+    id: 'delaunay', name: 'Sonia Delaunay', years: '1885–1979', origin: 'Ucrania / Francia',
+    blurb: 'Pionera de la abstracción y del orfismo (con Robert Delaunay): círculos y ritmos de color puro. Gráfica alegre y muy decorativa; nombre histórico en alza.',
+    periods: [
+      ['1910s', 'Orfismo', 'Con Robert Delaunay desarrolla el "simultaneísmo": color y ritmo.'],
+      ['1920s–1930s', 'Diseño y moda', 'Tejidos, moda y artes aplicadas; lleva la abstracción a lo cotidiano.'],
+      ['1960s–1970s', 'Gráfica tardía', 'Aguafuertes y litografías de ritmos coloreados; reconocimiento pleno.'],
+    ],
+  },
+  {
+    id: 'leger', name: 'Fernand Léger', years: '1881–1955', origin: 'Argentan, Francia',
+    blurb: 'Cubismo "tubular" y celebración de la máquina y lo popular. Color plano y contornos negros; litografías reconocibles. École de Paris, blue-chip.',
+    periods: [
+      ['1909–1914', 'Tubismo', 'Cubismo propio a base de cilindros y contrastes de formas.'],
+      ['1920s', 'La máquina y la ciudad', 'Purismo, mecánica, cartelismo; "Ballet mécanique" (1924).'],
+      ['1940s–1955', 'Figuras y color', 'Obreros, ocio, color plano; murales y gráfica.'],
+    ],
+  },
 ]
 
 export const LIQUIDITY_EXPLAINER = [

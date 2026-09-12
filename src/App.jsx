@@ -124,10 +124,10 @@ export default function App() {
         {tab === 'inicio' && <Dashboard state={state} onOpen={setOpenId} onNav={setTab} />}
         {tab === 'obras' && (
           <section>
-            <p className="lede">71 obras de 6 galerías (Bagot, Mayoral, Rubén Torres, Joan Gaspar y Disponible Online). Toca una imagen para ver su ficha. Ajusta precios y datos: la puntuación y la liquidez se recalculan y se guardan solas.</p>
+            <p className="lede">71 obras en 6 galerías (Bagot, Mayoral, Rubén Torres, Joan Gaspar, Nueva galería y Disponible Online). Toca una imagen para ver su ficha. Ajusta precios y datos: la puntuación y la liquidez se recalculan y se guardan solas.</p>
             <TrioBanner onNav={go} />
             {(() => {
-              const order = ['J. Bagot', 'Mayoral', 'Rubén Torres', 'Joan Gaspar', 'Disponible Online']
+              const order = ['J. Bagot', 'Mayoral', 'Rubén Torres', 'Joan Gaspar', 'Nueva galería', 'Disponible Online']
               const gals = [...new Set(scored.map(({ o }) => o.gallery))]
                 .sort((a, b) => ((order.indexOf(a) + 1) || 99) - ((order.indexOf(b) + 1) || 99))
               return gals.map((g) => {
@@ -157,7 +157,7 @@ export default function App() {
         {tab === 'inversion' && (<><TrioBanner onNav={go} /><Inversion /></>)}
         {tab === 'mercado' && (<><TrioBanner onNav={go} /><Info /></>)}
         {tab === 'comprar' && <DondeComprar />}
-        {tab === 'genius' && <ArteGenius />}
+        {tab === 'genius' && <ArteGenius state={state} weights={state.weights} onOpen={setOpenId} onNav={setTab} />}
         {tab === 'ajustes' && (
           <section>
             <p className="lede">¿Compras sobre todo como inversión o para disfrutar el cuadro en casa? Mueve los pesos y el ranking cambia.</p>
