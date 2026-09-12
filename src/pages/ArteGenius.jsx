@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { supabase } from '../lib/supabase'
-import RecoPanel from '../components/RecoPanel'
 
 const SUGGESTIONS = [
   'Estoy en una galería y me ofrecen una litografía de Miró firmada por 4.500 €. ¿Qué te parece?',
@@ -82,8 +81,6 @@ export default function ArteGenius({ state, weights, onOpen, onNav }) {
         <span className="badge-ai">GPT · visión</span>
       </div>
 
-      {state && <div style={{ marginBottom: 14 }}><RecoPanel state={state} weights={weights} onOpen={onOpen} onNav={onNav} /></div>}
-
       <div className="chat">
         {messages.map((m, i) => (
           <div key={i} className={'bubble ' + m.role + (m.error ? ' err' : '')}>
@@ -112,7 +109,7 @@ export default function ArteGenius({ state, weights, onOpen, onNav }) {
 
       <div className="composer">
         <button className="icon-btn" onClick={() => fileRef.current?.click()} aria-label="Adjuntar foto" title="Adjuntar foto">📷</button>
-        <input ref={fileRef} type="file" accept="image/*" capture="environment" hidden onChange={pickImage} />
+        <input ref={fileRef} type="file" accept="image/*" hidden onChange={pickImage} />
         <textarea
           rows={1}
           value={text}

@@ -24,6 +24,35 @@ export default function Info() {
         </table>
       </div>
 
+      <h2>Cazachollos TdP — mejores por precio (barrido completo)</h2>
+      <p>Barrido de la obra <strong>firmada a mano</strong> de los artistas reconocidos en TdP (Miró, Dalí, Tàpies, Chillida, Picasso, Chagall, Calder, Clavé). Precio <strong>socio</strong> (PVP×0,8, aproximado: difiere entre listado y ficha, confírmalo en tienda). Casi todos los comps son de <em>retail</em> de galería porque los martillos de subasta están tras muro de pago, así que aquí “chollo” = <strong>por debajo del retail de otras galerías</strong>; solo Cap de Creus y Cauchemar tienen comp de venta cercano. Confianza variable.</p>
+      <div className="tablewrap">
+        <table>
+          <thead>
+            <tr><th>Obra</th><th>Socio ~</th><th>Referencia de mercado</th><th>Lectura</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Tàpies</strong> · serie «Variations» (Personnage assis, Chaise ficelée, Oval gris, Cannage, Profil…)</td><td className="n">2.352 €</td><td>retail 2.990–3.600 € (Artedio)</td><td><strong style={{ color: 'var(--good)' }}>Chollo</strong> −20/−35%; gran formato (~104 cm), líquidas</td></tr>
+            <tr><td><strong>Tàpies</strong> · «L'esperit català I/II» (aguatinta/aguafuerte+gofrado)</td><td className="n">2.160 €</td><td>~3.125 € +IVA (composition)</td><td><strong style={{ color: 'var(--good)' }}>Chollo</strong> −40% (apaisados)</td></tr>
+            <tr><td><strong>Dalí</strong> · «Cap de Creus» (Field 80-8)</td><td className="n">1.600 €</td><td>martillo firmado ~2.200 € (Swann); retail 3.250–3.650 €</td><td><strong style={{ color: 'var(--good)' }}>Chollo</strong> · verificar firma a lápiz + certificado</td></tr>
+            <tr><td><strong>Calder</strong> · «Le Sacrilège d'Alan Kent» (carpeta Maeght 1976, ed. 200)</td><td className="n">~3.850 €</td><td>portfolio completo firmado ~8.300 € (Artebonito)</td><td><strong style={{ color: 'var(--good)' }}>Chollo</strong> · verificar que incluye las aguatintas completas</td></tr>
+            <tr><td><strong>Picasso</strong> · «Cauchemar» (Baer 1747, 1968, ed. Leiris)</td><td className="n">~7.900 €</td><td>hermana firmada ~10.700 € (1stDibs)</td><td><strong style={{ color: 'var(--good)' }}>Chollo</strong> · la única Picasso firmada a mano con margen</td></tr>
+            <tr><td><strong>Chillida</strong> · «Estampa V/VI (La indetenible quietud)» (ed. 100)</td><td className="n">2.400 €</td><td>retail 3.270 € (Galería BAT, editor)</td><td><strong style={{ color: 'var(--good)' }}>Chollo leve</strong>; demanda internacional</td></tr>
+            <tr><td><strong>Chillida</strong> · «Hommage à Heidegger» (xilografía)</td><td className="n">1.200 €</td><td>martillo 1.548 € (Van Ham 2015)</td><td><strong style={{ color: 'var(--good)' }}>Bien</strong>; formato pequeño (14×17)</td></tr>
+            <tr><td><strong>Tàpies</strong> · «Improvisations en blanc et en noir» (ed. 60)</td><td className="n">2.352 €</td><td>inferido 2.500–3.500 €</td><td><strong>Probable</strong> (confianza baja)</td></tr>
+            <tr><td><strong>Tàpies</strong> · «Album St Gallen» (tramo bajo)</td><td className="n">1.200–1.800 €</td><td>~2.600 € (Chairish)</td><td><strong>Bien</strong> · verificar plancha</td></tr>
+            <tr><td><strong>Clavé</strong> · «Cirque ou la parade» (litografía 1949)</td><td className="n">~1.256 €</td><td>litos tempranas 1.800–2.000 €</td><td><strong>Leve</strong> · verificar firma a lápiz</td></tr>
+            <tr><td><strong>Clavé</strong> · «L'Émerveillé Merveilleux» (Hommage Miró, ed. 10)</td><td className="n">~992 €</td><td>edición muy corta (escasez)</td><td><strong>Leve</strong></td></tr>
+            <tr><td><strong>Miró</strong> · «Álbum 19» / «Les essències de la Terra»</td><td className="n">2.000 €</td><td>litos firmadas ~3.000–4.500 €</td><td><strong style={{ color: 'var(--warn)' }}>Verificar</strong> firma vs cartel</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div className="callout">
+        <span>🚫</span>
+        <p><strong>Trampas y "no-chollos" (evitar o descartar por tu criterio de firma a mano):</strong> <strong>Picasso</strong> — toda la <em>Suite 156</em> (circo, celestina, cornudo, mosqueteros, 1.520–2.200 €) es <strong>póstuma con sello</strong>, no firma a mano; también «Homme assis» (sello), «Vallauris» (firma en plancha), «Service visage noir» (sello Madoura), «La guitare blanche» (reproducción) y los libros. <strong>Tàpies</strong> — «La nuit grandissante» (1.120–1.360 €) es un <em>cartel</em> que vale ~200 €, y «Messiaen» un cartel ~80 €. <strong>Miró</strong> — «Obra inédita recent» llevan solo inicial (reventa floja); «Ubu Roi» (6.800–7.600) y «Serie Mallorca» (8.800) están caros. <strong>Dalí</strong> — Bestiaire (2.800–3.120), Dix recettes y «Caducée de Mars» por encima de la reventa; «Divina Comedia» se editó sin firmar (verificar); «Don Quijote» 1980 plagado de "after Dalí". <strong>Chagall</strong> — «Écuyère au Bouquet» probablemente plancha de libro sin firma (verificar antes de nada). <strong>Chillida</strong> — «Ce maudit moi» (hoja suelta de libro), «Beltza II» y «Egimen» están caros.</p>
+      </div>
+
       <h2>Taller del Prado — precio socio vs mercado (todas las opciones)</h2>
       <p>Las 40 obras que tenemos como opción en TdP. Precio <strong>socio</strong> (−20%, IVA incl., certificado, local sin aduana). Comps de <strong>subasta</strong> (martillo; súmale ~25% de comisión + IVA) y <strong>retail</strong> de galería, aproximados y con confianza variable. Veredicto: 🟢 barato / semi-chollo · ⚪ en banda / correcto · 🔴 caro · ❓ a verificar.</p>
 
