@@ -31,15 +31,15 @@ export const TRIOS = [
     ids: ['online_braque_personnage', 'online_miro_quelquesfleurs', 'online_dali_zootrope'],
     note: 'Tres maestros de la Escuela de París firmados a mano: Braque (cubista) + Miró + Dalí. Braque aporta el registro cubista.',
     cfg: { uniform: true, outWcm: 64, outHcm: 86, matCm: 4, frameCm: 3, gapCm: 16, matColor: 'hueso', frameColor: 'madera clara', posX: 15, posY: 17,
-      artId: 'online_braque_personnage', artWcm: 52, art2Id: 'online_miro_quelquesfleurs', art2Wcm: 41, art3Id: 'online_dali_zootrope', artWcm3: 39.4, art3Wcm: 39.4 },
+      artId: 'online_braque_personnage', artWcm: 52, art2Id: 'online_miro_quelquesfleurs', art2Wcm: 41, art3Id: 'online_dali_zootrope', art3Wcm: 39.4 },
   },
   {
     key: 'ecole2', name: 'École de Paris v2', theme: 'École de Paris / cubista',
     subtitle: 'Braque «Lettera» · Miró (centro) · Braque «Personnage»',
-    ids: ['online_braque_lettera', 'online_miro_quelquesfleurs', 'online_braque_personnage'],
+    ids: ['online_braque_lettera', 'online_miro_recent5', 'online_braque_personnage'],
     note: 'Pareja de Braque (cubista) flanqueando un Miró. Dos Braques = coherencia de autor; el Miró aporta color al centro.',
     cfg: { uniform: true, outWcm: 64, outHcm: 86, matCm: 4, frameCm: 3, gapCm: 16, matColor: 'hueso', frameColor: 'madera clara', posX: 15, posY: 17,
-      artId: 'online_braque_lettera', artWcm: 28, art2Id: 'online_miro_quelquesfleurs', art2Wcm: 41, art3Id: 'online_braque_personnage', art3Wcm: 52 },
+      artId: 'online_braque_lettera', artWcm: 28, art2Id: 'online_miro_recent5', art2Wcm: 22, art3Id: 'online_braque_personnage', art3Wcm: 52 },
   },
 ]
 
