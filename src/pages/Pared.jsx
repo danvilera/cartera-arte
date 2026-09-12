@@ -101,7 +101,8 @@ export default function Pared() {
       const outHpx = cfg.outHcm * pxPerCm
       const innerW = Math.max(1, outWpx - 2 * framePx - 2 * matPx)
       const innerH = Math.max(1, outHpx - 2 * framePx - 2 * matPx)
-      let iw = innerW, ih = iw / ar
+      let iw = wcm * pxPerCm, ih = iw / ar
+      if (iw > innerW) { iw = innerW; ih = iw / ar }
       if (ih > innerH) { ih = innerH; iw = ih * ar }
       return (
         <div className="framed" style={{ position: 'relative', width: outWpx + 'px', height: outHpx + 'px', boxSizing: 'border-box', background: FRAMES[cfg.frameColor].bg, padding: framePx + 'px', boxShadow: '0 6px 20px rgba(0,0,0,.35)' }}>
@@ -148,7 +149,9 @@ export default function Pared() {
   }
   const loadSlot = (s) => setCfg((c) => ({ ...c, ...s.cfg }))
   const delSlot = (name) => setSlots((s) => s.filter((x) => x.name !== name))
-  const loadTrioCatalan = () => setCfg((c) => ({ ...c, artId: 'online_dali_zootrope', art2Id: 'online_miro_recent5', art3Id: 'online_tapies_minoriv', uniform: true, outWcm: 64, outHcm: 88, matCm: 8, frameCm: 3, gapCm: 16, matColor: 'hueso', frameColor: 'madera clara', posX: 18, posY: 20 }))
+  const trioBase = { uniform: true, outWcm: 66, outHcm: 90, matCm: 4, frameCm: 3, gapCm: 16, matColor: 'hueso', frameColor: 'madera clara', posX: 15, posY: 16, artId: 'online_dali_zootrope', artWcm: 39.4, art2Id: 'online_miro_recent5', art2Wcm: 22 }
+  const loadTrioCatalan = () => setCfg((c) => ({ ...c, ...trioBase, art3Id: 'online_tapies_messiaen', art3Wcm: 51.5 }))
+  const loadTrioCatalan2 = () => setCfg((c) => ({ ...c, ...trioBase, art3Id: 'online_tapies_minoriv', art3Wcm: 40 }))
 
   return (
     <div className="prose">
@@ -280,8 +283,11 @@ export default function Pared() {
 
       <div className="panel" style={{ marginTop: 12 }}>
         <h3 className="sheet-h3" style={{ marginTop: 0 }}>Montajes sugeridos</h3>
-        <button className="btn ghost mini" onClick={loadTrioCatalan}>🎨 Trío catalán (Miró al centro · marcos iguales)</button>
-        <p className="note" style={{ margin: '6px 0 0' }}>Dalí «Zöotrope» y Tàpies «Minor IV» a los lados, Miró pequeño al centro con paspartú mayor; los tres marcos del mismo tamaño. Súbele tu foto y ajusta escala/posición.</p>
+        <div className="two">
+          <div className="ctl"><button className="btn ghost mini" onClick={loadTrioCatalan}>🎨 Trío catalán v1 (Tàpies Messiaen)</button></div>
+          <div className="ctl"><button className="btn ghost mini" onClick={loadTrioCatalan2}>🎨 Trío catalán v2 (Tàpies Minor IV)</button></div>
+        </div>
+        <p className="note" style={{ margin: '6px 0 0' }}>Dalí «Zöotrope» (izq.) y el Tàpies (der.) flanqueando; Miró pequeño al centro. Marcos del mismo tamaño, pero cada obra a su TAMAÑO REAL: el Miró sale más pequeño con más paspartú, como debe ser. Súbele tu foto y ajusta.</p>
       </div>
 
       <div className="panel" style={{ marginTop: 12 }}>
