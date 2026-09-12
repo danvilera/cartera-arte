@@ -29,7 +29,7 @@ export default function Info() {
 
       <div className="callout">
         <span>💎</span>
-        <p><strong>Semi-chollos</strong> (donde el precio TdP está a la par o por debajo del mercado, con liquidez para recuperar lo pagado): <strong>Tàpies serie Variations</strong> (Personnage assis, Oval gris, Grand chaise, Profil — 2.352 € vs retail 2.990–3.600 €), <strong>Tàpies L'esperit català I/II</strong> (2.160 €, aguafuertes, retail ~3.125 €), <strong>Miró Obra inédita recent</strong> (2.240–2.800 € vs retail 3.250 €+), <strong>Vasarely Zebra Nº 3</strong> (1.200 € vs 1.500–1.800 €), <strong>Hartung L-14b</strong> y <strong>Saura Kafka</strong>; y, condicionados a autenticar firma a lápiz y certificado, <strong>Dalí Cap de Creus</strong> (1.600 €) y <strong>Clavé obra única</strong> (1.760 €).</p>
+        <p><strong>Semi-chollos</strong> (donde el precio TdP está a la par o por debajo del mercado, con liquidez para recuperar lo pagado): <strong>Tàpies serie Variations</strong> (Personnage assis, Oval gris, Grand chaise, Profil — 2.352 € vs retail 2.990–3.600 €), <strong>Tàpies L'esperit català I/II</strong> (2.160 €, aguafuertes, retail ~3.125 €), <strong>Vasarely Zebra Nº 3</strong> (1.200 € vs 1.500–1.800 €), <strong>Hartung L-14b</strong> y <strong>Saura Kafka</strong>; y, condicionados a autenticar firma a lápiz y certificado, <strong>Dalí Cap de Creus</strong> (1.600 €) y <strong>Clavé obra única</strong> (1.760 €).</p>
       </div>
 
       <div className="tablewrap">
@@ -40,16 +40,16 @@ export default function Info() {
           <tbody>
             <tr><td><strong>Miró</strong> · Quelques fleurs pour des amis (1964) · ed. 75</td><td className="n">4.800 €</td><td>retail ~4.500 € (Artsy); subasta 3.000–4.300 € all-in</td><td>⚪ En banda (alto)</td><td>—</td></tr>
             <tr><td><strong>Miró</strong> · Ubu Roi (1966) · prueba HC</td><td className="n">6.800 €</td><td>planchas firmadas 3.300–5.000 €</td><td>🔴 Caro / ❓ plancha</td><td>no</td></tr>
-            <tr><td><strong>Miró</strong> · Obra inédita recent (1) (1964) · ed. 100</td><td className="n">2.800 €</td><td>retail 3.250–8.500 $</td><td>🟢 Bien/barato</td><td>sí*</td></tr>
-            <tr><td><strong>Miró</strong> · Obra inédita recent (3) (1964)</td><td className="n">2.800 €</td><td>retail 3.250–8.500 $</td><td>🟢 Bien/barato</td><td>sí*</td></tr>
-            <tr><td><strong>Miró</strong> · Obra inédita recent (6) (1964)</td><td className="n">2.800 €</td><td>retail 3.250–8.500 $</td><td>🟢 Bien/barato</td><td>sí*</td></tr>
-            <tr><td><strong>Miró</strong> · Obra inédita recent (5) (1964)</td><td className="n">2.240 €</td><td>retail 3.250–8.500 $</td><td>🟢 Barato</td><td>sí</td></tr>
+            <tr><td><strong>Miró</strong> · Obra inédita recent (1) (1964) · ed. 100</td><td className="n">2.800 €</td><td>retail 3.250 €+, pero solo <em>inicial</em> (no firma); reventa subasta neta ~550–1.600 €</td><td>⚪ Bien (galería)</td><td>no (reventa)</td></tr>
+            <tr><td><strong>Miró</strong> · Obra inédita recent (3) (1964)</td><td className="n">2.800 €</td><td>ídem (solo inicial; reventa floja)</td><td>⚪ Bien (galería)</td><td>no (reventa)</td></tr>
+            <tr><td><strong>Miró</strong> · Obra inédita recent (6) (1964)</td><td className="n">2.800 €</td><td>ídem (solo inicial; reventa floja)</td><td>⚪ Bien (galería)</td><td>no (reventa)</td></tr>
+            <tr><td><strong>Miró</strong> · Obra inédita recent (5) (1964)</td><td className="n">2.240 €</td><td>el más barato; solo inicial; reventa subasta neta ~550–1.600 €</td><td>⚪ Bien (galería)</td><td>no (reventa)</td></tr>
             <tr><td><strong>Dalí</strong> · Le Chêne et le Roseau (1974) · Bestiaire</td><td className="n">3.120 €</td><td>retail 2.000 € (Artsy); reventa ~1.400 € all-in</td><td>🔴 Caro</td><td>no</td></tr>
             <tr><td><strong>Dalí</strong> · Le Singe et le Léopard (1974)</td><td className="n">2.800 €</td><td>subasta ~1.400 € all-in; retail 2.000–3.850 €</td><td>⚪ En banda (alto)</td><td>no</td></tr>
             <tr><td><strong>Dalí</strong> · Les Animaux Malades de la Peste (1974)</td><td className="n">2.800 €</td><td>≈ serie Bestiaire (inferencia)</td><td>⚪ En banda (alto)</td><td>no</td></tr>
             <tr><td><strong>Dalí</strong> · La Cour du Lion (1974)</td><td className="n">2.800 €</td><td>retail 3.850 €; subasta ~1.000–1.500 €</td><td>⚪ En banda</td><td>no</td></tr>
-            <tr><td><strong>Dalí</strong> · Zöotrope et tour Boullée (1973)</td><td className="n">1.760 €</td><td>sin dato duro; inferencia 1.000–2.500 €</td><td>⚪ En banda (inf.)</td><td>—</td></tr>
-            <tr><td><strong>Dalí</strong> · Cap de Creus (1979) · litografía</td><td className="n">1.600 €</td><td>subasta all-in ~2.200 € (Swann 2018)</td><td>🟢 Barato (condicional)</td><td>sí*</td></tr>
+            <tr><td><strong>Dalí</strong> · Zöotrope et tour Boullée (1973)</td><td className="n">1.760 €</td><td>carpeta completa se remata a ~600–745 €/lámina (Phillips/Bukowskis)</td><td>⚪ En banda (alto)</td><td>no</td></tr>
+            <tr><td><strong>Dalí</strong> · Cap de Creus (1979) · litografía firmada</td><td className="n">1.600 €</td><td>subasta firmada all-in ~2.200 € (Swann); retail 3.250–3.650 €</td><td>🟢 Barato (condicional)</td><td>sí ✓</td></tr>
             <tr><td><strong>Tàpies</strong> · La main jaune · ed. 200</td><td className="n">1.520 €</td><td>subasta est. 400–600 €; retail ~900–1.600 €</td><td>⚪ En banda (alto)</td><td>no</td></tr>
             <tr><td><strong>Tàpies</strong> · Messiaen 1986</td><td className="n">1.520 €</td><td>solo consta el <em>cartel</em> (Galfetti 1068, firma en plancha) ~80 €</td><td>❓ A verificar</td><td>no</td></tr>
             <tr><td><strong>Tàpies</strong> · L'esperit català I (1971) · aguatinta+gofrado</td><td className="n">2.160 €</td><td>retail ~3.125 € +IVA (composition)</td><td>🟢 Barato</td><td>sí</td></tr>
@@ -77,7 +77,7 @@ export default function Info() {
             <tr><td><strong>Vasarely</strong> · Corona (1979) · serigrafía</td><td className="n">1.200 €</td><td>serigrafías firmadas ~1.770 $</td><td>⚪ En banda</td><td>leve</td></tr>
             <tr><td><strong>Vasarely</strong> · Zebra Nº 3 (1984)</td><td className="n">1.200 €</td><td>retail 1.500–1.800 €</td><td>🟢 Barato</td><td>sí</td></tr>
             <tr><td><strong>Delaunay</strong> · Rythme-coloré (1971) · aguafuerte HC</td><td className="n">5.200 €</td><td>aguafuerte comparable ~3.500 €</td><td>🔴 Caro / ❓</td><td>no</td></tr>
-            <tr><td><strong>Clavé</strong> · Sin título (1977) · OBRA ÚNICA</td><td className="n">1.760 €</td><td>galería 10.000 €; subasta obra en papel 2–4.000 €</td><td>🟢 Barato (condicional)</td><td>sí*</td></tr>
+            <tr><td><strong>Clavé</strong> · Sin título (1977) · OBRA ÚNICA · 28,8×14 cm</td><td className="n">1.760 €</td><td>comp por tamaño (~16×24 cm) ~3.100 €; subasta papel 2–4.000 €</td><td>🟢 En banda/barato (condicional)</td><td>leve</td></tr>
           </tbody>
         </table>
       </div>
@@ -85,7 +85,7 @@ export default function Info() {
 
       <div className="callout">
         <span>⚠️</span>
-        <p><strong>A verificar antes de comprar</strong> (cambian el veredicto): <strong>«Messiaen 1986»</strong> — en mercado solo consta el <em>cartel</em> (Galfetti 1068, ed. 1.400, firma impresa en plancha, ~80 €); pide a TdP el nº de catálogo y foto de la firma a lápiz que confirme que es una edición distinta y firmada a mano. <strong>«L'esperit català I/II»</strong> — son <strong>grabados</strong> (aguatinta 1971 / aguafuerte 1974, con gofrado), no litografías. <strong>«Nocturn Matinal»</strong> — existe como carpeta completa (ed. 100) y como hoja suelta (~1.350 €); aclarar cuál venden. <strong>Chillida «Ce maudit moi»</strong> — es un libro deluxe (ed. 50) firmado por Chillida y Cioran; confirmar que es una xilografía suelta. <strong>Goya</strong> — el valor depende de que sea 1ª edición (Desastres 1863 / Tauromaquia 1816); verificar papel y estado.</p>
+        <p><strong>A verificar antes de comprar</strong> (cambian el veredicto): <strong>«Messiaen 1986»</strong> — en mercado solo consta el <em>cartel</em> (Galfetti 1068, ed. 1.400, firma impresa en plancha, ~80 €); pide a TdP el nº de catálogo y foto de la firma a lápiz que confirme que es una edición distinta y firmada a mano. <strong>«L'esperit català I/II»</strong> — son <strong>grabados</strong> (aguatinta 1971 / aguafuerte 1974, con gofrado), no litografías. <strong>«Nocturn Matinal»</strong> — existe como carpeta completa (ed. 100) y como hoja suelta (~1.350 €); aclarar cuál venden. <strong>Chillida «Ce maudit moi»</strong> — es un libro deluxe (ed. 50) firmado por Chillida y Cioran; confirmar que es una xilografía suelta. <strong>Goya</strong> — el valor depende de que sea 1ª edición (Desastres 1863 / Tauromaquia 1816); verificar papel y estado. <strong>Miró «Obra inédita recent»</strong> — llevan solo <em>inicial</em> a lápiz (no firma completa); buen precio de galería, pero la reventa en subasta suele quedar por debajo de lo pagado. <strong>Tàpies «Grand chaise»</strong> — ese título no cuadra con ninguna plancha catalogada de Variations; pedir a TdP el nº Galfetti. <strong>Tàpies «Oval gris»</strong> — existe una variante <em>sin firmar</em> más barata; confirmar que es la firmada a lápiz. <strong>Tàpies «Nocturn Matinal»</strong> — es una hoja suelta firmada; a 2.240 € solo se justifica si es la plancha grande «rehaussée» (62×109). <strong>Dalí «Zootrope»</strong> — la ficha de TdP la da como heliograbado+punta seca, ed. 210; verificar edición y precio exacto.</p>
       </div>
 
       <div className="callout">
