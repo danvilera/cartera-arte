@@ -51,11 +51,29 @@ export default function App() {
   const [saved, setSaved] = useState(true)
   const [drawer, setDrawer] = useState(false)
   const saveTimer = useRef(null)
+  const [updateReady, setUpdateReady] = useState(false)
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => { setSession(data.session); setAuthReady(true) })
     const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => setSession(s))
     return () => sub.subscription.unsubscribe()
+  }, [])
+
+  useEffect(() => {
+    let stop = false
+    const check = async () => {
+      try {
+        const r = await fetch('/version.json?ts=' + Date.now(), { cache: 'no-store' })
+        if (!r.ok) return
+        const d = await r.json()
+        if (!stop && d && d.v && typeof __BUILD_ID__ !== 'undefined' && d.v !== __BUILD_ID__) setUpdateReady(true)
+      } catch (e) {}
+    }
+    check()
+    const id = setInterval(check, 60000)
+    const onVis = () => { if (document.visibilityState === 'visible') check() }
+    document.addEventListener('visibilitychange', onVis)
+    return () => { stop = true; clearInterval(id); document.removeEventListener('visibilitychange', onVis) }
   }, [])
 
   useEffect(() => {
@@ -104,6 +122,11 @@ export default function App() {
 
   return (
     <div className="app">
+      {updateReady && (
+        <div onClick={() => { try { location.reload(true) } catch (e) { location.reload() } }} style={{ position: 'sticky', top: 0, zIndex: 60, background: 'var(--accent, #b98b50)', color: '#fff', padding: '9px 12px', textAlign: 'center', cursor: 'pointer', fontWeight: 700, fontSize: '.9rem' }}>
+          ✨ Nueva versión disponible · toca para actualizar
+        </div>
+      )}
       <header className="appbar">
         <button className="burger" onClick={() => setDrawer(true)} aria-label="Menú">☰</button>
         <div className="appbar-title">{TITLES[tab]}</div>

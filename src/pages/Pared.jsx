@@ -136,7 +136,7 @@ export default function Pared({ wall, onWall }) {
       return (
         <div className="framed" style={{ position: 'relative', width: outWpx + 'px', height: outHpx + 'px', boxSizing: 'border-box', background: FRAMES[cfg.frameColor].bg, padding: framePx + 'px', boxShadow: '0 6px 20px rgba(0,0,0,.35)' }}>
           <div className="mat" style={{ width: '100%', height: '100%', boxSizing: 'border-box', background: MATS[cfg.matColor], display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <img src={src} alt="obra" draggable={false} style={{ width: iw + 'px', height: ih + 'px', display: 'block', objectFit: 'cover' }} />
+            <img src={src} alt="obra" draggable={false} onError={(e) => { e.currentTarget.style.visibility = 'hidden' }} style={{ width: iw + 'px', height: ih + 'px', display: 'block', objectFit: 'cover' }} />
           </div>
         </div>
       )
@@ -146,7 +146,7 @@ export default function Pared({ wall, onWall }) {
     return (
       <div className="framed" style={{ position: 'relative', width: artWpx + matPx * 2 + framePx * 2 + 'px', background: FRAMES[cfg.frameColor].bg, padding: framePx + 'px', boxShadow: '0 6px 20px rgba(0,0,0,.35)' }}>
         <div className="mat" style={{ padding: matPx + 'px', background: MATS[cfg.matColor] }}>
-          <img src={src} alt="obra" draggable={false} style={{ width: artWpx + 'px', height: artHpx + 'px', display: 'block', objectFit: 'cover' }} />
+          <img src={src} alt="obra" draggable={false} onError={(e) => { e.currentTarget.style.visibility = 'hidden' }} style={{ width: artWpx + 'px', height: artHpx + 'px', display: 'block', objectFit: 'cover' }} />
         </div>
       </div>
     )
@@ -228,6 +228,7 @@ export default function Pared({ wall, onWall }) {
           <div className="wall-actions">
             <label className="btn ghost mini">Cambiar foto<input type="file" accept="image/*" hidden onChange={onPhoto} /></label>
             <button className="btn ghost mini" onClick={() => { setPhoto(null); onWall && onWall({ photo: null }); try { localStorage.removeItem('arte_wall_photo') } catch {} }}>Quitar foto</button>
+            <button className="btn ghost mini" onClick={() => setCfg((c) => ({ ...c, artId: 'none', art2Id: 'none', art3Id: 'none', art4Id: 'none', art5Id: 'none' }))}>🧹 Limpiar obras</button>
           </div>
         </>
       )}
