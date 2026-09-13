@@ -11,10 +11,12 @@ const FRAMES = {
   plata: { bg: 'linear-gradient(135deg,#e2e2e8,#a9a9b2)', label: 'Plata' },
 }
 const MATS = { hueso: '#efe9db', blanco: '#ffffff', gris: '#d7d5cf', negro: '#1c1c1c' }
+// AR (ancho/alto) real para obras cuya imagen viene cuadrada o mal recortada.
+const AR_OVERRIDE = { online_dali_capdecreus: 54.6 / 74.8 }
 
 const DEF_CFG = {
   sceneWidthCm: 300, artId: 'miro', artWcm: 70,
-  art2Id: 'none', art2Wcm: 60, art3Id: 'none', art3Wcm: 60, gapCm: 8,
+  art2Id: 'none', art2Wcm: 60, art3Id: 'none', art3Wcm: 60, art4Id: 'none', art4Wcm: 40, art5Id: 'none', art5Wcm: 40, gapCm: 8,
   matCm: 6, matColor: 'hueso', frameCm: 3, frameColor: 'madera clara',
   uniform: false, outWcm: 64, outHcm: 88,
   posX: 30, posY: 26, layout: 'row', bigSide: 'left',
@@ -30,6 +32,8 @@ export default function Pared({ wall, onWall }) {
   const [imgAR, setImgAR] = useState(1.3)
   const [imgAR2, setImgAR2] = useState(1.3)
   const [imgAR3, setImgAR3] = useState(1.3)
+  const [imgAR4, setImgAR4] = useState(1.3)
+  const [imgAR5, setImgAR5] = useState(1.3)
   const [slots, setSlots] = useState(() => load('arte_wall_slots', []))
   const [slotName, setSlotName] = useState('')
   const stageRef = useRef(null)
@@ -62,10 +66,16 @@ export default function Pared({ wall, onWall }) {
   const art2Src = hasTwo ? srcOf(cfg.art2Id) : null
   const hasThree = cfg.art3Id && cfg.art3Id !== 'none'
   const art3Src = hasThree ? srcOf(cfg.art3Id) : null
+  const hasFour = cfg.art4Id && cfg.art4Id !== 'none'
+  const art4Src = hasFour ? srcOf(cfg.art4Id) : null
+  const hasFive = cfg.art5Id && cfg.art5Id !== 'none'
+  const art5Src = hasFive ? srcOf(cfg.art5Id) : null
 
   useEffect(() => { readAR(artSrc, setImgAR) }, [artSrc])
   useEffect(() => { if (art2Src) readAR(art2Src, setImgAR2) }, [art2Src])
   useEffect(() => { if (art3Src) readAR(art3Src, setImgAR3) }, [art3Src])
+  useEffect(() => { if (art4Src) readAR(art4Src, setImgAR4) }, [art4Src])
+  useEffect(() => { if (art5Src) readAR(art5Src, setImgAR5) }, [art5Src])
 
   const set = (k, v) => setCfg((c) => ({ ...c, [k]: v }))
 
@@ -82,12 +92,14 @@ export default function Pared({ wall, onWall }) {
 
   function pickWork(w, slot) {
     const dims = sizeOf(w)
-    let widthCm = slot === 3 ? cfg.art3Wcm : slot === 2 ? cfg.art2Wcm : cfg.artWcm
+    let widthCm = slot === 5 ? cfg.art5Wcm : slot === 4 ? cfg.art4Wcm : slot === 3 ? cfg.art3Wcm : slot === 2 ? cfg.art2Wcm : cfg.artWcm
     if (dims) {
       const isLandscape = imgLandscapeGuess(w)
       widthCm = isLandscape ? Math.max(dims[0], dims[1]) : Math.min(dims[0], dims[1])
     }
-    if (slot === 3) setCfg((c) => ({ ...c, art3Id: w.id, art3Wcm: widthCm }))
+    if (slot === 5) setCfg((c) => ({ ...c, art5Id: w.id, art5Wcm: widthCm }))
+    else if (slot === 4) setCfg((c) => ({ ...c, art4Id: w.id, art4Wcm: widthCm }))
+    else if (slot === 3) setCfg((c) => ({ ...c, art3Id: w.id, art3Wcm: widthCm }))
     else if (slot === 2) setCfg((c) => ({ ...c, art2Id: w.id, art2Wcm: widthCm }))
     else setCfg((c) => ({ ...c, artId: w.id, artWcm: widthCm }))
   }
@@ -99,11 +111,17 @@ export default function Pared({ wall, onWall }) {
   const framedOuterCm = (wcm) => wcm + 2 * cfg.matCm + 2 * cfg.frameCm
   const nPieces = 1 + (hasTwo ? 1 : 0) + (hasThree ? 1 : 0)
   const outerCm = (wcm) => cfg.uniform ? cfg.outWcm : framedOuterCm(wcm)
-  const colMaxCm = Math.max(hasTwo ? outerCm(cfg.art2Wcm) : 0, hasThree ? outerCm(cfg.art3Wcm) : 0)
+  const nSmall = (hasTwo ? 1 : 0) + (hasThree ? 1 : 0) + (hasFour ? 1 : 0) + (hasFive ? 1 : 0)
+  const colMaxCm = Math.max(hasTwo ? outerCm(cfg.art2Wcm) : 0, hasThree ? outerCm(cfg.art3Wcm) : 0, hasFour ? outerCm(cfg.art4Wcm) : 0, hasFive ? outerCm(cfg.art5Wcm) : 0)
   const groupWcm = cfg.layout === 'asym'
-    ? outerCm(cfg.artWcm) + ((hasTwo || hasThree) ? cfg.gapCm + colMaxCm : 0)
+    ? outerCm(cfg.artWcm) + (nSmall ? cfg.gapCm + (nSmall >= 3 ? 2 * colMaxCm + cfg.gapCm : colMaxCm) : 0)
     : outerCm(cfg.artWcm) + (hasTwo ? cfg.gapCm + outerCm(cfg.art2Wcm) : 0) + (hasThree ? cfg.gapCm + outerCm(cfg.art3Wcm) : 0)
-  const alto1 = Math.round(cfg.artWcm / imgAR)
+  const AR1 = AR_OVERRIDE[cfg.artId] || imgAR
+  const AR2 = AR_OVERRIDE[cfg.art2Id] || imgAR2
+  const AR3 = AR_OVERRIDE[cfg.art3Id] || imgAR3
+  const AR4 = AR_OVERRIDE[cfg.art4Id] || imgAR4
+  const AR5 = AR_OVERRIDE[cfg.art5Id] || imgAR5
+  const alto1 = Math.round(cfg.artWcm / AR1)
 
   function Framed({ src, wcm, ar, box }) {
     const uni = box || (cfg.uniform ? { wcm: cfg.outWcm, hcm: cfg.outHcm } : null)
@@ -118,7 +136,7 @@ export default function Pared({ wall, onWall }) {
       return (
         <div className="framed" style={{ position: 'relative', width: outWpx + 'px', height: outHpx + 'px', boxSizing: 'border-box', background: FRAMES[cfg.frameColor].bg, padding: framePx + 'px', boxShadow: '0 6px 20px rgba(0,0,0,.35)' }}>
           <div className="mat" style={{ width: '100%', height: '100%', boxSizing: 'border-box', background: MATS[cfg.matColor], display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <img src={src} alt="obra" draggable={false} style={{ width: iw + 'px', height: ih + 'px', display: 'block' }} />
+            <img src={src} alt="obra" draggable={false} style={{ width: iw + 'px', height: ih + 'px', display: 'block', objectFit: 'cover' }} />
           </div>
         </div>
       )
@@ -128,7 +146,7 @@ export default function Pared({ wall, onWall }) {
     return (
       <div className="framed" style={{ position: 'relative', width: artWpx + matPx * 2 + framePx * 2 + 'px', background: FRAMES[cfg.frameColor].bg, padding: framePx + 'px', boxShadow: '0 6px 20px rgba(0,0,0,.35)' }}>
         <div className="mat" style={{ padding: matPx + 'px', background: MATS[cfg.matColor] }}>
-          <img src={src} alt="obra" draggable={false} style={{ width: artWpx + 'px', height: artHpx + 'px', display: 'block' }} />
+          <img src={src} alt="obra" draggable={false} style={{ width: artWpx + 'px', height: artHpx + 'px', display: 'block', objectFit: 'cover' }} />
         </div>
       </div>
     )
@@ -180,27 +198,28 @@ export default function Pared({ wall, onWall }) {
             <img className="wall-photo" src={photo} alt="pared" draggable={false} />
             {artSrc && pxPerCm > 0 && (() => {
               const gapPx = cfg.gapCm * pxPerCm
-              const big = <Framed src={artSrc} wcm={cfg.artWcm} ar={imgAR} />
+              const big = <Framed src={artSrc} wcm={cfg.artWcm} ar={AR1} />
               if (cfg.layout === 'asym') {
                 const items = []
-                if (hasTwo && art2Src) items.push({ src: art2Src, wcm: cfg.art2Wcm, ar: imgAR2 })
-                if (hasThree && art3Src) items.push({ src: art3Src, wcm: cfg.art3Wcm, ar: imgAR3 })
+                if (hasTwo && art2Src) items.push({ src: art2Src, wcm: cfg.art2Wcm, ar: AR2 })
+                if (hasThree && art3Src) items.push({ src: art3Src, wcm: cfg.art3Wcm, ar: AR3 })
+                if (hasFour && art4Src) items.push({ src: art4Src, wcm: cfg.art4Wcm, ar: AR4 })
+                if (hasFive && art5Src) items.push({ src: art5Src, wcm: cfg.art5Wcm, ar: AR5 })
                 const m2 = 2 * cfg.matCm + 2 * cfg.frameCm
                 const boxW = items.length ? Math.max(...items.map((x) => x.wcm + m2)) : 0
                 const boxH = items.length ? Math.max(...items.map((x) => x.wcm / (x.ar || 1) + m2)) : 0
                 const box = { wcm: boxW, hcm: boxH }
-                const col = (
-                  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: items.length > 1 ? 'space-between' : 'center', gap: gapPx + 'px' }}>
-                    {items.map((x, i) => <Framed key={i} src={x.src} wcm={x.wcm} ar={x.ar} box={box} />)}
-                  </div>
-                )
-                const inner = cfg.bigSide === 'right' ? <>{col}{big}</> : <>{big}{col}</>
+                const cells = items.map((x, i) => <Framed key={i} src={x.src} wcm={x.wcm} ar={x.ar} box={box} />)
+                const group = items.length >= 3
+                  ? <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, auto)', gap: gapPx + 'px', alignContent: 'space-between', justifyItems: 'center', height: '100%' }}>{cells}</div>
+                  : <div style={{ display: 'flex', flexDirection: 'column', justifyContent: items.length > 1 ? 'space-between' : 'center', gap: gapPx + 'px' }}>{cells}</div>
+                const inner = cfg.bigSide === 'right' ? <>{group}{big}</> : <>{big}{group}</>
                 return (
                   <div onPointerDown={onDown} style={{ position: 'absolute', left: cfg.posX + '%', top: cfg.posY + '%', display: 'flex', alignItems: 'stretch', gap: gapPx + 'px', cursor: 'grab', touchAction: 'none' }}>{inner}</div>
                 )
               }
-              const s2 = hasTwo && art2Src ? <Framed src={art2Src} wcm={cfg.art2Wcm} ar={imgAR2} /> : null
-              const s3 = hasThree && art3Src ? <Framed src={art3Src} wcm={cfg.art3Wcm} ar={imgAR3} /> : null
+              const s2 = hasTwo && art2Src ? <Framed src={art2Src} wcm={cfg.art2Wcm} ar={AR2} /> : null
+              const s3 = hasThree && art3Src ? <Framed src={art3Src} wcm={cfg.art3Wcm} ar={AR3} /> : null
               return (
                 <div onPointerDown={onDown} style={{ position: 'absolute', left: cfg.posX + '%', top: cfg.posY + '%', display: 'flex', alignItems: 'center', gap: gapPx + 'px', cursor: 'grab', touchAction: 'none' }}>{big}{s2}{s3}</div>
               )
@@ -228,7 +247,7 @@ export default function Pared({ wall, onWall }) {
           {cfg.layout === 'asym' && <button className={'chip2' + (cfg.bigSide !== 'right' ? ' on' : '')} onClick={() => set('bigSide', 'left')}>Grande a la izq.</button>}
           {cfg.layout === 'asym' && <button className={'chip2' + (cfg.bigSide === 'right' ? ' on' : '')} onClick={() => set('bigSide', 'right')}>Grande a la dcha.</button>}
         </div>
-        <p className="note" style={{ margin: '6px 0 0' }}>En «Grande + pequeñas al lado»: la obra grande a un lado y las pequeñas apiladas al otro. Con 2, se alinean arriba y abajo a la altura de la grande. Para 3 pequeñas conviene una grande alta (p. ej. un Tàpies Variations de ~104 cm).</p>
+        <p className="note" style={{ margin: '6px 0 0' }}>En «Grande + pequeñas al lado»: la obra grande a un lado y las pequeñas apiladas al otro. Con 2, se alinean arriba y abajo a la altura de la grande. Con 3–4 pequeñas se colocan en <strong>cuadrícula 2×2</strong> al lado de la grande (usa las obras 4ª y 5ª). Para que 3–4 quepan holgadas conviene una grande alta (p. ej. un Tàpies Variations de ~104 cm).</p>
 
         <h3 className="sheet-h3">2 · Obra principal</h3>
         <div className="chips2">
@@ -274,6 +293,34 @@ export default function Pared({ wall, onWall }) {
         {hasThree && (
           <div className="ctl"><label>Ancho 3ª obra: <b>{cfg.art3Wcm} cm</b></label>
             <input type="range" min="15" max="150" step="1" value={cfg.art3Wcm} onChange={(e) => set('art3Wcm', +e.target.value)} /></div>
+        )}
+
+        <h3 className="sheet-h3">3c · Cuarta obra (cuadrícula)</h3>
+        <div className="chips2">
+          <button className={'chip2' + (cfg.art4Id === 'none' ? ' on' : '')} onClick={() => set('art4Id', 'none')}>Ninguna</button>
+          {WORKS.map((w) => (
+            <button key={w.id} className={'chip2' + (cfg.art4Id === w.id ? ' on' : '')} onClick={() => pickWork(w, 4)}>
+              {w.artist.split(' ').slice(-1)[0]} · {w.title.replace(/[“”"]/g, '').slice(0, 16)}
+            </button>
+          ))}
+        </div>
+        {hasFour && (
+          <div className="ctl"><label>Ancho 4ª obra: <b>{cfg.art4Wcm} cm</b></label>
+            <input type="range" min="15" max="150" step="1" value={cfg.art4Wcm} onChange={(e) => set('art4Wcm', +e.target.value)} /></div>
+        )}
+
+        <h3 className="sheet-h3">3d · Quinta obra (cuadrícula)</h3>
+        <div className="chips2">
+          <button className={'chip2' + (cfg.art5Id === 'none' ? ' on' : '')} onClick={() => set('art5Id', 'none')}>Ninguna</button>
+          {WORKS.map((w) => (
+            <button key={w.id} className={'chip2' + (cfg.art5Id === w.id ? ' on' : '')} onClick={() => pickWork(w, 5)}>
+              {w.artist.split(' ').slice(-1)[0]} · {w.title.replace(/[“”"]/g, '').slice(0, 16)}
+            </button>
+          ))}
+        </div>
+        {hasFive && (
+          <div className="ctl"><label>Ancho 5ª obra: <b>{cfg.art5Wcm} cm</b></label>
+            <input type="range" min="15" max="150" step="1" value={cfg.art5Wcm} onChange={(e) => set('art5Wcm', +e.target.value)} /></div>
         )}
 
         <h3 className="sheet-h3">4 · Paspartú</h3>

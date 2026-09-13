@@ -62,7 +62,7 @@ export default function Trios({ state, onOpen, onNav }) {
           <div className="panel" key={t.key} style={{ marginTop: 14 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
               <h3 className="sheet-h3" style={{ margin: 0 }}>
-                <span style={{ fontSize: '.7rem', padding: '2px 7px', borderRadius: 20, background: isDuo ? 'var(--warn,#c99)' : 'var(--accent,#b98b50)', color: '#fff', marginRight: 8, verticalAlign: 'middle' }}>{works.length === 2 ? 'DÚO' : works.length >= 4 ? 'CUARTETO' : 'TRÍO'}</span>
+                <span style={{ fontSize: '.7rem', padding: '2px 7px', borderRadius: 20, background: isDuo ? 'var(--warn,#c99)' : 'var(--accent,#b98b50)', color: '#fff', marginRight: 8, verticalAlign: 'middle' }}>{works.length === 2 ? 'DÚO' : works.length >= 5 ? 'BLOQUE' : works.length === 4 ? 'CUARTETO' : 'TRÍO'}</span>
                 {t.name} <span className="note" style={{ fontWeight: 400 }}>· {t.theme}</span>
               </h3>
               <b style={{ fontSize: '1.15rem' }}>{eur(totalPrice)}</b>

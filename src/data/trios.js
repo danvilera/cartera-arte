@@ -92,10 +92,18 @@ export const TRIOS = [
   {
     key: 'cap_cuarteto', name: 'Cap de Creus + 4 pequeñas (cuarteto 2×2)', theme: 'Grande + cuadrícula 2×2', kind: 'quad',
     subtitle: 'Dalí «Cap de Creus» (grande) · Miró + Clavé + Braque en 2×2',
-    ids: ['online_dali_capdecreus', 'online_miro_recent5', 'online_clave_pintura', 'online_braque_lettera'],
-    note: 'Versión de 4 obras pequeñas en cuadrícula 2×2 al lado del Cap de Creus (una sola columna no da para 4 a tamaño real de marco). Aquí ves precio y enmarcado de las 4 + el Dalí. La vista «En la pared» muestra 3; la cuadrícula 2×2 completa la construyo aparte si te convence el coste.',
-    cfg: { layout: 'asym', bigSide: 'left', uniform: false, matCm: 5, frameCm: 3, gapCm: 12, matColor: 'hueso', frameColor: 'madera clara', posX: 24, posY: 12,
-      artId: 'online_dali_capdecreus', artWcm: 54.6, art2Id: 'online_miro_recent5', art2Wcm: 22, art3Id: 'online_clave_pintura', art3Wcm: 14 },
+    ids: ['online_dali_capdecreus', 'online_miro_recent5', 'online_clave_pintura', 'online_braque_floraux'],
+    note: 'Cuatro obras: Cap de Creus (grande) + Miró, Clavé y Braque «Composition aux motifs floraux» (pequeñas) en cuadrícula 2×2 al lado, con marco idéntico entre las pequeñas. Ves precio y enmarcado de las 4. En «En la pared» ya carga la cuadrícula 2×2.',
+    cfg: { layout: 'asym', bigSide: 'left', uniform: false, matCm: 5, frameCm: 3, gapCm: 12, matColor: 'hueso', frameColor: 'madera clara', posX: 20, posY: 10,
+      artId: 'online_dali_capdecreus', artWcm: 54.6, art2Id: 'online_miro_recent5', art2Wcm: 22, art3Id: 'online_clave_pintura', art3Wcm: 14, art4Id: 'online_braque_floraux', art4Wcm: 10 },
+  },
+  {
+    key: 'pack_bloque5', name: 'Bloque · Cap de Creus + 4 pequeñas (2×2)', theme: 'Grande + cuadrícula 2×2', kind: 'quint',
+    subtitle: 'Cap de Creus (grande) · Miró + Clavé + Braque + Tàpies (2×2)',
+    ids: ['online_dali_capdecreus', 'online_miro_recent5', 'online_clave_pintura', 'online_braque_floraux', 'online_tapies_minoriv'],
+    note: 'Bloque de 5: Cap de Creus como ancla y CUATRO pequeñas en cuadrícula 2×2 (Miró, Clavé, Braque «floraux» y Tàpies «Minor IV», la más pequeña de Tàpies que tenemos). Marco idéntico entre las pequeñas (paspartú igualado). Aquí ves precio + enmarcado de las cinco.',
+    cfg: { layout: 'asym', bigSide: 'left', uniform: false, matCm: 5, frameCm: 3, gapCm: 12, matColor: 'hueso', frameColor: 'madera clara', posX: 14, posY: 8,
+      artId: 'online_dali_capdecreus', artWcm: 54.6, art2Id: 'online_miro_recent5', art2Wcm: 22, art3Id: 'online_clave_pintura', art3Wcm: 14, art4Id: 'online_braque_floraux', art4Wcm: 10, art5Id: 'online_tapies_minoriv', art5Wcm: 40 },
   },
   {
     key: 'duo_miro_braque', name: 'Dúo · Miró + Braque', theme: 'Dúo blue-chip', kind: 'duo',
