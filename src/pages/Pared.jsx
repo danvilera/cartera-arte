@@ -17,7 +17,7 @@ const DEF_CFG = {
   art2Id: 'none', art2Wcm: 60, art3Id: 'none', art3Wcm: 60, gapCm: 8,
   matCm: 6, matColor: 'hueso', frameCm: 3, frameColor: 'madera clara',
   uniform: false, outWcm: 64, outHcm: 88,
-  posX: 30, posY: 26,
+  posX: 30, posY: 26, layout: 'row', bigSide: 'left',
 }
 
 const load = (k, f) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : f } catch { return f } }
@@ -99,7 +99,10 @@ export default function Pared({ wall, onWall }) {
   const framedOuterCm = (wcm) => wcm + 2 * cfg.matCm + 2 * cfg.frameCm
   const nPieces = 1 + (hasTwo ? 1 : 0) + (hasThree ? 1 : 0)
   const outerCm = (wcm) => cfg.uniform ? cfg.outWcm : framedOuterCm(wcm)
-  const groupWcm = outerCm(cfg.artWcm) + (hasTwo ? cfg.gapCm + outerCm(cfg.art2Wcm) : 0) + (hasThree ? cfg.gapCm + outerCm(cfg.art3Wcm) : 0)
+  const colMaxCm = Math.max(hasTwo ? outerCm(cfg.art2Wcm) : 0, hasThree ? outerCm(cfg.art3Wcm) : 0)
+  const groupWcm = cfg.layout === 'asym'
+    ? outerCm(cfg.artWcm) + ((hasTwo || hasThree) ? cfg.gapCm + colMaxCm : 0)
+    : outerCm(cfg.artWcm) + (hasTwo ? cfg.gapCm + outerCm(cfg.art2Wcm) : 0) + (hasThree ? cfg.gapCm + outerCm(cfg.art3Wcm) : 0)
   const alto1 = Math.round(cfg.artWcm / imgAR)
 
   function Framed({ src, wcm, ar }) {
@@ -157,6 +160,7 @@ export default function Pared({ wall, onWall }) {
   const loadSlot = (s) => setCfg((c) => ({ ...c, ...s.cfg }))
   const delSlot = (name) => setSlots((s) => s.filter((x) => x.name !== name))
   const loadTrio = (t) => setCfg((c) => ({ ...c, ...t.cfg }))
+  const loadCompo = (c) => setCfg((p) => ({ ...p, ...c }))
 
   return (
     <div className="prose">
@@ -173,13 +177,24 @@ export default function Pared({ wall, onWall }) {
         <>
           <div className="wall-stage" ref={stageRef}>
             <img className="wall-photo" src={photo} alt="pared" draggable={false} />
-            {artSrc && pxPerCm > 0 && (
-              <div onPointerDown={onDown} style={{ position: 'absolute', left: cfg.posX + '%', top: cfg.posY + '%', display: 'flex', alignItems: 'center', gap: (cfg.gapCm * pxPerCm) + 'px', cursor: 'grab', touchAction: 'none' }}>
-                <Framed src={artSrc} wcm={cfg.artWcm} ar={imgAR} />
-                {hasTwo && art2Src && <Framed src={art2Src} wcm={cfg.art2Wcm} ar={imgAR2} />}
-                {hasThree && art3Src && <Framed src={art3Src} wcm={cfg.art3Wcm} ar={imgAR3} />}
-              </div>
-            )}
+            {artSrc && pxPerCm > 0 && (() => {
+              const gapPx = cfg.gapCm * pxPerCm
+              const big = <Framed src={artSrc} wcm={cfg.artWcm} ar={imgAR} />
+              const s2 = hasTwo && art2Src ? <Framed src={art2Src} wcm={cfg.art2Wcm} ar={imgAR2} /> : null
+              const s3 = hasThree && art3Src ? <Framed src={art3Src} wcm={cfg.art3Wcm} ar={imgAR3} /> : null
+              const wrap = (children, align) => (
+                <div onPointerDown={onDown} style={{ position: 'absolute', left: cfg.posX + '%', top: cfg.posY + '%', display: 'flex', alignItems: align, gap: gapPx + 'px', cursor: 'grab', touchAction: 'none' }}>{children}</div>
+              )
+              if (cfg.layout === 'asym') {
+                const col = (
+                  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: (s2 && s3) ? 'space-between' : 'center', gap: gapPx + 'px' }}>
+                    {s2}{s3}
+                  </div>
+                )
+                return wrap(cfg.bigSide === 'right' ? <>{col}{big}</> : <>{big}{col}</>, 'stretch')
+              }
+              return wrap(<>{big}{s2}{s3}</>, 'center')
+            })()}
           </div>
           <div className="wall-actions">
             <label className="btn ghost mini">Cambiar foto<input type="file" accept="image/*" hidden onChange={onPhoto} /></label>
@@ -195,6 +210,15 @@ export default function Pared({ wall, onWall }) {
           <input type="range" min="80" max="600" step="5" value={cfg.sceneWidthCm} onChange={(e) => set('sceneWidthCm', +e.target.value)} />
           <small>Mide (aprox.) cuántos cm de pared abarca la foto de lado a lado.</small>
         </div>
+
+        <h3 className="sheet-h3">Disposición</h3>
+        <div className="chips2">
+          <button className={'chip2' + (cfg.layout !== 'asym' ? ' on' : '')} onClick={() => set('layout', 'row')}>Fila</button>
+          <button className={'chip2' + (cfg.layout === 'asym' ? ' on' : '')} onClick={() => set('layout', 'asym')}>Grande + pequeñas al lado</button>
+          {cfg.layout === 'asym' && <button className={'chip2' + (cfg.bigSide !== 'right' ? ' on' : '')} onClick={() => set('bigSide', 'left')}>Grande a la izq.</button>}
+          {cfg.layout === 'asym' && <button className={'chip2' + (cfg.bigSide === 'right' ? ' on' : '')} onClick={() => set('bigSide', 'right')}>Grande a la dcha.</button>}
+        </div>
+        <p className="note" style={{ margin: '6px 0 0' }}>En «Grande + pequeñas al lado»: la obra grande a un lado y las pequeñas apiladas al otro. Con 2, se alinean arriba y abajo a la altura de la grande. Para 3 pequeñas conviene una grande alta (p. ej. un Tàpies Variations de ~104 cm).</p>
 
         <h3 className="sheet-h3">2 · Obra principal</h3>
         <div className="chips2">
@@ -289,6 +313,7 @@ export default function Pared({ wall, onWall }) {
       <div className="panel" style={{ marginTop: 12 }}>
         <h3 className="sheet-h3" style={{ marginTop: 0 }}>Montajes sugeridos</h3>
         <div className="chips2">
+          <button className="chip2" onClick={() => loadCompo({ layout: 'asym', bigSide: 'left', uniform: false, artId: 'online_dali_capdecreus', artWcm: 54.6, art2Id: 'online_miro_recent5', art2Wcm: 22, art3Id: 'online_clave_pintura', art3Wcm: 14, gapCm: 12, matCm: 5, frameCm: 3, matColor: 'hueso', frameColor: 'madera clara', posX: 26, posY: 16 })}>🖼️ Cap de Creus + Miró + Clavé (asimétrico)</button>
           {TRIOS.map((t) => (
             <button key={t.key} className="chip2" onClick={() => loadTrio(t)}>🎨 {t.name}</button>
           ))}
