@@ -105,10 +105,11 @@ export default function Pared({ wall, onWall }) {
     : outerCm(cfg.artWcm) + (hasTwo ? cfg.gapCm + outerCm(cfg.art2Wcm) : 0) + (hasThree ? cfg.gapCm + outerCm(cfg.art3Wcm) : 0)
   const alto1 = Math.round(cfg.artWcm / imgAR)
 
-  function Framed({ src, wcm, ar }) {
-    if (cfg.uniform) {
-      const outWpx = cfg.outWcm * pxPerCm
-      const outHpx = cfg.outHcm * pxPerCm
+  function Framed({ src, wcm, ar, box }) {
+    const uni = box || (cfg.uniform ? { wcm: cfg.outWcm, hcm: cfg.outHcm } : null)
+    if (uni) {
+      const outWpx = uni.wcm * pxPerCm
+      const outHpx = uni.hcm * pxPerCm
       const innerW = Math.max(1, outWpx - 2 * framePx - 2 * matPx)
       const innerH = Math.max(1, outHpx - 2 * framePx - 2 * matPx)
       let iw = wcm * pxPerCm, ih = iw / ar
@@ -180,20 +181,29 @@ export default function Pared({ wall, onWall }) {
             {artSrc && pxPerCm > 0 && (() => {
               const gapPx = cfg.gapCm * pxPerCm
               const big = <Framed src={artSrc} wcm={cfg.artWcm} ar={imgAR} />
-              const s2 = hasTwo && art2Src ? <Framed src={art2Src} wcm={cfg.art2Wcm} ar={imgAR2} /> : null
-              const s3 = hasThree && art3Src ? <Framed src={art3Src} wcm={cfg.art3Wcm} ar={imgAR3} /> : null
-              const wrap = (children, align) => (
-                <div onPointerDown={onDown} style={{ position: 'absolute', left: cfg.posX + '%', top: cfg.posY + '%', display: 'flex', alignItems: align, gap: gapPx + 'px', cursor: 'grab', touchAction: 'none' }}>{children}</div>
-              )
               if (cfg.layout === 'asym') {
+                const items = []
+                if (hasTwo && art2Src) items.push({ src: art2Src, wcm: cfg.art2Wcm, ar: imgAR2 })
+                if (hasThree && art3Src) items.push({ src: art3Src, wcm: cfg.art3Wcm, ar: imgAR3 })
+                const m2 = 2 * cfg.matCm + 2 * cfg.frameCm
+                const boxW = items.length ? Math.max(...items.map((x) => x.wcm + m2)) : 0
+                const boxH = items.length ? Math.max(...items.map((x) => x.wcm / (x.ar || 1) + m2)) : 0
+                const box = { wcm: boxW, hcm: boxH }
                 const col = (
-                  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: (s2 && s3) ? 'space-between' : 'center', gap: gapPx + 'px' }}>
-                    {s2}{s3}
+                  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: items.length > 1 ? 'space-between' : 'center', gap: gapPx + 'px' }}>
+                    {items.map((x, i) => <Framed key={i} src={x.src} wcm={x.wcm} ar={x.ar} box={box} />)}
                   </div>
                 )
-                return wrap(cfg.bigSide === 'right' ? <>{col}{big}</> : <>{big}{col}</>, 'stretch')
+                const inner = cfg.bigSide === 'right' ? <>{col}{big}</> : <>{big}{col}</>
+                return (
+                  <div onPointerDown={onDown} style={{ position: 'absolute', left: cfg.posX + '%', top: cfg.posY + '%', display: 'flex', alignItems: 'stretch', gap: gapPx + 'px', cursor: 'grab', touchAction: 'none' }}>{inner}</div>
+                )
               }
-              return wrap(<>{big}{s2}{s3}</>, 'center')
+              const s2 = hasTwo && art2Src ? <Framed src={art2Src} wcm={cfg.art2Wcm} ar={imgAR2} /> : null
+              const s3 = hasThree && art3Src ? <Framed src={art3Src} wcm={cfg.art3Wcm} ar={imgAR3} /> : null
+              return (
+                <div onPointerDown={onDown} style={{ position: 'absolute', left: cfg.posX + '%', top: cfg.posY + '%', display: 'flex', alignItems: 'center', gap: gapPx + 'px', cursor: 'grab', touchAction: 'none' }}>{big}{s2}{s3}</div>
+              )
             })()}
           </div>
           <div className="wall-actions">
