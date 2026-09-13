@@ -2,6 +2,22 @@
 // cada obra a su ancho real; art=izquierda, art2=centro, art3=derecha).
 export const TRIOS = [
   {
+    key: 'pack_var3', name: 'Chollo pack · Tàpies Variations (trío)', theme: 'Chollo pack · máxima presencia',
+    subtitle: 'Personnage assis · Grand chaise · Profil (serie Variations)',
+    ids: ['online_tapies_personnage', 'online_tapies_grandchaise', 'online_tapies_profil'],
+    note: 'Tres litografías firmadas de la serie Variations (ed. 90), grandes verticales (~104 cm), MISMA serie = máxima coherencia. Las tres por debajo del retail europeo (2.352 € socio vs 2.990–3.600 €). El chollo pack de más presencia para la pared de 3 m.',
+    cfg: { uniform: true, outWcm: 84, outHcm: 116, matCm: 4, frameCm: 3, gapCm: 14, matColor: 'hueso', frameColor: 'madera clara', posX: 6, posY: 8,
+      artId: 'online_tapies_personnage', artWcm: 74, art2Id: 'online_tapies_grandchaise', art2Wcm: 76, art3Id: 'online_tapies_profil', art3Wcm: 73.5 },
+  },
+  {
+    key: 'pack_var2', name: 'Chollo pack · Tàpies Variations (dúo)', theme: 'Chollo pack · dúo fuerte', kind: 'duo',
+    subtitle: 'Personnage assis · Profil (serie Variations)',
+    ids: ['online_tapies_personnage', 'online_tapies_profil'],
+    note: 'Dos Variations firmadas (ed. 90) como dúo: mismo lenguaje, gran formato y ambas por debajo de retail. Opción chollo más contenida en precio, con mucha presencia.',
+    cfg: { uniform: true, outWcm: 84, outHcm: 116, matCm: 4, frameCm: 3, gapCm: 18, matColor: 'hueso', frameColor: 'madera clara', posX: 16, posY: 8,
+      artId: 'online_tapies_personnage', artWcm: 74, art2Id: 'online_tapies_profil', art2Wcm: 73.5, art3Id: 'none', art3Wcm: 60 },
+  },
+  {
     key: 'cat1', name: 'Trío catalán v1', theme: 'Maestros catalanes',
     subtitle: 'Dalí · Miró (centro) · Tàpies «Messiaen»',
     ids: ['online_dali_zootrope', 'online_miro_recent5', 'online_tapies_messiaen'],

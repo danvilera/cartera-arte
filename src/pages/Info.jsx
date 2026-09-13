@@ -53,6 +53,21 @@ export default function Info() {
         <p><strong>Trampas y "no-chollos" (evitar o descartar por tu criterio de firma a mano):</strong> <strong>Picasso</strong> — toda la <em>Suite 156</em> (circo, celestina, cornudo, mosqueteros, 1.520–2.200 €) es <strong>póstuma con sello</strong>, no firma a mano; también «Homme assis» (sello), «Vallauris» (firma en plancha), «Service visage noir» (sello Madoura), «La guitare blanche» (reproducción) y los libros. <strong>Tàpies</strong> — «La nuit grandissante» (1.120–1.360 €) es un <em>cartel</em> que vale ~200 €, y «Messiaen» un cartel ~80 €. <strong>Miró</strong> — «Obra inédita recent» llevan solo inicial (reventa floja); «Ubu Roi» (6.800–7.600) y «Serie Mallorca» (8.800) están caros. <strong>Dalí</strong> — Bestiaire (2.800–3.120), Dix recettes y «Caducée de Mars» por encima de la reventa; «Divina Comedia» se editó sin firmar (verificar); «Don Quijote» 1980 plagado de "after Dalí". <strong>Chagall</strong> — «Écuyère au Bouquet» probablemente plancha de libro sin firma (verificar antes de nada). <strong>Chillida</strong> — «Ce maudit moi» (hoja suelta de libro), «Beltza II» y «Egimen» están caros.</p>
       </div>
 
+      <h2>Chollo packs recomendados</h2>
+      <p>Combinaciones de chollos por presupuesto (precio socio de obra; súmales el enmarcado). Las tienes montadas en la pestaña <strong>Tríos</strong> (con precio + enmarcado) y en <strong>En la pará</strong> (montajes sugeridos).</p>
+      <div className="tablewrap">
+        <table>
+          <thead><tr><th>Pack</th><th>Obras</th><th>Obra (socio)</th><th>Lectura</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Asimétrico económico</strong></td><td>Dalí Cap de Creus + Miró recent + Clavé</td><td className="n">5.600 €</td><td>El más barato. Cap de Creus es el chollo recuperable; Miró y Clavé, disfrute. ~6.200 € con marcos.</td></tr>
+            <tr><td><strong>Dúo Variations</strong></td><td>Tàpies Personnage assis + Profil</td><td className="n">4.704 €</td><td>Dúo de gran formato (~104 cm), misma serie, ambas bajo retail. Mucha presencia por poco.</td></tr>
+            <tr><td><strong>Trío Variations</strong> (máx. presencia)</td><td>Tàpies Personnage assis + Grand chaise + Profil</td><td className="n">7.056 €</td><td>Tres Variations firmadas, todas −20/−35% vs retail. Llena la pared de 3 m. ~7.700 € con marcos.</td></tr>
+            <tr><td><strong>Cuarteto 2×2</strong> (completo)</td><td>Cap de Creus + Miró + Clavé + Braque</td><td className="n">8.640 €</td><td>Grande + 4 pequeñas en cuadrícula. ~9.400 € con marcos: casi todo el presupuesto, solo Cap de Creus recuperable.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p className="note">Mi recomendación por equilibrio: el <strong>Trío Variations</strong> si priorizas chollo + presencia, o el <strong>Asimétrico económico</strong> si priorizas precio y dejar margen. Verifica firma a lápiz y confirma el precio socio en tienda.</p>
+
       <h2>Taller del Prado — precio socio vs mercado (todas las opciones)</h2>
       <p>Las 40 obras que tenemos como opción en TdP. Precio <strong>socio</strong> (−20%, IVA incl., certificado, local sin aduana). Comps de <strong>subasta</strong> (martillo; súmale ~25% de comisión + IVA) y <strong>retail</strong> de galería, aproximados y con confianza variable. Veredicto: 🟢 barato / semi-chollo · ⚪ en banda / correcto · 🔴 caro · ❓ a verificar.</p>
 
