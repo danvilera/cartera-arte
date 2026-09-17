@@ -315,6 +315,40 @@ export default function Visita({ state, onOpen, onField, onNav }) {
         </details>
       </div>
 
+      {/* Fichas de catalogo razonado */}
+      <div className="panel" style={{ marginTop: 14 }}>
+        <details>
+          <summary style={{ cursor: 'pointer', fontWeight: 700, fontSize: '1.02rem' }}>📚 Catálogo razonado de tus obras clave (para verificar en la visita)</summary>
+          <div style={{ marginTop: 10 }}>
+            <p style={{ margin: '0 0 8px' }}>El <b>catálogo razonado</b> es el inventario oficial de la obra de un artista: cada estampa tiene un número único. Pide que la <b>factura/certificado cite esta referencia y el número de ejemplar</b>, y compáralo con lo de abajo. No hay base de datos pública automática: se verifica con el libro (bibliotecas de arte, fundaciones) o un experto. Estas referencias las cita la propia web del Taller del Prado y son coherentes con los catálogos conocidos (confianza media-alta).</p>
+            <ul style={{ margin: '4px 0 10px 18px', lineHeight: 1.8 }}>
+              <li><b>Dalí · Cap de Creus</b> (1979): <b>Field 80-8</b> (The Official Catalog of the Graphic Works of Salvador Dalí, A. Field, p. 187).</li>
+              <li><b>Dalí · Le Chêne et le Roseau</b> (1974): <b>Field 74-1 K</b> (p. 92-93).</li>
+              <li><b>Dalí · Zöotrope et tour Boullée</b> (1973): documentada en <b>Field</b>, p. 86-87 (sin número suelto; verifica la plancha).</li>
+              <li><b>Miró · Quelques fleurs pour des amis</b> (1964): <b>Cramer / Miró Litógrafo III, nº 339</b> (Maeght, p. 50-52). Es el frontispicio.</li>
+              <li><b>Miró · Ubu Roi</b> (1966): <b>Miró Litógrafo III, nº 413 y 414</b> (p. 87 y 95).</li>
+              <li><b>Tàpies · La main jaune</b> (1973): <b>Galfetti 347</b> (Das graphische Werk 1973-78, Erker, p. 26). Sello seco Erker Presse, P.A.</li>
+              <li><b>Tàpies · Messiaen 1986</b>: <b>cat. raz. Obra Gráfica de Tàpies, vol. III, nº 1068</b>.</li>
+              <li><b>Tàpies · Minor IV</b> (1988/BAT 1986): sin nº en la ficha (ed. 60, ej. 11); pide la ref. Galfetti.</li>
+              <li><b>Braque · «Né le» (motivos florales)</b> (1957, ed. PAB 7/7): sin nº de catálogo (edición mínima de Pierre André Benoit); la ref. general de grabado de Braque es <b>Vallier</b>. Ojo: color algo apagado.</li>
+            </ul>
+            <b>Catálogos de referencia por artista:</b>
+            <ul style={{ margin: '4px 0 10px 18px', lineHeight: 1.7 }}>
+              <li>Miró: litografías «Miró Lithographe» (Mourlot/Leiris, = «Miró Litógrafo»); aguafuertes <b>Dupin</b>; libros <b>Cramer</b>.</li>
+              <li>Dalí: <b>Field</b> (con cautela: mucha falsificación, exige procedencia).</li>
+              <li>Tàpies: <b>Galfetti</b> (varios volúmenes).</li>
+              <li>Braque: <b>Vallier</b> · Picasso: <b>Bloch / Baer</b> · Chillida: <b>Koelen</b>.</li>
+            </ul>
+            <b>Cómo verificar de verdad:</b>
+            <ul style={{ margin: '4px 0 0 18px', lineHeight: 1.7 }}>
+              <li>Que el certificado nombre el <b>catálogo, número y ejemplar</b> exactos.</li>
+              <li>Consulta el libro en una <b>fundación</b> (Fundació Miró, Fundació Tàpies, Fundació Gala-Dalí) o biblioteca de arte.</li>
+              <li>Para Miró/Dalí, la autenticación oficial la dan la <b>Successió Miró</b> y la <b>Fundació Gala-Salvador Dalí</b>.</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
       {/* Buscador y filtros */}
       <div className="panel" style={{ marginTop: 14 }}>
         <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="🔎 Buscar por artista, titulo o tecnica…"

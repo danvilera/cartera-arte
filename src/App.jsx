@@ -16,10 +16,12 @@ import Pared from './pages/Pared'
 import Dashboard from './pages/Dashboard'
 import Trios from './pages/Trios'
 import Visita from './pages/Visita'
+import Enmarcado from './pages/Enmarcado'
 
 const NAV = [
   { key: 'inicio', label: 'Inicio', icon: '🏠' },
   { key: 'visita', label: 'Visita TdP', icon: '🗓️' },
+  { key: 'enmarcado', label: 'Enmarcado', icon: '🖼️' },
   { key: 'obras', label: 'Obras', icon: '🖼️' },
   { key: 'comparar', label: 'Comparar', icon: '⚖️' },
   { key: 'pared', label: 'En la pared', icon: '📐' },
@@ -150,6 +152,7 @@ export default function App() {
       <main className="main">
         {tab === 'inicio' && <Dashboard state={state} onOpen={setOpenId} onNav={setTab} />}
         {tab === 'visita' && <Visita state={state} onOpen={setOpenId} onField={setField} onNav={setTab} />}
+        {tab === 'enmarcado' && <Enmarcado />}
         {tab === 'obras' && (
           <section>
             <p className="lede">79 obras en 7 galerías (Bagot, Mayoral, Rubén Torres, Joan Gaspar, Nueva galería, Disponible Online y Galería Atelier). Toca una imagen para ver su ficha. Ajusta precios y datos: la puntuación y la liquidez se recalculan y se guardan solas.</p>
