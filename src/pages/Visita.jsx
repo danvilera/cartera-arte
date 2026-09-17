@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import { WORKS } from '../data/works'
 import { TRIOS } from '../data/trios'
+import { frameCost, parseDims } from '../lib/framing'
 import { total, liquidityIndex, liquidityLabel } from '../lib/scoring'
 
 const eur = (n) => (Number(n) || 0).toLocaleString('es-ES') + ' €'
@@ -229,6 +230,60 @@ export default function Visita({ state, onOpen, onField, onNav }) {
               <button className="btn" onClick={() => openTrioWall('cap_braque7', onNav)}>📐 Verlo en la pared</button>
               <button className="btn ghost" onClick={() => onNav && onNav('trios')}>Ver en Tríos</button>
             </div>
+          </div>
+        )
+      })()}
+
+      {/* Analisis a fondo del trio + estrategia */}
+      {(() => {
+        const A = ['online_dali_capdecreus', 'online_miro_recent5', 'online_braque_floraux'].map((id) => byId[id]).filter(Boolean)
+        const B = ['online_dali_capdecreus', 'online_miro_recent5', 'online_tapies_minoriv'].map((id) => byId[id]).filter(Boolean)
+        const sum = (ws) => ws.reduce((s, w) => s + (w.price || 0), 0)
+        const framing = (ws) => ws.reduce((s, w) => s + frameCost(parseDims(w), { glass: 'uv70' }).total, 0)
+        const totA = sum(A), totB = sum(B), frA = framing(A), frB = framing(B)
+        const Row = ({ k, a, b }) => (
+          <tr><td style={{ opacity: .7 }}>{k}</td><td>{a}</td><td>{b}</td></tr>
+        )
+        return (
+          <div className="panel" style={{ marginTop: 14 }}>
+            <details>
+              <summary style={{ cursor: 'pointer', fontWeight: 700, fontSize: '1.02rem' }}>📊 Análisis a fondo del trío y estrategia de compra</summary>
+              <div style={{ marginTop: 12 }}>
+
+                <h4 style={{ margin: '0 0 6px' }}>Cómo veo el trío (Cap de Creus + Miró + Braque 7/7)</h4>
+                <p style={{ margin: '0 0 10px' }}>Es un conjunto con fuerza real: juntas <b>tres firmas a mano</b> de tres nombres reconocidos por menos de 6.000 €. El <b>Cap de Creus</b> ancla la pared (litografía de verdad, no fotomecánica, tema catalán muy resonante), el <b>Miró</b> pone el color y el <b>Braque «floraux»</b> aporta algo poco común: una <b>aguatinta de edición de solo 7</b>, rareza objetiva. En cuanto a retener valor, dos de las tres (Miró y Braque) están en el lado bueno; el Dalí de los 70 es más decorativo que inversión. Matices honestos: el Braque es <b>diminuto (16×10 cm)</b>, funciona como joya de acento, no como protagonista; y su precio lo tengo con <b>confianza baja</b> (no encontré comparable directo y la ficha avisaba de color algo apagado). El Miró es «Obra inédita recent», con firma tipo monograma y edición grande.</p>
+
+                <h4 style={{ margin: '12px 0 6px' }}>Comparado con Dalí + Miró + Tàpies</h4>
+                <p style={{ margin: '0 0 8px' }}>Cambiando el Braque por un <b>Tàpies «Minor IV»</b> (aguafuerte firmado, 56×40, catalogado) tienes un trío igual de sólido y más barato:</p>
+                <div className="cmp-wrap"><table className="cmp" style={{ fontSize: '.82rem' }}>
+                  <thead><tr><th></th><th>Con Braque 7/7</th><th>Con Tàpies</th></tr></thead>
+                  <tbody>
+                    <Row k="Tercera pieza" a="Braque aguatinta ed. 7 (16×10)" b="Tàpies Minor IV (56×40)" />
+                    <Row k="Historia" a="Catalanes + École de Paris" b="Tres maestros catalanes (redondo)" />
+                    <Row k="Presencia" a="Braque = acento pequeño" b="Tàpies aporta más cuerpo" />
+                    <Row k="Retiene valor" a="Miró + Braque (2 de 3)" b="Miró + Tàpies (2 de 3)" />
+                    <Row k="Liquidez / reventa" a="Braque: mercado más fino" b="Tàpies: mejor mercado en España" />
+                    <Row k="Rareza" a="Alta (solo 7 ejemplares)" b="Media (ediciones mayores)" />
+                    <Row k="Total socio" a={eur(totA)} b={eur(totB)} />
+                    <Row k="Enmarcado aprox (UV70)" a={'~' + eur(frA)} b={'~' + eur(frB)} />
+                  </tbody>
+                </table></div>
+                <p className="note" style={{ margin: '8px 0 0' }}><b>Mi lectura:</b> si priorizas <b>coherencia, liquidez y seguridad de reventa</b>, el trío con Tàpies es un pelín superior (historia catalana redonda, Tàpies con mejor mercado y catalogación, y sale más barato). Si valoras la <b>rareza</b> y un contrapunto distinto, y te enamora el Braque, el 7/7 es una joya poco repetible aunque pequeña. Ninguno es un error; los dos entran de sobra en presupuesto. Confianza media (comps de oferta, no de subasta).</p>
+
+                <h4 style={{ margin: '14px 0 6px' }}>¿Cuánto margen de negociación tienes?</h4>
+                <p style={{ margin: '0 0 8px' }}>Partes de que el <b>precio socio ya es −20% con IVA incluido</b>, y el director te dijo por escrito que por comprar varias habría «alguna otra consideración»: hay margen extra <b>confirmado</b>, aunque no dijo cuánto. Mi estimación (confianza media-baja): por un conjunto de 3 piezas, un extra realista de <b>~5 a 12%</b> sobre el socio, y quizá hasta <b>~15%</b> si cierras las tres y pagas por transferencia. Sobre {eur(totA)} eso son ~{eur(Math.round(totA * 0.05))} a ~{eur(Math.round(totA * 0.12))} menos, dejándolo en torno a <b>{eur(Math.round(totA * 0.88))}–{eur(Math.round(totA * 0.95))}</b>. No lo des por hecho: ánclalo tú, apoyándote en los chollos y en las bandas de mercado de cada ficha.</p>
+
+                <h4 style={{ margin: '14px 0 6px' }}>¿Descuento directo o que incluya el enmarcado?</h4>
+                <p style={{ margin: '0 0 8px' }}>Enmarcar las tres con vidrio Museo UV70 ronda los <b>~{eur(frA)}</b> (más si eliges UV99). Clave: <b>TdP tiene taller de enmarcado propio</b>, así que enmarcar les cuesta poco; pueden «regalarte» ~{eur(frA)} de enmarcado con un coste real para ellos bastante menor. Por eso, a veces sacas <b>más valor</b> pidiendo el enmarcado incluido que un descuento equivalente en efectivo. Pero ojo: un <b>descuento en efectivo</b> baja tu <b>coste base real</b> (mejor para reventa: el marco no se revende) y te deja <b>elegir marco y vidrio</b> en Barcelona.</p>
+                <p style={{ margin: '0 0 8px' }}><b>Jugada recomendada (en dos pasos):</b> primero exprime un <b>descuento en efectivo</b> sobre las obras (valor duro); y como cierre, pide que te <b>incluyan o rebajen fuerte el enmarcado</b>. Lo ideal es <b>descuento + enmarcado a precio de coste</b>. Si te obligan a elegir una sola palanca: para inversión/reventa, mejor el <b>descuento en efectivo</b>; para pura comodidad si las vas a enmarcar igual, el <b>enmarcado incluido</b> captura más valor nominal.</p>
+
+                <h4 style={{ margin: '14px 0 6px' }}>¿Te las llevas ya o que las enmarquen y te las envíen?</h4>
+                <p style={{ margin: '0 0 6px' }}>Estás en Barcelona y la galería en Madrid. Enviar obra <b>enmarcada con cristal</b> es frágil y arriesgado (el envío nacional es gratis desde 300 €, pero el riesgo de rotura lo asumes tú).</p>
+                <p style={{ margin: '0 0 8px' }}><b>Mi recomendación:</b> llévatelas <b>tú, sin enmarcar</b>, en una <b>carpeta rígida</b> (nunca enrolladas: una litografía se puede cuartear, van planas). Aseguras el chollo ese mismo día y las enmarcas en Barcelona con <b>marcos idénticos</b> para las pequeñas (paspartú igualado) y vidrio anti-UV, a juego con tu pared de 3 m. Si prefieres cero gestión, que te las enmarquen ellos (taller propio) y te las envíen, asumiendo el riesgo de cristal y su elección de marco.</p>
+
+                <p className="note" style={{ margin: '10px 0 0' }}>Resumen: intenta <b>descuento en efectivo</b> sobre las obras + <b>enmarcado incluido/a coste</b>; y salvo que te enmarquen de maravilla, <b>llévatelas sin enmarcar</b> y móntalas en Barcelona.</p>
+              </div>
+            </details>
           </div>
         )
       })()}
