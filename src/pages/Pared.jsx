@@ -144,8 +144,8 @@ export default function Pared({ wall, onWall }) {
     const artWpx = wcm * pxPerCm
     const artHpx = artWpx / ar
     return (
-      <div className="framed" style={{ position: 'relative', width: artWpx + matPx * 2 + framePx * 2 + 'px', background: FRAMES[cfg.frameColor].bg, padding: framePx + 'px', boxShadow: '0 6px 20px rgba(0,0,0,.35)' }}>
-        <div className="mat" style={{ padding: matPx + 'px', background: MATS[cfg.matColor] }}>
+      <div className="framed" style={{ position: 'relative', width: artWpx + matPx * 2 + framePx * 2 + 'px', background: FRAMES[cfg.frameColor].bg, padding: framePx + 'px', boxShadow: '0 6px 20px rgba(0,0,0,.35)', display: 'flex', boxSizing: 'border-box' }}>
+        <div className="mat" style={{ flex: 1, minHeight: 0, minWidth: 0, padding: matPx + 'px', background: MATS[cfg.matColor], display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <img src={src} alt="obra" draggable={false} onError={(e) => { e.currentTarget.style.visibility = 'hidden' }} style={{ width: artWpx + 'px', height: artHpx + 'px', display: 'block', objectFit: 'cover' }} />
         </div>
       </div>
