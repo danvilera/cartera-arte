@@ -330,7 +330,7 @@ export default function Visita({ state, onOpen, onField, onNav }) {
               <li><b>Tàpies · La main jaune</b> (1973): <b>Galfetti 347</b> (Das graphische Werk 1973-78, Erker, p. 26). Sello seco Erker Presse, P.A.</li>
               <li><b>Tàpies · Messiaen 1986</b>: <b>cat. raz. Obra Gráfica de Tàpies, vol. III, nº 1068</b>.</li>
               <li><b>Tàpies · Minor IV</b> (1988/BAT 1986): sin nº en la ficha (ed. 60, ej. 11); pide la ref. Galfetti.</li>
-              <li><b>Braque · «Né le» (motivos florales)</b> (1957, ed. PAB 7/7): sin nº de catálogo (edición mínima de Pierre André Benoit); la ref. general de grabado de Braque es <b>Vallier</b>. Ojo: color algo apagado.</li>
+              <li><b>Braque · «Né le» / motivos florales</b> (1957, ed. PAB 7/7): NO localizo su número en el catálogo razonado (<b>Dora Vallier, «Braque. L’œuvre gravé»</b>) ni en registros online; es una edición mínima (7 ej.) de Pierre André Benoit. Verifícalo pidiendo a TdP el <b>nº de Vallier</b> y, si quieres, consultando el <b>Musée-Bibliothèque P.-A. Benoit (Alès)</b>, que guarda el archivo PAB. Ojo: parte de la gráfica PAB de Braque es «cartalégraphie» (desde 1959, cuando ya no grababa él mismo); esta es de 1957/aguatinta, pero confirma que la ejecutó el propio Braque. Color algo apagado.</li>
             </ul>
             <b>Catálogos de referencia por artista:</b>
             <ul style={{ margin: '4px 0 10px 18px', lineHeight: 1.7 }}>
