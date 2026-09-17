@@ -152,7 +152,7 @@ export default function App() {
         {tab === 'visita' && <Visita state={state} onOpen={setOpenId} onField={setField} onNav={setTab} />}
         {tab === 'obras' && (
           <section>
-            <p className="lede">71 obras en 6 galerías (Bagot, Mayoral, Rubén Torres, Joan Gaspar, Nueva galería y Disponible Online). Toca una imagen para ver su ficha. Ajusta precios y datos: la puntuación y la liquidez se recalculan y se guardan solas.</p>
+            <p className="lede">79 obras en 7 galerías (Bagot, Mayoral, Rubén Torres, Joan Gaspar, Nueva galería, Disponible Online y Galería Atelier). Toca una imagen para ver su ficha. Ajusta precios y datos: la puntuación y la liquidez se recalculan y se guardan solas.</p>
             <TrioBanner onNav={go} />
             <input value={obrasQ} onChange={(e) => setObrasQ(e.target.value)} placeholder="🔎 Buscar obra por artista, título o técnica…"
               style={{ width: '100%', padding: '10px 12px', borderRadius: 10, border: '1px solid var(--line, #e2ddd0)', fontSize: '.95rem', margin: '0 0 6px', background: 'var(--bg, #fff)', color: 'inherit' }} />
