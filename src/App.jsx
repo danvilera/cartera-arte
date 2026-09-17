@@ -15,9 +15,11 @@ import Comparar from './pages/Comparar'
 import Pared from './pages/Pared'
 import Dashboard from './pages/Dashboard'
 import Trios from './pages/Trios'
+import Visita from './pages/Visita'
 
 const NAV = [
   { key: 'inicio', label: 'Inicio', icon: '🏠' },
+  { key: 'visita', label: 'Visita TdP', icon: '🗓️' },
   { key: 'obras', label: 'Obras', icon: '🖼️' },
   { key: 'comparar', label: 'Comparar', icon: '⚖️' },
   { key: 'pared', label: 'En la pared', icon: '📐' },
@@ -52,6 +54,7 @@ export default function App() {
   const [drawer, setDrawer] = useState(false)
   const saveTimer = useRef(null)
   const [updateReady, setUpdateReady] = useState(false)
+  const [obrasQ, setObrasQ] = useState('')
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => { setSession(data.session); setAuthReady(true) })
@@ -146,16 +149,21 @@ export default function App() {
 
       <main className="main">
         {tab === 'inicio' && <Dashboard state={state} onOpen={setOpenId} onNav={setTab} />}
+        {tab === 'visita' && <Visita state={state} onOpen={setOpenId} onField={setField} />}
         {tab === 'obras' && (
           <section>
             <p className="lede">71 obras en 6 galerías (Bagot, Mayoral, Rubén Torres, Joan Gaspar, Nueva galería y Disponible Online). Toca una imagen para ver su ficha. Ajusta precios y datos: la puntuación y la liquidez se recalculan y se guardan solas.</p>
             <TrioBanner onNav={go} />
+            <input value={obrasQ} onChange={(e) => setObrasQ(e.target.value)} placeholder="🔎 Buscar obra por artista, título o técnica…"
+              style={{ width: '100%', padding: '10px 12px', borderRadius: 10, border: '1px solid var(--line, #e2ddd0)', fontSize: '.95rem', margin: '0 0 6px', background: 'var(--bg, #fff)', color: 'inherit' }} />
             {(() => {
               const order = ['J. Bagot', 'Mayoral', 'Rubén Torres', 'Joan Gaspar', 'Nueva galería', 'Disponible Online']
-              const gals = [...new Set(scored.map(({ o }) => o.gallery))]
+              const nq = obrasQ.trim().toLowerCase()
+              const sc2 = nq ? scored.filter(({ o }) => (o.artist + ' ' + o.title + ' ' + o.tech + ' ' + (o.ref || '')).toLowerCase().includes(nq)) : scored
+              const gals = [...new Set(sc2.map(({ o }) => o.gallery))]
                 .sort((a, b) => ((order.indexOf(a) + 1) || 99) - ((order.indexOf(b) + 1) || 99))
               return gals.map((g) => {
-                const items = scored.filter(({ o }) => o.gallery === g)
+                const items = sc2.filter(({ o }) => o.gallery === g)
                 return (
                   <div key={g} className="galgroup">
                     <h2 style={{ fontSize: '1.15rem', margin: '28px 0 12px', paddingBottom: 6, borderBottom: '1px solid var(--line, #e2ddd0)', display: 'flex', alignItems: 'baseline', gap: 10 }}>

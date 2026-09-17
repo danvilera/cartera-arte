@@ -9,6 +9,7 @@ const short = (t) => t.replace(/[“”"]/g, '').slice(0, 22)
 
 export default function Comparar({ state, onOpen }) {
   const [sel, setSel] = useState(() => WORKS.slice(0, 2).map((w) => w.id))
+  const [q, setQ] = useState('')
   const toggle = (id) => setSel((s) => s.includes(id) ? s.filter((x) => x !== id) : (s.length >= 3 ? s : [...s, id]))
 
   const rows = sel.map((id) => {
@@ -36,8 +37,10 @@ export default function Comparar({ state, onOpen }) {
   return (
     <div className="prose">
       <p className="lede">Elige hasta 3 obras y compáralas lado a lado: precio, coste puerta real, puntuación y liquidez.</p>
+      <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="🔎 Buscar obra…"
+        style={{ width: '100%', padding: '9px 12px', borderRadius: 10, border: '1px solid var(--line, #e2ddd0)', fontSize: '.95rem', margin: '0 0 8px', background: 'var(--bg, #fff)', color: 'inherit' }} />
       <div className="chips2" style={{ marginBottom: 8 }}>
-        {WORKS.map((w) => (
+        {(q ? WORKS.filter((w) => (w.artist + ' ' + w.title + ' ' + w.tech).toLowerCase().includes(q.trim().toLowerCase())) : WORKS).map((w) => (
           <button key={w.id} className={'chip2' + (sel.includes(w.id) ? ' on' : '')} onClick={() => toggle(w.id)}>
             {last(w.artist)} · {short(w.title).slice(0, 16)}
           </button>
