@@ -288,6 +288,33 @@ export default function Visita({ state, onOpen, onField, onNav }) {
         )
       })()}
 
+      {/* Novedades detectadas en la web (barrido 17 sep) */}
+      <div className="panel" style={{ marginTop: 14 }}>
+        <details>
+          <summary style={{ cursor: 'pointer', fontWeight: 700, fontSize: '1.02rem' }}>🆕 Novedades para preguntar el sábado (barrido web, 17 sep)</summary>
+          <div style={{ marginTop: 10 }}>
+            <p style={{ margin: '0 0 8px' }}>Revisé la web: <b>tus 9 obras siguen disponibles y a los mismos precios</b> (la web incluye IVA; socio = -20%). Además aparecen estas piezas firmadas a mano que <b>no teníamos fichadas</b>. Precio socio estimado (lista x 0,8); <b>confírmalo en persona</b>.</p>
+            <b>Tàpies (el filón más interesante por precio):</b>
+            <ul style={{ margin: '4px 0 10px 18px', lineHeight: 1.7 }}>
+              <li><b>Serie «Llambrec material»</b> (1975, litografías 76×56, firmadas): hay varias (VII, VIII, XI, XII, XIII, XV, XVI). Lista ~1.795-2.495 → <b>socio ~1.436-1.996</b>. Algunas figuran «consultar precio». Tàpies firmados grandes por debajo de las Variations: mira la serie entera.</li>
+              <li><b>Oiseau (Hommage à Santomaso)</b> ~2.500 → socio ~2.000</li>
+              <li><b>El pa a la barca</b> ~4.000 → socio ~3.200</li>
+              <li><b>Blanc central</b> ~3.200 → socio ~2.560</li>
+              <li><b>Orange et gris</b> ~2.500 → socio ~2.000</li>
+              <li><b>Suite 63×90 (IV)</b> ~2.450 → socio ~1.960</li>
+              <li><b>Erker 1993</b> (avant la lettre) ~2.940 → socio ~2.352</li>
+            </ul>
+            <b>Braque (blue-chip, más caros pero notables):</b>
+            <ul style={{ margin: '4px 0 10px 18px', lineHeight: 1.7 }}>
+              <li><b>Poissons</b> ~7.000 → socio ~5.600 (uno de sus grabados más reconocibles)</li>
+              <li><b>Les pommes</b> (de «Si je mourais là-bas») ~5.750 → socio ~4.600</li>
+            </ul>
+            <p className="note" style={{ margin: '0 0 6px' }}><b>Cuidado / no confundir:</b> lo que aparece como «Derrière le Miroir» (Nº 168, 175, 180, 210...) y las piezas de 50-800 € suelen ser <b>hojas de revista sin firma a lápiz</b>. No es lo que buscas.</p>
+            <p className="note" style={{ margin: 0 }}>Referencias de catálogo confirmadas de tu lista: Quelques fleurs = Cramer, Miró Litógrafo III nº 339 · Le Chêne = Field 74-1 K · La main jaune = Galfetti 347 (sello Erker, P.A.) · Messiaen = cat. raz. vol. III nº 1068 · Minor IV = ej. nº 11 · Zootrope = ej. nº 41, Field.</p>
+          </div>
+        </details>
+      </div>
+
       {/* Buscador y filtros */}
       <div className="panel" style={{ marginTop: 14 }}>
         <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="🔎 Buscar por artista, titulo o tecnica…"
