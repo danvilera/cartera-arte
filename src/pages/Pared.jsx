@@ -12,7 +12,7 @@ const FRAMES = {
 }
 const MATS = { hueso: '#efe9db', blanco: '#ffffff', gris: '#d7d5cf', negro: '#1c1c1c' }
 // AR (ancho/alto) real para obras cuya imagen viene cuadrada o mal recortada.
-const AR_OVERRIDE = { online_dali_capdecreus: 54.6 / 74.8 }
+const AR_OVERRIDE = { online_dali_capdecreus: 1346 / 1800 } // foto real TdP (vertical)
 
 const DEF_CFG = {
   sceneWidthCm: 300, artId: 'miro', artWcm: 70,
@@ -372,6 +372,7 @@ export default function Pared({ wall, onWall }) {
         <h3 className="sheet-h3" style={{ marginTop: 0 }}>Montajes sugeridos</h3>
         <div className="chips2">
           <button className="chip2" onClick={() => loadCompo({ layout: 'asym', bigSide: 'left', uniform: false, artId: 'online_dali_capdecreus', artWcm: 54.6, art2Id: 'online_miro_recent5', art2Wcm: 22, art3Id: 'online_clave_pintura', art3Wcm: 14, gapCm: 12, matCm: 5, frameCm: 3, matColor: 'hueso', frameColor: 'madera clara', posX: 26, posY: 16 })}>🖼️ Cap de Creus + Miró + Clavé (asimétrico)</button>
+          <button className="chip2" onClick={() => loadCompo({ layout: 'asym', bigSide: 'left', uniform: false, artId: 'online_dali_capdecreus', artWcm: 54.6, art2Id: 'online_miro_recent5', art2Wcm: 22, art3Id: 'online_braque_floraux', art3Wcm: 10, gapCm: 12, matCm: 5, frameCm: 3, matColor: 'hueso', frameColor: 'madera clara', posX: 26, posY: 14 })}>🖼️ Cap de Creus + Miró + Braque 7/7 (asimétrico)</button>
           {TRIOS.map((t) => (
             <button key={t.key} className="chip2" onClick={() => loadTrio(t)}>🎨 {t.name}</button>
           ))}

@@ -1,9 +1,12 @@
 import React, { useMemo, useState } from 'react'
 import { WORKS } from '../data/works'
+import { TRIOS } from '../data/trios'
 import { total, liquidityIndex, liquidityLabel } from '../lib/scoring'
 
 const eur = (n) => (Number(n) || 0).toLocaleString('es-ES') + ' €'
 const last = (s) => (s || '').split(' ').slice(-1)[0]
+const byId = Object.fromEntries(WORKS.map((w) => [w.id, w]))
+const openTrioWall = (key, onNav) => { try { localStorage.setItem('arte_open_trio', key) } catch (e) {} ; onNav && onNav('pared') }
 
 // Obras cuyo vendedor es Taller del Prado (identificadas por la URL de su ficha).
 const isTdP = (o) => !!(o.url && o.url.includes('tallerdelprado.com'))
@@ -113,7 +116,7 @@ function printList(works) {
   w.document.write(html); w.document.close(); w.focus(); setTimeout(() => w.print(), 400)
 }
 
-export default function Visita({ state, onOpen, onField }) {
+export default function Visita({ state, onOpen, onField, onNav }) {
   const tdp = useMemo(() => WORKS.filter(isTdP), [])
   const artists = useMemo(() => [...new Set(tdp.map((o) => o.artist))].sort(), [tdp])
 
@@ -186,6 +189,49 @@ export default function Visita({ state, onOpen, onField }) {
           </div>
         )}
       </div>
+
+      {/* Trio recomendado */}
+      {(() => {
+        const trio = TRIOS.find((x) => x.key === 'cap_braque7')
+        if (!trio) return null
+        const ws = trio.ids.map((id) => byId[id]).filter(Boolean)
+        const tot = ws.reduce((s, w) => s + (w.price || 0), 0)
+        return (
+          <div className="panel" style={{ marginTop: 14, borderLeft: '3px solid var(--accent, #b98b50)' }}>
+            <h3 className="sheet-h3" style={{ marginTop: 0 }}>⭐ Trío recomendado para tirar: Cap de Creus + Miró + Braque 7/7</h3>
+            <p style={{ margin: '0 0 10px' }}>El conjunto de <b>más fuerza</b> y buen precio: el <b>Dalí «Cap de Creus»</b> (litografía firmada de verdad, tema catalán) como <b>obra grande</b> a un lado y, apiladas al otro con <b>marco idéntico</b>, el <b>Miró</b> de color y el <b>Braque «Composition aux motifs floraux»</b>, una aguatinta de <b>edición de solo 7</b> (rareza real). Tres firmas a mano de tres nombres reconocidos.</p>
+            {ws.map((w) => (
+              <div key={w.id} style={{ display: 'flex', gap: 10, alignItems: 'center', padding: '6px 0', borderTop: '1px solid var(--line, #e2ddd0)' }}>
+                <button onClick={() => onOpen(w.id)} style={{ border: 0, padding: 0, background: '#f3efe6', width: 46, height: 56, minWidth: 46, cursor: 'pointer', borderRadius: 4, overflow: 'hidden' }} aria-label={'Ver ' + w.title}>
+                  {w.img && <img src={w.img} alt={w.artist} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} onError={(e) => { e.currentTarget.style.display = 'none' }} />}
+                </button>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontWeight: 700, fontSize: '.9rem' }}>{w.artist}</div>
+                  <div className="note" style={{ margin: 0 }}>{w.title}</div>
+                </div>
+                <b style={{ whiteSpace: 'nowrap' }}>{eur(w.price)}</b>
+              </div>
+            ))}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginTop: 8, paddingTop: 8, borderTop: '2px solid var(--line, #e2ddd0)' }}>
+              <b>Total socio (3 obras)</b>
+              <b style={{ fontSize: '1.1rem', color: 'var(--good)' }}>{eur(tot)}</b>
+            </div>
+            <p className="note" style={{ margin: '6px 0 0' }}>Deja ~{eur(10000 - tot)} dentro del tope de 10.000 €: margen para negociar el conjunto o subir alguna pieza. Enmarcado aparte (mira el cálculo en «En la pared»).</p>
+            <div style={{ marginTop: 10, padding: '8px 10px', borderRadius: 8, background: 'rgba(193,85,58,.08)' }}>
+              <b style={{ fontSize: '.82rem' }}>A confirmar en persona:</b>
+              <ul style={{ margin: '4px 0 0 18px', padding: 0, fontSize: '.82rem', lineHeight: 1.6 }}>
+                <li><b>Cap de Creus:</b> firma a lápiz real (Dalí años 70 = hojas prefirmadas) y garantía de autenticidad.</li>
+                <li><b>Miró:</b> es «Obra inédita recent», firma tipo monograma/inicial y edición grande.</li>
+                <li><b>Braque «floraux»:</b> edición 7 (rara) pero color algo apagado y sin comparable directo; confirmar estado.</li>
+              </ul>
+            </div>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 10 }}>
+              <button className="btn" onClick={() => openTrioWall('cap_braque7', onNav)}>📐 Verlo en la pared</button>
+              <button className="btn ghost" onClick={() => onNav && onNav('trios')}>Ver en Tríos</button>
+            </div>
+          </div>
+        )
+      })()}
 
       {/* Buscador y filtros */}
       <div className="panel" style={{ marginTop: 14 }}>

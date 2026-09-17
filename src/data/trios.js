@@ -90,6 +90,14 @@ export const TRIOS = [
       artId: 'online_dali_capdecreus', artWcm: 54.6, art2Id: 'online_miro_recent5', art2Wcm: 22, art3Id: 'online_braque_lettera', art3Wcm: 28 },
   },
   {
+    key: 'cap_braque7', name: 'Cap de Creus + Miró + Braque 7/7 (asimétrico)', theme: 'Grande + 2 pequeñas',
+    subtitle: 'Dalí «Cap de Creus» (grande) · Miró + Braque «Composition aux motifs floraux» (ed. 7)',
+    ids: ['online_dali_capdecreus', 'online_miro_recent5', 'online_braque_floraux'],
+    note: 'El de más fuerza para tirar: Cap de Creus (tema catalán, litografía firmada de verdad) como ancla y, apilados al lado con marco idéntico, el Miró de color y el Braque «Composition aux motifs floraux», una aguatinta de EDICIÓN SOLO 7 (rareza real). Tres firmas a mano de tres blue-chips por poco dinero. El Braque es muy pequeño (16×10), hace de joya de acento.',
+    cfg: { layout: 'asym', bigSide: 'left', uniform: false, matCm: 5, frameCm: 3, gapCm: 12, matColor: 'hueso', frameColor: 'madera clara', posX: 26, posY: 14,
+      artId: 'online_dali_capdecreus', artWcm: 54.6, art2Id: 'online_miro_recent5', art2Wcm: 22, art3Id: 'online_braque_floraux', art3Wcm: 10 },
+  },
+  {
     key: 'cap_cuarteto', name: 'Cap de Creus + 4 pequeñas (cuarteto 2×2)', theme: 'Grande + cuadrícula 2×2', kind: 'quad',
     subtitle: 'Dalí «Cap de Creus» (grande) · Miró + Clavé + Braque en 2×2',
     ids: ['online_dali_capdecreus', 'online_miro_recent5', 'online_clave_pintura', 'online_braque_floraux'],

@@ -149,7 +149,7 @@ export default function App() {
 
       <main className="main">
         {tab === 'inicio' && <Dashboard state={state} onOpen={setOpenId} onNav={setTab} />}
-        {tab === 'visita' && <Visita state={state} onOpen={setOpenId} onField={setField} />}
+        {tab === 'visita' && <Visita state={state} onOpen={setOpenId} onField={setField} onNav={setTab} />}
         {tab === 'obras' && (
           <section>
             <p className="lede">71 obras en 6 galerías (Bagot, Mayoral, Rubén Torres, Joan Gaspar, Nueva galería y Disponible Online). Toca una imagen para ver su ficha. Ajusta precios y datos: la puntuación y la liquidez se recalculan y se guardan solas.</p>
